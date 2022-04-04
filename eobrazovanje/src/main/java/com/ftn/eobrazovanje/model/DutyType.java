@@ -13,11 +13,12 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StudentFile {
+public class DutyType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    //blob treba da bude
-    private String content;
-    private int page;
+
+    private String name;
+
 }

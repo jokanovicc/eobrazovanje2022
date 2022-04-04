@@ -5,23 +5,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Notification {
+public class StudyProgram {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    private CourseEnrollment courseEnrollment;
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    private List<Course> courses = new ArrayList<>();
+
+    private Integer studyLenght;
 
     @ManyToOne
-    private Teacher teacher;
-
-    private String message;
+    private StudyType studyType;
 
 }

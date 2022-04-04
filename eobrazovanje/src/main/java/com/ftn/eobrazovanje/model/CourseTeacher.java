@@ -1,7 +1,6 @@
 package com.ftn.eobrazovanje.model;
 
 
-import com.ftn.eobrazovanje.model.roles.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ import javax.persistence.*;
 @Data
 public class CourseTeacher {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,9 +22,5 @@ public class CourseTeacher {
 
     @ManyToOne
     private TeacherRole teacherRole;
-
-
-
-
 
 }

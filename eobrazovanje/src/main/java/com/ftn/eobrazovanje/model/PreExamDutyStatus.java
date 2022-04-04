@@ -15,9 +15,12 @@ import javax.persistence.Id;
 @Data
 public class PreExamDutyStatus {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
+
+
 }

@@ -10,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Course {
 
     @Id
@@ -21,7 +21,6 @@ public class Course {
 
     private String sylabus;
 
-    private Integer ESPB;
-
+    private String ESPB;
 
 }

@@ -13,14 +13,13 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PreExamDutyType {
-
+public class DocumentFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private Integer numberOfPages;
 
-
+    private String content;
 
 }

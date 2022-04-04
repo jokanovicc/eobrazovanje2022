@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Data
 public class DocumentType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

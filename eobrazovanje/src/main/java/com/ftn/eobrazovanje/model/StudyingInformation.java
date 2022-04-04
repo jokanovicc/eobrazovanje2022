@@ -1,6 +1,6 @@
 package com.ftn.eobrazovanje.model;
 
-import com.ftn.eobrazovanje.model.roles.Student;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +16,17 @@ public class StudyingInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int yearOfEnrollment;
 
-    @OneToOne
-    private Student student;
-    private boolean bugdet;
-    private int yearOfStudying;
+    private Integer startSchoolYear;
 
     @ManyToOne
-    private StudyingProgramme programme;
+    private Student student;
+
+    private String financialType;
+
+    @ManyToOne
+    private StudyProgram studyProgram;
+
+    private Integer schoolYear;
 
 }

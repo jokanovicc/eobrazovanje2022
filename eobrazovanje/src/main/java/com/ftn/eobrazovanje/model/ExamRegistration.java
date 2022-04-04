@@ -1,6 +1,5 @@
 package com.ftn.eobrazovanje.model;
 
-import com.ftn.eobrazovanje.model.roles.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,18 +11,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 public class ExamRegistration {
+    //prijava ispita
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @ManyToOne
-    private Student student;
-
     @ManyToOne
     private PreExamDuty preExamDuty;
 
-
-
+    @ManyToOne
+    private Student student;
 }

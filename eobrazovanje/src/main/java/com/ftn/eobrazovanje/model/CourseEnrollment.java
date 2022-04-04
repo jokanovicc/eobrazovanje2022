@@ -1,6 +1,5 @@
 package com.ftn.eobrazovanje.model;
 
-import com.ftn.eobrazovanje.model.roles.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class CourseEnrollment {
+    //izvodjenje predmeta
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +20,8 @@ public class CourseEnrollment {
     private Integer schoolYear;
 
     @ManyToOne
-    private Teacher teacher;
+    private CourseTeacher courseTeacher;
 
     @ManyToOne
     private Course course;
-
-
-
-
 }

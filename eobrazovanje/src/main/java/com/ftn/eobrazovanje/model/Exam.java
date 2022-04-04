@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,12 +13,19 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class Exam {
+    //ISPIT
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToMany
-    private List<PreExamDuty> preExamDuties;
+    private List<PreExamDuty> preExamDuties = new ArrayList<>();
+
+    @ManyToOne
+    private Attending attending;
+
+    private Integer grade;
+
 
 }

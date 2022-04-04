@@ -1,5 +1,6 @@
 package com.ftn.eobrazovanje.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,18 +11,20 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Notification {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    private CourseEnrollment courseEnrollment;
+    private Student student;
 
-    @ManyToOne
-    private Teacher teacher;
+    private Double amount;
 
-    private String message;
+    private String text;
+
+    private String accountNumber;
+
 
 }

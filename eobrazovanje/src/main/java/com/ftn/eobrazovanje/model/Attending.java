@@ -5,24 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ExaminationPeriod {
+public class Attending {
+    //POHADJANJE
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private LocalDate startDate;
+    @ManyToOne
+    private CourseEnrollment courseEnrollment;
 
-    private LocalDate endDate;
+    @ManyToOne
+    private Student student;
 
-    @OneToMany
-    private List<Exam> examList;
 
 }

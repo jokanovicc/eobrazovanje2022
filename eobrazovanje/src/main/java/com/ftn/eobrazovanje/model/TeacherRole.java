@@ -9,10 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class TeacherRole {
 
     @Id
@@ -20,6 +20,4 @@ public class TeacherRole {
     private Integer id;
 
     private String name;
-
-
 }

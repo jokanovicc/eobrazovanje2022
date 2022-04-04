@@ -1,4 +1,4 @@
-package com.ftn.eobrazovanje.model.roles;
+package com.ftn.eobrazovanje.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,20 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Teacher {
+@AllArgsConstructor
+@Data
+public class StudyType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstname;
-    private String lastname;
-    private String username;
-    private boolean gender;
-
-
-
+    private String name;
 }

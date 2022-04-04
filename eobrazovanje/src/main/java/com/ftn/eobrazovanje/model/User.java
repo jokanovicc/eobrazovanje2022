@@ -1,30 +1,35 @@
 package com.ftn.eobrazovanje.model;
 
-import com.ftn.eobrazovanje.model.roles.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
+@Data
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String name;
+    private String jmbg;
+    private String address;
+    private String username;
+    private String password;
+
     @ManyToOne
-    private Student student;
+    private Role role;
 
-    private Double amount;
+    @ManyToOne
+    private Gender gender;
 
-    private String purpose;
 
-    private String referenceNumber;
+
 
 
 }

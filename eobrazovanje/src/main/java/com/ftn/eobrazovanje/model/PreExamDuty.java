@@ -11,16 +11,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 public class PreExamDuty {
+    //PREDISPITNA OBAVEZA
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String schoolYear;
+    private Integer schoolYear;
 
     @ManyToOne
-    private CourseEnrollment course;
+    private CourseTeacher courseTeacher;
 
     @ManyToOne
-    private CourseTeacher teacher;
+    private Course course;
+
 }

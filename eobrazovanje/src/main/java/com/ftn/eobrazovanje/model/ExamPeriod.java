@@ -1,4 +1,4 @@
-package com.ftn.eobrazovanje.model.roles;
+package com.ftn.eobrazovanje.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,29 +11,17 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+@AllArgsConstructor
+@Data
+public class ExamPeriod {
+    //ispitni rok
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstname;
-    private String lastname;
-    private String username;
-    private String password;
-    private String address;
-    private LocalDate dateOfBirth;
-    private boolean gender;
-    private String indexNo;
-    private String birthtown;
+    private LocalDate startDate;
 
-
-
-
-
-
-
+    private LocalDate endDate;
 }
