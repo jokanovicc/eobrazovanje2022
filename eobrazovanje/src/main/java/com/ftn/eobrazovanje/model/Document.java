@@ -17,7 +17,7 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)

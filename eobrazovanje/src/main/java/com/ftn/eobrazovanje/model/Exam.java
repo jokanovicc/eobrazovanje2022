@@ -17,7 +17,7 @@ public class Exam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @OneToMany
     private List<PreExamDuty> preExamDuties = new ArrayList<>();

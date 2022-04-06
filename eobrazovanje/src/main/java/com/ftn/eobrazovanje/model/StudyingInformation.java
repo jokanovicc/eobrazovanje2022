@@ -15,9 +15,9 @@ public class StudyingInformation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer startSchoolYear;
+    private int startSchoolYear;
 
     @ManyToOne
     private Student student;
@@ -27,6 +27,6 @@ public class StudyingInformation {
     @ManyToOne
     private StudyProgram studyProgram;
 
-    private Integer schoolYear;
+    private int schoolYear;
 
 }

@@ -15,7 +15,7 @@ public class CourseTeacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     private Teacher teacher;
@@ -23,4 +23,7 @@ public class CourseTeacher {
     @ManyToOne
     private TeacherRole teacherRole;
 
+    public CourseTeacher(Long id) {
+        this.id = id;
+    }
 }

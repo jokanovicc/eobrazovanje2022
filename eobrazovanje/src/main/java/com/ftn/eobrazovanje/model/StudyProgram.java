@@ -17,12 +17,12 @@ public class StudyProgram {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Course> courses = new ArrayList<>();
 
-    private Integer studyLenght;
+    private int studyLenght;
 
     @ManyToOne
     private StudyType studyType;

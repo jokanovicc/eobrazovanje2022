@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String name;
     private String jmbg;
@@ -25,11 +25,15 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @ManyToOne
-    private Gender gender;
+    private String gender;
 
-
-
-
-
+    public User(Long id, String name, String jmbg, String address, String username, Role role, String gender) {
+        this.id = id;
+        this.name = name;
+        this.jmbg = jmbg;
+        this.address = address;
+        this.username = username;
+        this.role = role;
+        this.gender = gender;
+    }
 }

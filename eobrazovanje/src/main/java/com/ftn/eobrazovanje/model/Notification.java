@@ -14,10 +14,10 @@ public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
-    private CourseEnrollment courseEnrollment;
+    private CoursePerformance coursePerformance;
 
     @ManyToOne
     private Teacher teacher;
