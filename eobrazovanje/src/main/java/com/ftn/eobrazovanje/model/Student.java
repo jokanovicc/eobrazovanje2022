@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

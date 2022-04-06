@@ -10,14 +10,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CourseEnrollment {
+public class CoursePerformance {
     //izvodjenje predmeta
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer schoolYear;
+    private int schoolYear;
 
     @ManyToOne
     private CourseTeacher courseTeacher;

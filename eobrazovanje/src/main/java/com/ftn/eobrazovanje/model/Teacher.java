@@ -14,7 +14,7 @@ public class Teacher {
 
 
     @Id
-    private Integer id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
