@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,18 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<PreExamDuty> preExamDuties = new ArrayList<>();
+    private int preExamDutyPoints;
+
+    private int finalExamPoints;
 
     @ManyToOne
     private Attending attending;
 
     private Integer grade;
+
+    private LocalDate date;
+
+    private String classroom;
 
 
 }

@@ -8,7 +8,7 @@ public class CoursePerformanceMapper {
     public static CoursePerformanceDTO toDto(CoursePerformance coursePerformance) {
         return new CoursePerformanceDTO(coursePerformance.getId(),
                 coursePerformance.getSchoolYear(),
-                CourseTeacherMapper.toDto(coursePerformance.getCourseTeacher()),
+                CourseTeacherMapper.toDtoList(coursePerformance.getCourseTeachers()),
                 CourseMapper.toDto(coursePerformance.getCourse()));
     }
 
@@ -16,7 +16,7 @@ public class CoursePerformanceMapper {
         return new CoursePerformance(
                 dto.getId(),
                 dto.getSchoolYear(),
-                CourseTeacherMapper.toEntity(dto.getCourseTeacher()),
+                CourseTeacherMapper.toEntityList(dto.getCourseTeachers()),
                 CourseMapper.toEntity(dto.getCourse())
         );
     }

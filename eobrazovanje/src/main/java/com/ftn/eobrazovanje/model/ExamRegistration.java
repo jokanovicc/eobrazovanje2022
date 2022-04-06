@@ -18,8 +18,10 @@ public class ExamRegistration {
     private Long id;
 
     @ManyToOne
-    private PreExamDuty preExamDuty;
+    private Exam exam;
 
     @ManyToOne
     private Student student;
+
+    private ExamPeriod examPeriod;
 }

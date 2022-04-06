@@ -4,6 +4,7 @@ import com.ftn.eobrazovanje.api.dto.TeacherDTO;
 import com.ftn.eobrazovanje.model.Role;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
+import com.ftn.eobrazovanje.model.UserRole;
 
 public class TeacherMapper {
     public static TeacherDTO toDto(Teacher teacher) {
@@ -24,7 +25,7 @@ public class TeacherMapper {
                 dto.getJmbg(),
                 dto.getAddress(),
                 dto.getUsername(),
-                new Role("teacher"),
+                new Role(UserRole.TEACHER),
                 dto.getGender()
         );
 

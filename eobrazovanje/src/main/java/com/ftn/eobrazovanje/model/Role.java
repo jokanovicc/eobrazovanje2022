@@ -20,9 +20,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private UserRole name;
 
-    public Role(String name) {
+    public Role(UserRole name) {
         this.name = name;
     }
 }

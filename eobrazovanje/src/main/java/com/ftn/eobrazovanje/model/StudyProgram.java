@@ -22,7 +22,7 @@ public class StudyProgram {
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Course> courses = new ArrayList<>();
 
-    private int studyLenght;
+    private int studyLength;
 
     @ManyToOne
     private StudyType studyType;
