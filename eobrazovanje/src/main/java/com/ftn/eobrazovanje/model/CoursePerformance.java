@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,8 +20,8 @@ public class CoursePerformance {
 
     private int schoolYear;
 
-    @ManyToOne
-    private CourseTeacher courseTeacher;
+    @ManyToMany
+    private List<CourseTeacher> courseTeachers;
 
     @ManyToOne
     private Course course;
