@@ -28,7 +28,7 @@ public class NotificationMapper {
     public static List<NotificationDTO> toDtoList(List<Notification> notifications) {
         return notifications
                 .stream()
-                .map(notification -> NotificationMapper.toDto(notification))
+                .map(notification -> toDto(notification))
                 .collect(Collectors.toList());
     }
 }

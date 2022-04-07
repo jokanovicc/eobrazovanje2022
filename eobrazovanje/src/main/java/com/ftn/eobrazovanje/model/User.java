@@ -22,12 +22,13 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToOne
-    private Role role;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     private String gender;
 
-    public User(Long id, String name, String jmbg, String address, String username, Role role, String gender) {
+    public User(Long id, String name, String jmbg, String address, String username, UserRole role, String gender) {
         this.id = id;
         this.name = name;
         this.jmbg = jmbg;

@@ -25,7 +25,7 @@ public class TeacherMapper {
                 dto.getJmbg(),
                 dto.getAddress(),
                 dto.getUsername(),
-                new Role(UserRole.TEACHER),
+                UserRole.TEACHER,
                 dto.getGender()
         );
 

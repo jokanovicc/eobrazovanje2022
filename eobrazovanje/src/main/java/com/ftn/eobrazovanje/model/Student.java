@@ -15,6 +15,8 @@ public class Student {
     @Id
     private Long id;
 
+    private String indexNumber;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @MapsId

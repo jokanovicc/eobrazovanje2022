@@ -1,21 +1,19 @@
-package com.ftn.eobrazovanje.model;
+package com.ftn.eobrazovanje.api.dto;
 
+import com.ftn.eobrazovanje.model.ExamStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Exam {
-    //ISPIT
-
+public class ExamDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +22,7 @@ public class Exam {
 
     private int finalExamPoints;
 
-    @ManyToOne
-    private Attending attending;
+    private CourseDTO course;
 
     private Integer grade;
 
@@ -33,7 +30,5 @@ public class Exam {
 
     private String classroom;
 
-    private ExamStatus status;
-
-
+    private String status;
 }
