@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
             throw new UserNonExistentException("User doesn't exist");
         }
 
-        UserRole role = user.get().getRole().getName();
+        UserRole role = user.get().getRole();
         Long userId = user.get().getId();
 
         if(role == UserRole.STUDENT) {

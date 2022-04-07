@@ -23,5 +23,6 @@ public class ExamRegistration {
     @ManyToOne
     private Student student;
 
+    @ManyToOne
     private ExamPeriod examPeriod;
 }

@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UserService {
 
    Optional<User> getUser(Authentication authentication);
+
+   User findByUsername(String username);
 }
