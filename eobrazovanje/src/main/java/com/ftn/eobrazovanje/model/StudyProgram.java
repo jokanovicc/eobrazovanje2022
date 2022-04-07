@@ -19,6 +19,8 @@ public class StudyProgram {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Course> courses = new ArrayList<>();
 

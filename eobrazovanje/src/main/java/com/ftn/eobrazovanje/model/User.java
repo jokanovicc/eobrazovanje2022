@@ -17,6 +17,7 @@ public class User {
     private Long id;
 
     private String name;
+    private String lastname;
     private String jmbg;
     private String address;
     private String username;

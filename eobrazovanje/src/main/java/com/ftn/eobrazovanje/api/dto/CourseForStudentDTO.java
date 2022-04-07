@@ -16,13 +16,14 @@ public class CourseForStudentDTO extends CourseDTO{
     private int finalExamPoints;
 
     public CourseForStudentDTO(Long id,
+                               String name,
                                String sylabus,
                                String ESPB,
                                List<CourseTeacher> teachers,
                                int preExamDutyPoints,
                                int finalExamPoints
     ) {
-        super(id, sylabus, ESPB);
+        super(name,id, sylabus, ESPB);
         this.teachers = teachers;
         this.preExamDutyPoints = preExamDutyPoints;
         this.finalExamPoints = finalExamPoints;

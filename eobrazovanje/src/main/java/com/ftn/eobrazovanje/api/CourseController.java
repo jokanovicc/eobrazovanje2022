@@ -17,11 +17,12 @@ import java.util.List;
 @RequestMapping("/api/courses")
 public class CourseController {
 
-    @Autowired
-    private CourseService courseService;
+//    @Autowired
+//    private CourseService courseService;
 
     @GetMapping
     public List<CourseDTO> getCourses(Authentication authentication) {
-        return courseService.getCoursesForUser(authentication);
+      //  return courseService.getCoursesForUser(authentication);
+        return null;
     }
 }

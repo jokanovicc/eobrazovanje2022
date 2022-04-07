@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CourseDTO {
+    private String name;
     private Long id;
     private String sylabus;
     private String ESPB;

@@ -1,6 +1,5 @@
 package com.ftn.eobrazovanje.api.dto;
 
-import com.ftn.eobrazovanje.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
