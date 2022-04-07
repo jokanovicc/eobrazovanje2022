@@ -1,6 +1,8 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
+import com.ftn.eobrazovanje.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +17,11 @@ import java.util.List;
 @RequestMapping("/api/courses")
 public class CourseController {
 
+    @Autowired
+    private CourseService courseService;
+
     @GetMapping
     public List<CourseDTO> getCourses(Authentication authentication) {
-        return null;
+        return courseService.getCoursesForUser(authentication);
     }
 }

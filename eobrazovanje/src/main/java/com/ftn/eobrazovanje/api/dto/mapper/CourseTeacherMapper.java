@@ -30,7 +30,7 @@ public class CourseTeacherMapper {
     public static List<CourseTeacher> toEntityList(List<CourseTeacherDTO> teachers) {
         return teachers
                 .stream()
-                .map(teacher -> CourseTeacherMapper.toEntity(teacher))
+                .map(teacher -> toEntity(teacher))
                 .collect(Collectors.toList());
     }
 }

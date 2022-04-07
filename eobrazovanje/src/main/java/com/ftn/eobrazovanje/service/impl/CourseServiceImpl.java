@@ -44,18 +44,18 @@ public class CourseServiceImpl implements CourseService {
             return this.getCoursesForTeacher(userId);
         }
 
-        return this.getCoursesForAdmin(userId);
+        return this.getCoursesForAdmin();
     }
 
     private List<CourseDTO> getCoursesForStudent(Long studentId) {
-        return null;
+        return CourseMapper.toDtoList(courseRepository.getByStudentId(studentId));
     }
 
     private List<CourseDTO> getCoursesForTeacher(Long teacherId) {
-        return null;
+        return CourseMapper.toDtoList(courseRepository.getByTeacherId(teacherId));
     }
 
-    private List<CourseDTO> getCoursesForAdmin(Long adminId) {
+    private List<CourseDTO> getCoursesForAdmin() {
         return CourseMapper.toDtoList(courseRepository.findAll());
     }
 }
