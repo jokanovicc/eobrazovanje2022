@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getUser(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        return null;
+        return userRepository.findFirstByUsername(username);
     }
 
     @Override

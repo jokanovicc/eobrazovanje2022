@@ -24,4 +24,6 @@ public class ExamPeriod {
     private LocalDate startDate;
 
     private LocalDate endDate;
+
+    private String name;
 }

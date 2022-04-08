@@ -28,8 +28,14 @@ insert into study_program_courses(courses_id, study_program_id) values (2,1);
 insert into studying_information(financial_type,school_year,start_school_year,student_user_id,study_program_id) VALUES
 ('budget','3','2019',2,1);
 
-insert into attending(course_performance_id,student_user_id) values (1,2);
-insert into attending(course_performance_id,student_user_id) values (2,2);
+insert into performance(school_year, course_id) values ('2022', 1);
+insert into performance(school_year, course_id) values ('2022', 2);
+
+insert into performance_teacher_relationship(performance_id, teacher_id) values (1, 1);
+insert into performance_teacher_relationship(performance_id, teacher_id) values (2, 1);
+
+insert into attending(performance_id,student_user_id) values (1,2);
+insert into attending(performance_id,student_user_id) values (2,2);
 
 
 
@@ -43,5 +49,5 @@ insert into attending(course_performance_id,student_user_id) values (2,2);
 
 
 
-INSERT INTO exam_period(end_date,start_date) VALUES ('2022-05-05','2022-05-01');
+INSERT INTO exam_period(end_date,start_date, name) VALUES ('2022-05-05','2022-05-01', 'aprilski');
 

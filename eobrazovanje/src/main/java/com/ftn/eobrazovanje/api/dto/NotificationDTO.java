@@ -1,7 +1,5 @@
 package com.ftn.eobrazovanje.api.dto;
 
-import com.ftn.eobrazovanje.model.CoursePerformance;
-import com.ftn.eobrazovanje.model.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +13,10 @@ public class NotificationDTO {
     private CoursePerformanceDTO coursePerformance;
     private TeacherDTO teacher;
     private String message;
+
+    public NotificationDTO(CoursePerformanceDTO coursePerformance, TeacherDTO teacher, String message) {
+        this.coursePerformance = coursePerformance;
+        this.teacher = teacher;
+        this.message = message;
+    }
 }

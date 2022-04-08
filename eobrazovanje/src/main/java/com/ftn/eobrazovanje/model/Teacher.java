@@ -21,6 +21,7 @@ public class Teacher {
     @MapsId
     private User user;
 
-
-
+    public Teacher(Long id) {
+        this.id = id;
+    }
 }

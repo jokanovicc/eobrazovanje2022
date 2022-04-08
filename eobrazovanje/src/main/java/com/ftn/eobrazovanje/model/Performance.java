@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CoursePerformance {
+public class Performance {
     //izvodjenje predmeta
 
     @Id
@@ -20,9 +20,17 @@ public class CoursePerformance {
 
     private int schoolYear;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "performance_teacher_relationship",
+            joinColumns = { @JoinColumn(name = "performance_id") },
+            inverseJoinColumns = { @JoinColumn(name = "teacher_id") })
     private List<CourseTeacher> courseTeachers;
 
     @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
+
+    public Performance(Long id) {
+        this.id = id;
+    }
 }

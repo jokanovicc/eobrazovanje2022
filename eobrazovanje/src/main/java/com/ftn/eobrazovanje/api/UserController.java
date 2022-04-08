@@ -64,7 +64,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/my-info")
+    @GetMapping
     public UserDTO getMyInfo(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userPrincipal.getUsername());
@@ -75,7 +75,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/update-info")
+    @PutMapping
     public void updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userPrincipal.getUsername());
@@ -88,7 +88,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/create-teacher")
+    @PostMapping
     public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO){
         Teacher teacher = TeacherMapper.toEntity(teacherDTO);
         teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
