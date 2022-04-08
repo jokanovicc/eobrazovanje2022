@@ -48,6 +48,10 @@ public class UserController {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e64d8b5... fix: update notifications & model
     @GetMapping
     public UserDTO getMyInfo(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
