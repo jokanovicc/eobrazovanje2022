@@ -11,6 +11,8 @@ public class TeacherMapper {
         return new TeacherDTO(
                 teacher.getId(),
                 teacher.getUser().getName(),
+                teacher.getUser().getLastname(),
+                teacher.getUser().getPassword(),
                 teacher.getUser().getJmbg(),
                 teacher.getUser().getAddress(),
                 teacher.getUser().getUsername(),
@@ -22,6 +24,7 @@ public class TeacherMapper {
         User user = new User(
                 dto.getId(),
                 dto.getName(),
+                dto.getLastname(),
                 dto.getJmbg(),
                 dto.getAddress(),
                 dto.getUsername(),

@@ -1,11 +1,13 @@
 package com.ftn.eobrazovanje.service.impl;
 
+import com.ftn.eobrazovanje.api.dto.UserUpdateDTO;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.repository.UserRepository;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Optional<User> getUser(Authentication authentication) {
@@ -30,5 +35,15 @@ public class UserServiceImpl implements UserService {
             return user.get();
         }
         return null;
+    }
+
+    @Override
+    public void update(User user, UserUpdateDTO userUpdateDTO) {
+        user.setAddress(userUpdateDTO.getAddress());
+        user.setUsername(userUpdateDTO.getUsername());
+        user.setLastname(userUpdateDTO.getLastname());
+        user.setName(userUpdateDTO.getName());
+        user.setPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));
+        userRepository.save(user);
     }
 }

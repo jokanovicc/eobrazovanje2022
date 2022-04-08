@@ -1,7 +1,16 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.LoginDTO;
+import com.ftn.eobrazovanje.api.dto.TeacherDTO;
+import com.ftn.eobrazovanje.api.dto.UserDTO;
+import com.ftn.eobrazovanje.api.dto.UserUpdateDTO;
+import com.ftn.eobrazovanje.api.dto.mapper.TeacherMapper;
+import com.ftn.eobrazovanje.api.dto.mapper.UserMapper;
+import com.ftn.eobrazovanje.exception.UserNonExistentException;
+import com.ftn.eobrazovanje.model.Teacher;
+import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.security.TokenUtils;
+import com.ftn.eobrazovanje.service.TeacherService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +21,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -31,7 +40,13 @@ public class UserController {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    TeacherService teacherService;
+
+    @Autowired
     TokenUtils tokenUtils;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @PostMapping("/login")
@@ -46,6 +61,42 @@ public class UserController {
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @GetMapping("/my-info")
+    public UserDTO getMyInfo(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userPrincipal.getUsername());
+        if(user == null) {
+            throw new UserNonExistentException("User doesn't exist");
+        }
+        return UserMapper.toDto(user);
+
+    }
+
+    @PutMapping("/update-info")
+    public void updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userPrincipal.getUsername());
+        if(user == null) {
+            throw new UserNonExistentException("User doesn't exist");
+        }
+        userService.update(user, userUpdateDTO);
+
+
+    }
+
+
+    @PostMapping("/create-teacher")
+    public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO){
+        Teacher teacher = TeacherMapper.toEntity(teacherDTO);
+        teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
+        teacherService.createTeacher(teacher);
+
+        return teacherDTO;
+
+
     }
 
 

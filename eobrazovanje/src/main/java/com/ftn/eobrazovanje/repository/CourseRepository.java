@@ -21,4 +21,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             "where course_performance_course_teachers.course_teachers_id = ?1",
             nativeQuery = true)
     List<Course> getByTeacherId(Long teacherId);
+
+
+
 }
