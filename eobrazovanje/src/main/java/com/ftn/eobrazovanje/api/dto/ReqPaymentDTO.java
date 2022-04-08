@@ -15,7 +15,7 @@ public class ReqPaymentDTO {
 
     private Long id;
 
-    private Long referenceNumber;
+    private String referenceNumber;
 
     private Double amount;
 
@@ -23,5 +23,4 @@ public class ReqPaymentDTO {
 
     private String accountNumber;
 
-    private LocalDate paymentDate;
 }

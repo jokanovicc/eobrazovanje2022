@@ -18,7 +18,7 @@ public class StudentDTO {
 
     private String indexNumber;
 
-    private User user;
+    private UserDTO user;
 
     private String referenceNumber;
 }

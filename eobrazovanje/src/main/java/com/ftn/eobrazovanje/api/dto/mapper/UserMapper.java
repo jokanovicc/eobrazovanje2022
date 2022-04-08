@@ -10,6 +10,19 @@ import java.util.stream.Collectors;
 public class UserMapper {
 
 
+    public static User toEntity(UserDTO dto){
+        return new User(
+                dto.getId(),
+                dto.getName(),
+                dto.getLastname(),
+                dto.getJmbg(),
+                dto.getAddress(),
+                dto.getUsername(),
+                dto.getGender()
+
+        );
+    }
+
     public static UserDTO toDto(User user){
         return new UserDTO(
                 user.getId(),

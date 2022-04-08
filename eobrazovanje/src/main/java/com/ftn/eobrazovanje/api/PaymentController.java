@@ -2,6 +2,7 @@ package com.ftn.eobrazovanje.api;
 
 
 import com.ftn.eobrazovanje.api.dto.ReqPaymentDTO;
+import com.ftn.eobrazovanje.api.dto.RespPaymentDTO;
 import com.ftn.eobrazovanje.service.PaymentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PaymentController {
 
     @GetMapping(value = "/students/{id}")
     public ResponseEntity getAllByStudentId(@PathVariable Long id){
-        List<ReqPaymentDTO> payments = paymentService.findAllByStudentId(id);
+        List<RespPaymentDTO> payments = paymentService.findAllByStudentId(id);
 
         return new ResponseEntity(payments, HttpStatus.OK);
     }

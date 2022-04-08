@@ -1,8 +1,10 @@
 package com.ftn.eobrazovanje.api.dto.mapper;
 
 import com.ftn.eobrazovanje.api.dto.ReqPaymentDTO;
+import com.ftn.eobrazovanje.api.dto.RespPaymentDTO;
 import com.ftn.eobrazovanje.model.Payment;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +17,12 @@ public class PaymentMapper {
                 dto.getAmount(),
                 dto.getText(),
                 dto.getAccountNumber(),
-                dto.getPaymentDate()
+                LocalDate.now()
                 );
     }
     //TODO zavrsiti
-    public static ReqPaymentDTO reqToDto(Payment payment) {
-        return new ReqPaymentDTO(
+    public static RespPaymentDTO respToDto(Payment payment) {
+        return new RespPaymentDTO(
                 payment.getId(),
                 StudentMapper.toDto(payment.getStudent()),
                 payment.getAmount(),
@@ -30,10 +32,10 @@ public class PaymentMapper {
         );
     }
 
-    public static List<ReqPaymentDTO> toDtoList(List<Payment> payments) {
+    public static List<RespPaymentDTO> toDtoList(List<Payment> payments) {
         return payments
                 .stream()
-                .map(payment -> toDto(payment))
+                .map(payment -> respToDto(payment))
                 .collect(Collectors.toList());
     }
 }
