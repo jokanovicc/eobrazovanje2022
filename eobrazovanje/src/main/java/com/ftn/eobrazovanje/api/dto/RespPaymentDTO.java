@@ -1,25 +1,21 @@
-package com.ftn.eobrazovanje.model;
-
+package com.ftn.eobrazovanje.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Payment {
+public class RespPaymentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @ManyToOne
-    private Student student;
+    private StudentDTO student;
 
     private Double amount;
 
@@ -28,6 +24,4 @@ public class Payment {
     private String accountNumber;
 
     private LocalDate paymentDate;
-
-
 }

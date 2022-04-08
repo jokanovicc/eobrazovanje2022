@@ -19,7 +19,7 @@ public class NotificationMapper {
     public static NotificationDTO toDto(Notification notification) {
         return new NotificationDTO(
                 notification.getId(),
-                CoursePerformanceMapper.toDto(notification.getCoursePerformance()),
+                CoursePerformanceMapper.toDto(notification.getPerformance()),
                 TeacherMapper.toDto(notification.getTeacher()),
                 notification.getMessage()
         );

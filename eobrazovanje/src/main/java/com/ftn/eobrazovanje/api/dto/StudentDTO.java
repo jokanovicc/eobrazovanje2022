@@ -1,27 +1,24 @@
-package com.ftn.eobrazovanje.model;
+package com.ftn.eobrazovanje.api.dto;
 
+//TODO zavrsiti
+
+import com.ftn.eobrazovanje.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 
-@Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Student {
+public class StudentDTO {
 
-    @Id
     private Long id;
 
     private String indexNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @MapsId
     private User user;
 
-    @Column(unique = true)
     private String referenceNumber;
 }

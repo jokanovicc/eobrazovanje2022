@@ -29,12 +29,15 @@ public class NotificationController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<NotificationDTO> sendNotification(@RequestBody NotificationDTO notification)
+    public ResponseEntity<NotificationDTO> sendNotification(
+            @RequestBody NotificationDTO notification,
+            Authentication authentication
+            )
             throws URISyntaxException {
         if (notification.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        NotificationDTO result = notificationService.send(notification);
+        NotificationDTO result = notificationService.create(notification, authentication);
         return ResponseEntity
                 .created(new URI("/api/notifications/" + result.getId()))
                 .body(result);

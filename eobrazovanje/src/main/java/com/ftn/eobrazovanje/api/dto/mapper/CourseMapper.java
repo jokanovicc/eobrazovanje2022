@@ -24,11 +24,11 @@ public class CourseMapper {
 
     public static CourseDTO toDtoFromExam(Exam exam) {
         return new CourseForStudentDTO
-                (exam.getAttending().getCoursePerformance().getCourse().getId(),
-                exam.getAttending().getCoursePerformance().getCourse().getName(),
-                exam.getAttending().getCoursePerformance().getCourse().getSylabus(),
-                exam.getAttending().getCoursePerformance().getCourse().getESPB(),
-                exam.getAttending().getCoursePerformance().getCourseTeachers(),
+                (exam.getAttending().getPerformance().getCourse().getId(),
+                exam.getAttending().getPerformance().getCourse().getName(),
+                exam.getAttending().getPerformance().getCourse().getSylabus(),
+                exam.getAttending().getPerformance().getCourse().getESPB(),
+                exam.getAttending().getPerformance().getCourseTeachers(),
                 exam.getPreExamDutyPoints(),
                 exam.getFinalExamPoints());
     }

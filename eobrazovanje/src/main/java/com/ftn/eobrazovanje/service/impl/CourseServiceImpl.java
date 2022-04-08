@@ -3,6 +3,7 @@ package com.ftn.eobrazovanje.service.impl;
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.CourseMapper;
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
+import com.ftn.eobrazovanje.model.Course;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.model.UserRole;
 import com.ftn.eobrazovanje.repository.CourseRepository;

@@ -13,7 +13,7 @@ public class ExamMapper {
                 exam.getId(),
                 exam.getPreExamDutyPoints(),
                 exam.getFinalExamPoints(),
-                CourseMapper.toDto(exam.getAttending().getCoursePerformance().getCourse()),
+                CourseMapper.toDto(exam.getAttending().getPerformance().getCourse()),
                 exam.getGrade(),
                 exam.getDate(),
                 exam.getClassroom(),

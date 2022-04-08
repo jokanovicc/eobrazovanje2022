@@ -18,7 +18,7 @@ public class Attending {
     private Long id;
 
     @ManyToOne
-    private CoursePerformance coursePerformance;
+    private Performance performance;
 
     @ManyToOne
     private Student student;

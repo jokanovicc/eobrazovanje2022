@@ -48,5 +48,40 @@ public class UserController {
         }
     }
 
+    @GetMapping
+    public UserDTO getMyInfo(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userPrincipal.getUsername());
+        if(user == null) {
+            throw new UserNonExistentException("User doesn't exist");
+        }
+        return UserMapper.toDto(user);
+
+    }
+
+    @PutMapping
+    public void updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userPrincipal.getUsername());
+        if(user == null) {
+            throw new UserNonExistentException("User doesn't exist");
+        }
+        userService.update(user, userUpdateDTO);
+
+
+    }
+
+
+    @PostMapping
+    public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO){
+        Teacher teacher = TeacherMapper.toEntity(teacherDTO);
+        teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
+        teacherService.createTeacher(teacher);
+
+        return teacherDTO;
+
+
+    }
+
 
 }
