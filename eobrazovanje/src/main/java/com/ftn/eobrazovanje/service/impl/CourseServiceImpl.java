@@ -1,6 +1,7 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
+import com.ftn.eobrazovanje.api.dto.CreateCourseDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.CourseMapper;
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.Course;
@@ -12,10 +13,12 @@ import com.ftn.eobrazovanje.service.CourseService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
@@ -26,6 +29,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private ExamRepository examRepository;
+
+
 
     @Override
     public List<CourseDTO> getCoursesForUser(Authentication authentication) {
@@ -46,6 +51,26 @@ public class CourseServiceImpl implements CourseService {
         }
 
         return this.getCoursesForAdmin();
+    }
+
+    @Override
+    public Course createCourse(Course course) {
+        return courseRepository.save(course);
+
+
+    }
+
+    @Override
+    public Course findById(Long id) {
+        return courseRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateCourse(Course course, CourseDTO courseDTO) {
+        course.setName(courseDTO.getName());
+        course.setESPB(courseDTO.getESPB());
+        course.setSylabus(courseDTO.getSylabus());
+        courseRepository.save(course);
     }
 
     private List<CourseDTO> getCoursesForStudent(Long studentId) {

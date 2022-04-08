@@ -4,20 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Transient;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class TeacherDTO {
+public class UserUpdateDTO {
 
-    private Long id;
     private String name;
     private String lastname;
-    private String jmbg;
+    private String password;
     private String address;
     private String username;
-    private String gender;
-    @Transient
-    private String password;
 }
