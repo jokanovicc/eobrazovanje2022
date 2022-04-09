@@ -1,10 +1,9 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.UserUpdateDTO;
-<<<<<<< HEAD
+
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
-=======
->>>>>>> payments-api
+
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.repository.UserRepository;
 import com.ftn.eobrazovanje.service.UserService;

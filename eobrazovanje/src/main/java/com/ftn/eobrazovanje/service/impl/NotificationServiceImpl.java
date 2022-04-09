@@ -3,15 +3,15 @@ package com.ftn.eobrazovanje.service.impl;
 import com.ftn.eobrazovanje.api.dto.NotificationRequest;
 import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import com.ftn.eobrazovanje.api.dto.mapper.NotificationMapper;
-<<<<<<< HEAD
+
 import com.ftn.eobrazovanje.model.*;
-=======
+
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.Notification;
 import com.ftn.eobrazovanje.model.Performance;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
->>>>>>> payments-api
+
 import com.ftn.eobrazovanje.repository.NotificationRepository;
 import com.ftn.eobrazovanje.service.NotificationService;
 import com.ftn.eobrazovanje.service.UserService;
