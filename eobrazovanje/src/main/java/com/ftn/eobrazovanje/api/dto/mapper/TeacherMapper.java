@@ -6,7 +6,11 @@ import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.model.UserRole;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TeacherMapper {
+
     public static TeacherDTO toDto(Teacher teacher) {
         if(teacher.getUser() == null) {
             return new TeacherDTO(teacher.getId());
@@ -15,12 +19,19 @@ public class TeacherMapper {
                 teacher.getId(),
                 teacher.getUser().getName(),
                 teacher.getUser().getLastname(),
-                teacher.getUser().getPassword(),
                 teacher.getUser().getJmbg(),
                 teacher.getUser().getAddress(),
                 teacher.getUser().getUsername(),
-                teacher.getUser().getGender()
+                teacher.getUser().getGender(),
+                teacher.getUser().getPassword()
         );
+    }
+
+    public static List<TeacherDTO> toDTOList(List<Teacher> teachers){
+        return teachers
+                .stream()
+                .map(teacher -> TeacherMapper.toDto(teacher))
+                .collect(Collectors.toList());
     }
 
     public static Teacher toEntity(TeacherDTO dto) {
@@ -32,7 +43,8 @@ public class TeacherMapper {
                 dto.getAddress(),
                 dto.getUsername(),
                 UserRole.TEACHER,
-                dto.getGender()
+                dto.getGender(),
+                dto.getPassword()
         );
 
         return new Teacher(dto.getId(), user);

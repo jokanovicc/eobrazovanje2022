@@ -29,7 +29,7 @@ public class User {
 
     private String gender;
 
-    public User(Long id, String name,String lastname, String jmbg, String address, String username, UserRole role, String gender) {
+    public User(Long id, String name,String lastname, String jmbg, String address, String username, UserRole role, String gender, String password) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -38,6 +38,7 @@ public class User {
         this.username = username;
         this.role = role;
         this.gender = gender;
+        this.password = password;
     }
 
     public User(Long id, String name,String lastname, String jmbg, String address, String username, String gender) {

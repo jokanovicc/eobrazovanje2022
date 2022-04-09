@@ -1,5 +1,6 @@
 package com.ftn.eobrazovanje.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,12 @@ public class TeacherDTO {
     private String address;
     private String username;
     private String gender;
-    @Transient
     private String password;
 
 
     public TeacherDTO(Long id) {
         this.id = id;
     }
+
+
 }

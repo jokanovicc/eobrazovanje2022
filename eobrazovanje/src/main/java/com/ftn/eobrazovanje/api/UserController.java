@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -90,13 +91,21 @@ public class UserController {
 
 
     @PostMapping
-    public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO){
+    public void createTeacher(@RequestBody TeacherDTO teacherDTO){
         Teacher teacher = TeacherMapper.toEntity(teacherDTO);
         teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
         teacherService.createTeacher(teacher);
 
-        return teacherDTO;
 
+    }
+
+    //param je /teachers?pageNo=1
+    @GetMapping("/teachers")
+    public List<TeacherDTO> getAllTeacher(@RequestParam(defaultValue = "0") Integer pageNo){
+        List<Teacher> list = teacherService.getAllTeachers(pageNo);
+        List<TeacherDTO> teacherDTOS = TeacherMapper.toDTOList(list);
+
+        return teacherDTOS;
 
     }
 
