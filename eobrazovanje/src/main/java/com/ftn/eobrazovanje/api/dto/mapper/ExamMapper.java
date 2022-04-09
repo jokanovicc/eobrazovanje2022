@@ -17,7 +17,7 @@ public class ExamMapper {
                 exam.getGrade(),
                 exam.getDate(),
                 exam.getClassroom(),
-                exam.getStatus().name()
+                exam.getStatus()
         );
     }
 

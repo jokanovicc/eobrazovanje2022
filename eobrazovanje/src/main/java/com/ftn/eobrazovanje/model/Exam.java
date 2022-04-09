@@ -33,7 +33,7 @@ public class Exam {
 
     private String classroom;
 
-    private ExamStatus status;
+    private String status;
 
 
 }

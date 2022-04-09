@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
-    @Query(value = "select * from notification where course_performance_id in" +
-            "(select course_performance_id from attending where student_user_id = ?1)",
+    @Query(value = "select * from notification where performance_id in" +
+            "(select performance_id from attending where student_user_id = ?1)",
             nativeQuery = true)
     List<Notification> getOfStudent(Long studentId);
 

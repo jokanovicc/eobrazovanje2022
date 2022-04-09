@@ -2,7 +2,6 @@ package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.ExamMapper;
-import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.ExamStatus;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.repository.ExamRepository;

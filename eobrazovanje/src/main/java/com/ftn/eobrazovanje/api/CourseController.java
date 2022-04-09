@@ -22,8 +22,7 @@ public class CourseController {
 
     @GetMapping
     public List<CourseDTO> getCourses(Authentication authentication) {
-      //  return courseService.getCoursesForUser(authentication);
-        return null;
+        return courseService.getCoursesForUser(authentication);
     }
 
     @PostMapping
@@ -39,11 +38,6 @@ public class CourseController {
         courseService.updateCourse(course, courseDTO);
 
         return CourseMapper.toDto(course);
-
-
-
-
-
 
     }
 }
