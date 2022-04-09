@@ -19,7 +19,8 @@ public class UserMapper {
                 dto.getJmbg(),
                 dto.getAddress(),
                 dto.getUsername(),
-                dto.getGender()
+                dto.getGender(),
+                dto.getEmail()
 
         );
     }
@@ -32,7 +33,8 @@ public class UserMapper {
                 user.getJmbg(),
                 user.getAddress(),
                 user.getUsername(),
-                user.getGender()
+                user.getGender(),
+                user.getEmail()
         );
     }
 
