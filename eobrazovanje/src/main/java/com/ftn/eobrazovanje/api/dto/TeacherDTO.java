@@ -20,4 +20,8 @@ public class TeacherDTO {
     private String gender;
     @Transient
     private String password;
+
+    public TeacherDTO(Long id) {
+        this.id = id;
+    }
 }

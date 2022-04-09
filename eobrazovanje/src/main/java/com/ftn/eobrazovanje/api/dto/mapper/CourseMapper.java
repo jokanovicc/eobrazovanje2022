@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 public class CourseMapper {
     public static CourseDTO toDto(Course course) {
         return new CourseDTO(
-                course.getName(),
+                course.getName() != null ? course.getName() : null,
                 course.getId(),
-                course.getSylabus(),
-                course.getESPB()
+                course.getSylabus() != null ? course.getSylabus() : null,
+                course.getESPB() != null ? course.getESPB() : null
         );
     }
 

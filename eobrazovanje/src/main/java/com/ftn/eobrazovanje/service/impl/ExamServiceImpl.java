@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -25,12 +24,9 @@ public class ExamServiceImpl implements ExamService {
     private ExamRepository examRepository;
 
     public List<ExamDTO> getExamsForStudent(Authentication authentication, String examStatus) {
-        Optional<User> current = userService.getUser(authentication);
-        if(current.isEmpty()) {
-            throw new UserNonExistentException("User doesn't exist");
-        }
+        User current = userService.getUser(authentication);
 
-        Long studentId = current.get().getId();
+        Long studentId = current.getId();
 
         //polozeni predmeti
         ExamStatus status = ExamStatus.valueOf(examStatus);

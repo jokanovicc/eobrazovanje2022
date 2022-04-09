@@ -33,13 +33,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDTO> getCoursesForUser(Authentication authentication) {
-        Optional<User> user = userService.getUser(authentication);
-        if(user.isEmpty()) {
-            throw new UserNonExistentException("User doesn't exist");
-        }
+        User user = userService.getUser(authentication);
 
-        UserRole role = user.get().getRole();
-        Long userId = user.get().getId();
+        UserRole role = user.getRole();
+        Long userId = user.getId();
 
         if(role == UserRole.STUDENT) {
             return this.getCoursesForStudent(userId);

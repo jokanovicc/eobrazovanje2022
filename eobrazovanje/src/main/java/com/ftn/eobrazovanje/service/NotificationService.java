@@ -1,8 +1,7 @@
 package com.ftn.eobrazovanje.service;
 
-import com.ftn.eobrazovanje.api.dto.NotificationDTO;
-import com.ftn.eobrazovanje.model.Notification;
-import org.springframework.data.jpa.repository.Query;
+import com.ftn.eobrazovanje.api.dto.NotificationRequest;
+import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface NotificationService {
-    NotificationDTO create(NotificationDTO notification, Authentication authentication);
+    NotificationResponse create(NotificationRequest notification, Authentication authentication);
 
-    List<NotificationDTO> getOfStudent(Long studentId);
+    List<NotificationResponse> getNotifications(Authentication authentication);
 }

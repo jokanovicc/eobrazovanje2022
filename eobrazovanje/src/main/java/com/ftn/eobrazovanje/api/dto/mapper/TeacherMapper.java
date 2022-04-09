@@ -8,6 +8,9 @@ import com.ftn.eobrazovanje.model.UserRole;
 
 public class TeacherMapper {
     public static TeacherDTO toDto(Teacher teacher) {
+        if(teacher.getUser() == null) {
+            return new TeacherDTO(teacher.getId());
+        }
         return new TeacherDTO(
                 teacher.getId(),
                 teacher.getUser().getName(),

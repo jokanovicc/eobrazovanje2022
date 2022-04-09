@@ -8,8 +8,12 @@ public class CoursePerformanceMapper {
     public static CoursePerformanceDTO toDto(Performance coursePerformance) {
         return new CoursePerformanceDTO(coursePerformance.getId(),
                 coursePerformance.getSchoolYear(),
-                CourseTeacherMapper.toDtoList(coursePerformance.getCourseTeachers()),
-                CourseMapper.toDto(coursePerformance.getCourse()));
+                coursePerformance.getCourseTeachers() != null ?
+                        CourseTeacherMapper.toDtoList(coursePerformance.getCourseTeachers())
+                : null,
+                coursePerformance.getCourse() != null ?
+                        CourseMapper.toDto(coursePerformance.getCourse())
+                : null);
     }
 
     public static Performance toEntity(CoursePerformanceDTO dto) {

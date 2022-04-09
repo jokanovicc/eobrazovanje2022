@@ -1,6 +1,7 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.UserUpdateDTO;
+import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.repository.UserRepository;
 import com.ftn.eobrazovanje.service.UserService;
@@ -22,16 +23,21 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Optional<User> getUser(Authentication authentication) {
+    public User getUser(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        return userRepository.findFirstByUsername(username);
+        Optional<User> user = userRepository.findFirstByUsername(username);
+
+        if(user.isEmpty()) {
+            throw new UserNonExistentException("User doesn't exist");
+        }
+        return user.get();
     }
 
     @Override
     public User findByUsername(String username) {
         Optional<User> user = userRepository.findFirstByUsername(username);
-        if (!user.isEmpty()) {
+        if (user.isPresent()) {
             return user.get();
         }
         return null;

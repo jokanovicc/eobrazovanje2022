@@ -1,12 +1,9 @@
 package com.ftn.eobrazovanje.service.impl;
 
-import com.ftn.eobrazovanje.api.dto.NotificationDTO;
+import com.ftn.eobrazovanje.api.dto.NotificationRequest;
+import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import com.ftn.eobrazovanje.api.dto.mapper.NotificationMapper;
-import com.ftn.eobrazovanje.exception.UserNonExistentException;
-import com.ftn.eobrazovanje.model.Notification;
-import com.ftn.eobrazovanje.model.Performance;
-import com.ftn.eobrazovanje.model.Teacher;
-import com.ftn.eobrazovanje.model.User;
+import com.ftn.eobrazovanje.model.*;
 import com.ftn.eobrazovanje.repository.NotificationRepository;
 import com.ftn.eobrazovanje.service.NotificationService;
 import com.ftn.eobrazovanje.service.UserService;
@@ -27,26 +24,32 @@ public class NotificationServiceImpl implements NotificationService {
     private UserService userService;
 
     @Override
-    public NotificationDTO create(NotificationDTO dto, Authentication authentication) {
+    public NotificationResponse create(NotificationRequest request, Authentication authentication) {
 
-        Optional<User> teacher = userService.getUser(authentication);
-        if(teacher.isEmpty()) {
-            throw new UserNonExistentException("User doesn't exist");
-        }
+       User teacher = userService.getUser(authentication);
 
         Notification notification = new Notification(
-                new Performance(dto.getCoursePerformance().getId()),
-                new Teacher(teacher.get().getId()),
-                dto.getMessage()
+                new Performance(request.getPerformanceId()),
+                new Teacher(teacher.getId()),
+                request.getMessage()
         );
         Notification created = notificationRepository.save(notification);
-        Notification found = notificationRepository.findById(created.getId()).get();
 
-        return NotificationMapper.toDto(notificationRepository.findById(found.getId()).get());
+        return NotificationMapper.toDto(notificationRepository.findById(created.getId()).get());
     }
 
     @Override
-    public List<NotificationDTO> getOfStudent(Long studentId) {
-        return NotificationMapper.toDtoList(notificationRepository.getOfStudent(studentId));
+    public List<NotificationResponse> getNotifications(Authentication authentication) {
+        User current = userService.getUser(authentication);
+
+        if(current.getRole() == UserRole.ADMIN) {
+            return NotificationMapper.toDtoList(notificationRepository.findAll());
+        }
+
+        if(current.getRole() == UserRole.TEACHER) {
+            return NotificationMapper.toDtoList(notificationRepository.getOfTeacher(current.getId()));
+        }
+
+        return NotificationMapper.toDtoList(notificationRepository.getOfStudent(current.getId()));
     }
 }
