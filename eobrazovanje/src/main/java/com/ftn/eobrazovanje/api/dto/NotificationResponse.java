@@ -14,7 +14,9 @@ public class NotificationResponse {
     private TeacherDTO teacher;
     private String message;
 
+
     public NotificationResponse(CoursePerformanceDTO coursePerformance, TeacherDTO teacher, String message) {
+
         this.coursePerformance = coursePerformance;
         this.teacher = teacher;
         this.message = message;

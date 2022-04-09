@@ -40,6 +40,7 @@ public class NotificationController {
             throws URISyntaxException {
 
         NotificationResponse result = notificationService.create(notification, authentication);
+
         return ResponseEntity
                 .created(new URI("/api/notifications/" + result.getId()))
                 .body(result);

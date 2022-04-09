@@ -64,6 +64,7 @@ public class UserController {
     }
 
 
+
     @GetMapping
     public UserDTO getMyInfo(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
