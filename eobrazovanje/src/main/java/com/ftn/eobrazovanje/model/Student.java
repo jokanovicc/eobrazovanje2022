@@ -21,4 +21,7 @@ public class Student {
     @JoinColumn(name = "user_id")
     @MapsId
     private User user;
+
+    @Column(unique = true)
+    private String referenceNumber;
 }
