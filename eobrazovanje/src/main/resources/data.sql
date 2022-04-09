@@ -55,6 +55,7 @@ insert into performance_exam(performance_id, date, classroom) values ( 1, '2022-
 insert into performance_exam(performance_id, date, classroom) values ( 2, '2022-01-25', '310');
 insert into performance_exam(performance_id, date, classroom) values ( 3, '2022-01-26', '312');
 insert into performance_exam(performance_id, date, classroom) values ( 3, '2022-02-13', '312');
+insert into performance_exam(performance_id, date, classroom) values ( 4, '2022-04-14', '315');
 
 insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
 values ( 45, 31, 8, 'PASSED', 1, 1);
@@ -73,4 +74,5 @@ insert into exam_registration(exam_id, exam_period_id, student_user_id) values (
 insert into exam_registration(exam_id, exam_period_id, student_user_id) values (3, 1, 2);
 insert into exam_registration(exam_id, exam_period_id, student_user_id) values (4, 2, 2);
 
+insert into financial_card(student_user_id, balance) values (2, 400);
 

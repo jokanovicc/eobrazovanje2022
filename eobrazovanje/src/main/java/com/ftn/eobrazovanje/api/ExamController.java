@@ -28,7 +28,7 @@ public class ExamController {
         return examService.getExamsForStudent(authentication, status);
     }
 
-    @PostMapping("/performanceExam/{performanceExamId}/attending/{attendingId}/period/{periodId}")
+    @PostMapping("/{performanceExamId}/attending/{attendingId}/period/{periodId}")
     public ExamDTO registerExam(
             @PathVariable Long performanceExamId,
             @PathVariable Long attendingId,
