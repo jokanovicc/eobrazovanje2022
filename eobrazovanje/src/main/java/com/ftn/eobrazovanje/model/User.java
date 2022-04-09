@@ -22,6 +22,7 @@ public class User {
     private String address;
     private String username;
     private String password;
+    private String email;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -41,7 +42,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String name,String lastname, String jmbg, String address, String username, String gender) {
+    public User(Long id, String name,String lastname, String jmbg, String address, String username, String gender, String email) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -49,5 +50,6 @@ public class User {
         this.address = address;
         this.username = username;
         this.gender = gender;
+        this.email = email;
     }
 }

@@ -15,4 +15,6 @@ public interface UserService {
    User findByUsername(String username);
 
    void update(User user, UserUpdateDTO userUpdateDTO);
+
+   User create(User user);
 }
