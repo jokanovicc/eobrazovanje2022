@@ -1,12 +1,18 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
+import com.ftn.eobrazovanje.api.dto.StudentDTO;
+import com.ftn.eobrazovanje.api.dto.mapper.StudentMapper;
+import com.ftn.eobrazovanje.model.Student;
+import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.service.ExamService;
+import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -19,6 +25,9 @@ public class ExamController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping
     public List<ExamDTO> getExams(
@@ -36,5 +45,10 @@ public class ExamController {
             Authentication authentication
     ) {
         return examService.registerExam(performanceExamId, attendingId, periodId, authentication);
+    }
+
+    @GetMapping("/{examId}/students")
+    public List<StudentDTO> findRegisteredToExamStudents(@PathVariable("examId") Long examId){
+        return studentService.findExamRegisteredStudents(examId);
     }
 }

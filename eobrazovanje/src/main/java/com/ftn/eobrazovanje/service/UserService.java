@@ -5,6 +5,7 @@ import com.ftn.eobrazovanje.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,4 +18,6 @@ public interface UserService {
    void update(User user, UserUpdateDTO userUpdateDTO);
 
    User create(User user);
+
+   List<User> findRegisteredToExamUser(Long examId);
 }
