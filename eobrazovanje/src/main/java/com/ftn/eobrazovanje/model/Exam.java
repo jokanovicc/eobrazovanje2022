@@ -29,11 +29,20 @@ public class Exam {
 
     private Integer grade;
 
-    private LocalDate date;
-
-    private String classroom;
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    private PerformanceExam exam;
 
     private String status;
 
-
+    public Exam(int preExamDutyPoints, int finalExamPoints,
+                Attending attending, Integer grade,
+                PerformanceExam exam, String status) {
+        this.preExamDutyPoints = preExamDutyPoints;
+        this.finalExamPoints = finalExamPoints;
+        this.attending = attending;
+        this.grade = grade;
+        this.exam = exam;
+        this.status = status;
+    }
 }

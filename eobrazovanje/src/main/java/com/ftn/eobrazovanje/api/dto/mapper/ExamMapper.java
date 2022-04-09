@@ -15,8 +15,8 @@ public class ExamMapper {
                 exam.getFinalExamPoints(),
                 CourseMapper.toDto(exam.getAttending().getPerformance().getCourse()),
                 exam.getGrade(),
-                exam.getDate(),
-                exam.getClassroom(),
+                exam.getExam().getDate(),
+                exam.getExam().getClassroom(),
                 exam.getStatus()
         );
     }

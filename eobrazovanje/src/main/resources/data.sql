@@ -51,17 +51,22 @@ insert into exam_period(start_date, end_date, name) values ('2022-01-15', '2022-
 insert into exam_period(start_date, end_date, name) values ('2022-02-01', '2022-02-17', 'februarski');
 insert into exam_period(start_date, end_date, name) values ('2022-04-09', '2022-05-05', 'aprilski aktuelni');
 
-insert into exam(classroom, date, pre_exam_duty_points, final_exam_points, grade, status, attending_id)
-values ('417', '2022-01-17', 45, 31, 8, 'PASSED', 1);
+insert into performance_exam(performance_id, date, classroom) values ( 1, '2022-01-17', '417');
+insert into performance_exam(performance_id, date, classroom) values ( 2, '2022-01-25', '310');
+insert into performance_exam(performance_id, date, classroom) values ( 3, '2022-01-26', '312');
+insert into performance_exam(performance_id, date, classroom) values ( 3, '2022-02-13', '312');
 
-insert into exam(classroom, date, pre_exam_duty_points, final_exam_points, grade, status, attending_id)
-values ('310', '2022-01-25', 0, 0, null, 'REGISTERED', 2);
+insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
+values ( 45, 31, 8, 'PASSED', 1, 1);
 
-insert into exam(classroom, date, pre_exam_duty_points, final_exam_points, grade, status, attending_id)
-values ('312', '2022-01-26', 0, 0, null, 'FAILED', 3);
+insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
+values ( 0, 0, null, 'REGISTERED', 2, 2);
 
-insert into exam(classroom, date, pre_exam_duty_points, final_exam_points, grade, status, attending_id)
-values ('312', '2022-02-13', 41, 40, 9, 'PASSED', 3);
+insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
+values (0, 0, null, 'FAILED', 3, 3);
+
+insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
+values (41, 40, 9, 'PASSED', 3, 4);
 
 insert into exam_registration(exam_id, exam_period_id, student_user_id) values (1, 1, 2);
 insert into exam_registration(exam_id, exam_period_id, student_user_id) values (2, 1, 2);

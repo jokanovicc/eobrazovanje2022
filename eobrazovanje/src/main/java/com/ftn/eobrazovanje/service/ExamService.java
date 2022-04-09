@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ExamService {
     List<ExamDTO> getExamsForStudent(Authentication authentication, String status);
+    ExamDTO registerExam(Long performanceExamId, Long examId, Long attendingId, Authentication authentication);
 }
