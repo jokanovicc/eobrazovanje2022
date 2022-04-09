@@ -6,8 +6,14 @@ INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUE
     ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
 ', 'STUDENT', 'MALE');
 
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
+    ('Novica','Nedeljkovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
+', 'TEACHER', 'MALE');
+
 INSERT INTO teacher(user_id) VALUES  (1);
 INSERT INTO student(user_id,index_number) VALUES  (2,'RA-123/2020');
+INSERT INTO teacher(user_id) VALUES  (3);
+
 
 INSERT INTO teacher_role(name) VALUES ('PREDAVAC');
 INSERT INTO teacher_role(name) VALUES ('ASISTENT');
@@ -37,10 +43,15 @@ insert into performance(school_year, course_id) values ('2022', 2);
 insert into performance(school_year, course_id) values ('2022', 3);
 insert into performance(school_year, course_id) values ('2022', 4);
 
+INSERT into course_teacher(teacher_user_id, teacher_role_id) values (1, 1);
+INSERT into course_teacher(teacher_user_id, teacher_role_id) values (3, 2);
+
+
+
+
 insert into performance_teacher_relationship(performance_id, teacher_id) values (1, 1);
+insert into performance_teacher_relationship(performance_id, teacher_id) values (1, 2);
 insert into performance_teacher_relationship(performance_id, teacher_id) values (2, 1);
-insert into performance_teacher_relationship(performance_id, teacher_id) values (3, 1);
-insert into performance_teacher_relationship(performance_id, teacher_id) values (4, 1);
 
 insert into attending(performance_id,student_user_id) values (1,2);
 insert into attending(performance_id,student_user_id) values (2,2);
