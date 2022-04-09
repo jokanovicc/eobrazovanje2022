@@ -3,9 +3,11 @@ package com.ftn.eobrazovanje.repository;
 import com.ftn.eobrazovanje.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query(value = "select * course join course_performance join attending on" +

@@ -29,5 +29,11 @@ public class Payment {
 
     private LocalDate paymentDate;
 
-
+    public Payment(Student student, Double amount, String text, String accountNumber, LocalDate paymentDate) {
+        this.student = student;
+        this.amount = amount;
+        this.text = text;
+        this.accountNumber = accountNumber;
+        this.paymentDate = paymentDate;
+    }
 }

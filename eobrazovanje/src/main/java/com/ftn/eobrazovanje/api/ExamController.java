@@ -23,7 +23,18 @@ public class ExamController {
     @GetMapping
     public List<ExamDTO> getExams(
             @RequestParam(name = "status", required = false, defaultValue = "ALL") String status,
-            Authentication authentication) {
+            Authentication authentication
+    ) {
         return examService.getExamsForStudent(authentication, status);
+    }
+
+    @PostMapping("/{performanceExamId}/attending/{attendingId}/period/{periodId}")
+    public ExamDTO registerExam(
+            @PathVariable Long performanceExamId,
+            @PathVariable Long attendingId,
+            @PathVariable Long periodId,
+            Authentication authentication
+    ) {
+        return examService.registerExam(performanceExamId, attendingId, periodId, authentication);
     }
 }

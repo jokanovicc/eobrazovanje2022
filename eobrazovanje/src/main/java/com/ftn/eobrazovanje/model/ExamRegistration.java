@@ -25,4 +25,10 @@ public class ExamRegistration {
 
     @ManyToOne
     private ExamPeriod examPeriod;
+
+    public ExamRegistration(Exam exam, Student student, ExamPeriod examPeriod) {
+        this.exam = exam;
+        this.student = student;
+        this.examPeriod = examPeriod;
+    }
 }
