@@ -1,10 +1,10 @@
 package com.ftn.eobrazovanje.service.impl;
 
-import com.ftn.eobrazovanje.api.dto.ExamDTO;
-import com.ftn.eobrazovanje.api.dto.ExamWithStudentInfoResponse;
-import com.ftn.eobrazovanje.api.dto.GradeStudentRequest;
+import com.ftn.eobrazovanje.api.dto.*;
 import com.ftn.eobrazovanje.api.dto.mapper.ExamMapper;
 import com.ftn.eobrazovanje.api.dto.mapper.ExamWithStudentInfoMapper;
+import com.ftn.eobrazovanje.api.dto.mapper.PerformanceExamMapper;
+import com.ftn.eobrazovanje.exception.BadRequestException;
 import com.ftn.eobrazovanje.exception.ExamRegistrationFailedException;
 import com.ftn.eobrazovanje.exception.NotFoundException;
 import com.ftn.eobrazovanje.model.*;
@@ -45,6 +45,9 @@ public class ExamServiceImpl implements ExamService {
 
     @Autowired
     private PerformanceExamRepository performanceExamRepository;
+
+    @Autowired
+    private PerformanceRepository performanceRepository;
 
     @Autowired
     private ExamRegistrationRepository examRegistrationRepository;
@@ -127,6 +130,22 @@ public class ExamServiceImpl implements ExamService {
         return ExamWithStudentInfoMapper.toDtoList(
                 examRepository.findAllRegisteredForPerformanceExam(performanceExamId)
         );
+    }
+
+    @Override
+    public PerformanceExamResponse createExam(CreateExamRequest request) {
+        Optional<Performance> performance = performanceRepository.findById(request.getPerformanceId());
+        if(performance.isEmpty()) {
+            throw new BadRequestException("Provided performance id not found");
+        }
+        PerformanceExam exam = new PerformanceExam(
+                performance.get(),
+                request.getDate(),
+                request.getExamPeriod(),
+                request.getClassroom()
+        );
+
+        return PerformanceExamMapper.toDto(performanceExamRepository.save(exam));
     }
 
     @Transactional

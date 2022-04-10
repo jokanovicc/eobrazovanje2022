@@ -28,4 +28,10 @@ public class PerformanceExam {
 
     private String classroom;
 
+    public PerformanceExam(Performance performance, LocalDate date, ExamPeriod examPeriod, String classroom) {
+        this.performance = performance;
+        this.date = date;
+        this.examPeriod = examPeriod;
+        this.classroom = classroom;
+    }
 }

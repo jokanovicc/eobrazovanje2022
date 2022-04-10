@@ -2,6 +2,7 @@ package com.ftn.eobrazovanje.api.dto.mapper;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
 import com.ftn.eobrazovanje.model.Exam;
+import com.ftn.eobrazovanje.model.PerformanceExam;
 
 import java.util.List;
 import java.util.stream.Collectors;
