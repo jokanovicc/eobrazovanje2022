@@ -1,9 +1,9 @@
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
-('Marko','Petrovic','1203983840001', 'Liman 3, Novi Sad', 'markop','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
+('Marko','Petrovic','1203983840001', 'Liman 3, Novi Sad', 'markop','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
 ', 'TEACHER', 'MALE');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
-    ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
+    ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
 ', 'STUDENT', 'MALE');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
@@ -11,7 +11,7 @@ INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUE
 ', 'TEACHER', 'MALE');
 
 INSERT INTO teacher(user_id) VALUES  (1);
-INSERT INTO student(user_id,index_number) VALUES  (2,'RA-123/2020');
+INSERT INTO student(user_id,index_number,password_token,first_login,reference_number) VALUES  (2,'RA-123/2020','',true,'1ADRHF322');
 INSERT INTO teacher(user_id) VALUES  (3);
 
 

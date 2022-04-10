@@ -49,12 +49,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findOneById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void update(User user, UserUpdateDTO userUpdateDTO) {
         user.setAddress(userUpdateDTO.getAddress());
         user.setUsername(userUpdateDTO.getUsername());
         user.setLastname(userUpdateDTO.getLastname());
         user.setName(userUpdateDTO.getName());
         user.setPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void update(User user) {
         userRepository.save(user);
     }
 
