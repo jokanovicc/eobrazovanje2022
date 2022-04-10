@@ -22,6 +22,16 @@ public class PerformanceExam {
 
     private LocalDate date;
 
+    @ManyToOne
+    @JoinColumn(name = "exam_period_id")
+    private ExamPeriod examPeriod;
+
     private String classroom;
 
+    public PerformanceExam(Performance performance, LocalDate date, ExamPeriod examPeriod, String classroom) {
+        this.performance = performance;
+        this.date = date;
+        this.examPeriod = examPeriod;
+        this.classroom = classroom;
+    }
 }

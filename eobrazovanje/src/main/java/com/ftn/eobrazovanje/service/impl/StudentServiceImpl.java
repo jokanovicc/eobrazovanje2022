@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -96,6 +97,23 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
+    @Override
+    public StudentDTO findById(Long id) {
+        return StudentMapper.toDto(studentRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public List<StudentDTO> findExamRegisteredStudents(Long examId) {
+        List<User> users;
+        users = userService.findRegisteredToExamUser(examId);
+        ArrayList<StudentDTO> studentDTOS = new ArrayList<>();
+        for (User u:users) {
+            StudentDTO student = findById(u.getId());
+            studentDTOS.add(student);
+
+        }
+        return studentDTOS;
+    }
 
 
     public static String generateRandomReferencialNumber() {
@@ -107,5 +125,7 @@ public class StudentServiceImpl implements StudentService {
             sb.append(chars.charAt(rnd.nextInt(chars.length())));
         return sb.toString();
     }
+
+
 
 }

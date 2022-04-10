@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,5 +72,10 @@ public class UserServiceImpl implements UserService {
     public User create(User user) {
         User savedUser = userRepository.save(user);
         return savedUser;
+    }
+
+    @Override
+    public List<User> findRegisteredToExamUser(Long examId) {
+        return userRepository.findAllRegisteredToExamStudents(examId);
     }
 }

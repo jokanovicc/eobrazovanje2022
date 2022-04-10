@@ -31,10 +31,6 @@ public class CourseController {
     @Autowired
     private TeacherService teacherService;
 
-
-
-
-
     @GetMapping
     public List<CourseDTO> getCourses(Authentication authentication) {
         return courseService.getCoursesForUser(authentication);
@@ -54,37 +50,5 @@ public class CourseController {
 
         return CourseMapper.toDto(course);
 
-    }
-
-    @PostMapping("/performances/{performanceId}/teachers")
-    public ResponseEntity addTeacherToPerformance(@PathVariable("performanceId") Long performanceId, @RequestBody TeacherToAttendingDTO teacherToAttendingDTO){
-        Performance performance = performanceService.findById(performanceId);
-        if(performance == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        Teacher teacher = teacherService.findById(teacherToAttendingDTO.getTeacherId());
-        if(teacher == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        performanceService.addTeacherToPerformance(teacher, teacherToAttendingDTO.getTeacherRole(),teacherService,performance);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-
-    }
-
-
-    @DeleteMapping("/performances/{performanceId}/teachers/{teacherId}")
-    public ResponseEntity removeTeacherFromPerformance(@PathVariable("performanceId") Long performId, @PathVariable("teacherId") Long teacherId){
-        Performance performance = performanceService.findById(performId);
-        if(performance == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        CourseTeacher courseTeacher = teacherService.findByCourseTeacherByTeacher(teacherId);
-        if(courseTeacher == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        performanceService.removeTeacherFromPerformance(performance, courseTeacher);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

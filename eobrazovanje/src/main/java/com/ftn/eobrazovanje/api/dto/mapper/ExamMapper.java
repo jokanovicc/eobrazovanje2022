@@ -2,6 +2,7 @@ package com.ftn.eobrazovanje.api.dto.mapper;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
 import com.ftn.eobrazovanje.model.Exam;
+import com.ftn.eobrazovanje.model.PerformanceExam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,8 @@ public class ExamMapper {
                 exam.getGrade(),
                 exam.getExam().getDate(),
                 exam.getExam().getClassroom(),
-                exam.getStatus()
+                exam.getStatus(),
+                exam.getExam().getExamPeriod().getName()
         );
     }
 

@@ -26,4 +26,9 @@ public class CourseTeacher {
     public CourseTeacher(Long id) {
         this.id = id;
     }
+
+    public CourseTeacher(Teacher teacher, TeacherRole teacherRole) {
+        this.teacher = teacher;
+        this.teacherRole = teacherRole;
+    }
 }

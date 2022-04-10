@@ -33,4 +33,15 @@ public class Performance {
     public Performance(Long id) {
         this.id = id;
     }
+
+    public Performance(int schoolYear, Course course) {
+        this.schoolYear = schoolYear;
+        this.course = course;
+    }
+
+    public Performance(int schoolYear, List<CourseTeacher> courseTeachers, Course course) {
+        this.schoolYear = schoolYear;
+        this.courseTeachers = courseTeachers;
+        this.course = course;
+    }
 }

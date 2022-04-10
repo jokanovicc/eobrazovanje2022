@@ -40,4 +40,8 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     @Query(value = "select * from exam where attending_id = ?1 and status in ('FAILED', 'PASSED', 'REGISTERED')",
             nativeQuery = true)
     List<Exam> findByAttending(Long attendingId);
+
+    @Query(value = "select * from exam where exam_id = ?1 and status = 'REGISTERED'",
+            nativeQuery = true)
+    List<Exam> findAllRegisteredForPerformanceExam(Long performanceExamId);
 }
