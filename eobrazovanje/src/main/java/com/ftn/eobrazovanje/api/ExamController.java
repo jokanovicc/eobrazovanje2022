@@ -1,22 +1,20 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
-import com.ftn.eobrazovanje.api.dto.StudentDTO;
-import com.ftn.eobrazovanje.api.dto.mapper.StudentMapper;
-import com.ftn.eobrazovanje.model.Student;
-import com.ftn.eobrazovanje.model.User;
+import com.ftn.eobrazovanje.api.dto.ExamWithStudentInfoResponse;
+import com.ftn.eobrazovanje.api.dto.GradeStudentRequest;
 import com.ftn.eobrazovanje.service.ExamService;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
 @RestController
+@Validated
 @RequestMapping("/api/exams")
 public class ExamController {
 
@@ -37,18 +35,31 @@ public class ExamController {
         return examService.getExamsForStudent(authentication, status);
     }
 
-    @PostMapping("/{performanceExamId}/attending/{attendingId}/period/{periodId}")
+    @PostMapping("/{performanceExamId}/attending/{attendingId}")
     public ExamDTO registerExam(
             @PathVariable Long performanceExamId,
             @PathVariable Long attendingId,
-            @PathVariable Long periodId,
             Authentication authentication
     ) {
-        return examService.registerExam(performanceExamId, attendingId, periodId, authentication);
+        return examService.registerExam(performanceExamId, attendingId, authentication);
+    }
+
+    @PutMapping("/{examId}/students/{studentId}")
+    public ExamDTO gradeStudent(
+            @PathVariable Long examId,
+            @PathVariable Long studentId,
+            @RequestBody(required = true) GradeStudentRequest studentGrade,
+            Authentication authentication
+    ) {
+        return examService.gradeStudent(examId, studentId, studentGrade, authentication);
     }
 
     @GetMapping("/{examId}/students")
-    public List<StudentDTO> findRegisteredToExamStudents(@PathVariable("examId") Long examId){
-        return studentService.findExamRegisteredStudents(examId);
+    public List<ExamWithStudentInfoResponse> findRegisteredToExamStudents(
+            @PathVariable("examId") Long performanceExamId
+    ){
+        return examService.getStudentsWhoRegisteredExam(performanceExamId);
     }
+
+
 }

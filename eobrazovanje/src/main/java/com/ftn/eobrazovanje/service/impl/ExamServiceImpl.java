@@ -1,7 +1,10 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.ExamDTO;
+import com.ftn.eobrazovanje.api.dto.ExamWithStudentInfoResponse;
+import com.ftn.eobrazovanje.api.dto.GradeStudentRequest;
 import com.ftn.eobrazovanje.api.dto.mapper.ExamMapper;
+import com.ftn.eobrazovanje.api.dto.mapper.ExamWithStudentInfoMapper;
 import com.ftn.eobrazovanje.exception.ExamRegistrationFailedException;
 import com.ftn.eobrazovanje.exception.NotFoundException;
 import com.ftn.eobrazovanje.model.*;
@@ -11,8 +14,6 @@ import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
@@ -76,15 +77,13 @@ public class ExamServiceImpl implements ExamService {
     public ExamDTO registerExam(
             Long performanceExamId,
             Long attendingId,
-            Long periodId,
             Authentication authentication
     ) {
         User user = userService.getUser(authentication);
         Student student = studentRepository.findById(user.getId()).get();
 
-        checkIfExamCanBeRegistered(periodId, attendingId, user.getId(), performanceExamId);
+        checkIfExamCanBeRegistered(attendingId, user.getId(), performanceExamId);
 
-        ExamPeriod period = examPeriodRepository.findById(periodId).get();
         PerformanceExam exam = performanceExamRepository.findById(performanceExamId).get();
         FinancialCard card = financialCardRepository.findByStudentId(user.getId()).get();
         Attending attending = attendingRepository.findById(attendingId).get();
@@ -94,12 +93,41 @@ public class ExamServiceImpl implements ExamService {
         Exam registered = new Exam(0, 0, attending, 0, exam, "REGISTERED");
         examRepository.save(registered);
 
-        ExamRegistration registration = new ExamRegistration(registered, student, period);
+        ExamRegistration registration = new ExamRegistration(registered, student, exam.getExamPeriod());
         examRegistrationRepository.save(registration);
 
         return ExamMapper.toDto(registered);
     }
 
+    //profesoru ce na interfejsu biti prikazana lista EXAMA za svakog pojedinacnog studenta znaci nece biti
+    //performance exam generalni, nego pojedinacna polaganja, tako da cu za svako polaganje imati direkt id pojedinacnog polaganja
+    @Override
+    public ExamDTO gradeStudent(
+            Long examId,
+            Long studentId,
+            GradeStudentRequest studentGrade,
+            Authentication authentication
+    ) {
+        Exam exam = examRepository.findById(examId).get();
+        this.validatePoints(studentGrade.getPreExamDutyPoints(), studentGrade.getFinalExamPoints());
+        int grade = calculateStudentGrade(studentGrade.getPreExamDutyPoints(), studentGrade.getFinalExamPoints());
+
+        exam.setPreExamDutyPoints(studentGrade.getPreExamDutyPoints());
+        exam.setFinalExamPoints(studentGrade.getFinalExamPoints());
+        exam.setGrade(grade);
+        exam.setStatus(String.valueOf(calculateExamStatus(grade)));
+
+        examRepository.save(exam);
+
+        return ExamMapper.toDto(exam);
+    }
+
+    @Override
+    public List<ExamWithStudentInfoResponse> getStudentsWhoRegisteredExam(Long performanceExamId) {
+        return ExamWithStudentInfoMapper.toDtoList(
+                examRepository.findAllRegisteredForPerformanceExam(performanceExamId)
+        );
+    }
 
     @Transactional
     private void chargeStudentForExam(FinancialCard card, Student student) {
@@ -115,20 +143,18 @@ public class ExamServiceImpl implements ExamService {
         financialCardRepository.save(card);
     }
 
-    private void checkIfExamCanBeRegistered(Long periodId, Long attendingId, Long userId, Long performanceExamId) {
+    private void checkIfExamCanBeRegistered(Long attendingId, Long userId, Long performanceExamId) {
 
-        Optional<ExamPeriod> periodOptional = examPeriodRepository.findById(periodId);
         Optional<Attending> attendingOptional = attendingRepository.findById(attendingId);
         Optional<FinancialCard> cardOptional = financialCardRepository.findByStudentId(userId);
         Optional<PerformanceExam> performanceExamOptional = performanceExamRepository.findById(performanceExamId);
 
-        checkIfStudentInfoIsEmpty(periodOptional, attendingOptional, cardOptional, performanceExamOptional);
+        checkIfStudentInfoIsEmpty(attendingOptional, cardOptional, performanceExamOptional);
 
-        ExamPeriod period = periodOptional.get();
         FinancialCard card = cardOptional.get();
         PerformanceExam exam = performanceExamOptional.get();
 
-        if(!examPeriodIsActive(period)) {
+        if(!examPeriodIsActive(exam.getExamPeriod())) {
             throw new ExamRegistrationFailedException("Selected exam period is currently inactive");
         }
         if(registeringTimePassed(exam)) {
@@ -160,14 +186,10 @@ public class ExamServiceImpl implements ExamService {
     }
 
     private void checkIfStudentInfoIsEmpty(
-            Optional<ExamPeriod> period,
             Optional<Attending> attending,
             Optional<FinancialCard> card,
             Optional<PerformanceExam> exam
     ) {
-        if(period.isEmpty()) {
-            throw new NotFoundException("Exam period not found");
-        }
         if(attending.isEmpty()) {
             throw new NotFoundException("Exam not found");
         }
@@ -176,6 +198,40 @@ public class ExamServiceImpl implements ExamService {
         }
         if(exam.isEmpty()) {
             throw new NotFoundException("Exam not found");
+        }
+    }
+
+    private int calculateStudentGrade(int preExamDutyPoints, int finalExamPoints) {
+        int sum = preExamDutyPoints + finalExamPoints;
+        if(preExamDutyPoints < 51) {
+            return 5;
+        }
+        if(sum > 50 && sum < 61) {
+            return 6;
+        }
+        if(sum > 60 && sum < 71) {
+            return 7;
+        }
+        if(sum > 70 && sum < 81) {
+            return 8;
+        }
+        if(sum > 80 && sum < 91) {
+            return 9;
+        }
+        return 10;
+    }
+
+    private ExamStatus calculateExamStatus(int grade) {
+        if(grade < 6) {
+            return ExamStatus.FAILED;
+        }
+        return ExamStatus.PASSED;
+    }
+
+    private void validatePoints(int preExamDutyPoints, int finalExamPoints) {
+        int sum = preExamDutyPoints + finalExamPoints;
+        if(preExamDutyPoints > 100 || preExamDutyPoints < 0) {
+            throw new NotFoundException("Points are invalid. Must be between 1 and 100");
         }
     }
 }

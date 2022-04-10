@@ -20,9 +20,9 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int preExamDutyPoints;
+    private Integer preExamDutyPoints;
 
-    private int finalExamPoints;
+    private Integer finalExamPoints;
 
     @ManyToOne
     private Attending attending;
