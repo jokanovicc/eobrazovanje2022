@@ -24,4 +24,16 @@ public class Student {
 
     @Column(unique = true)
     private String referenceNumber;
+
+    private String passwordToken;
+
+    private boolean firstLogin;
+
+
+    public Student(Long id, String indexNumber, User user, String referenceNumber) {
+        this.id = id;
+        this.indexNumber = indexNumber;
+        this.user = user;
+        this.referenceNumber = referenceNumber;
+    }
 }

@@ -10,4 +10,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student findFirstByReferenceNumber(String referenceNumber);
 
+    Student findFirstByPasswordToken(String token);
+
 }
