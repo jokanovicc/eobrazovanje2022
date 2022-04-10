@@ -8,6 +8,7 @@ import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,7 @@ public class ExamController {
                 .body(result);
     }
 
+    @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")
     @PostMapping("/{performanceExamId}/attending/{attendingId}")
     public ResponseEntity<ExamDTO> registerExam(
             @PathVariable Long performanceExamId,
@@ -56,6 +58,7 @@ public class ExamController {
                 .body(response);
     }
 
+    @PreAuthorize("hasRole('ADMIN', 'TEACHER')")
     @PutMapping("/{examId}/students/{studentId}")
     public ResponseEntity<ExamDTO> gradeStudent(
             @PathVariable Long examId,
@@ -69,6 +72,7 @@ public class ExamController {
                 .body(result);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @GetMapping("/{examId}/students")
     public ResponseEntity<List<ExamWithStudentInfoResponse>> findRegisteredToExamStudents(
             @PathVariable("examId") Long performanceExamId
