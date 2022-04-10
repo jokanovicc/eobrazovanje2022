@@ -1,5 +1,7 @@
 package com.ftn.eobrazovanje.service;
 
+import com.ftn.eobrazovanje.api.dto.CoursePerformanceDTO;
+import com.ftn.eobrazovanje.api.dto.CreateCoursePerformanceRequest;
 import com.ftn.eobrazovanje.api.dto.TeacherToAttendingDTO;
 import com.ftn.eobrazovanje.model.CourseTeacher;
 import com.ftn.eobrazovanje.model.Performance;
@@ -12,8 +14,9 @@ public interface PerformanceService {
 
     Performance findById(Long id);
 
-    void addTeacherToPerformance(Teacher teacher, String role, TeacherService teacherService, Performance performance);
+    void addTeacherToPerformance(Teacher teacher, String role, Performance performance);
 
     void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher);
 
+    CoursePerformanceDTO create(CreateCoursePerformanceRequest coursePerformance);
 }

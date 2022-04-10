@@ -25,4 +25,7 @@ public class Course {
 
     private String ESPB;
 
+    public Course(Long id) {
+        this.id = id;
+    }
 }

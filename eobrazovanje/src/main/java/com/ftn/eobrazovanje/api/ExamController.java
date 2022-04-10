@@ -7,9 +7,13 @@ import com.ftn.eobrazovanje.service.ExamService;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @CrossOrigin
@@ -28,37 +32,51 @@ public class ExamController {
     private StudentService studentService;
 
     @GetMapping
-    public List<ExamDTO> getExams(
+    public ResponseEntity<List<ExamDTO>> getExams(
             @RequestParam(name = "status", required = false, defaultValue = "ALL") String status,
             Authentication authentication
     ) {
-        return examService.getExamsForStudent(authentication, status);
+        List<ExamDTO> result = examService.getExamsForStudent(authentication, status);
+        return ResponseEntity
+                .ok()
+                .body(result);
     }
 
     @PostMapping("/{performanceExamId}/attending/{attendingId}")
-    public ExamDTO registerExam(
+    public ResponseEntity<ExamDTO> registerExam(
             @PathVariable Long performanceExamId,
             @PathVariable Long attendingId,
             Authentication authentication
-    ) {
-        return examService.registerExam(performanceExamId, attendingId, authentication);
+    ) throws URISyntaxException {
+
+        ExamDTO response = examService.registerExam(performanceExamId, attendingId, authentication);
+
+        return ResponseEntity
+                .created(new URI("/api/exams/" + response.getId()))
+                .body(response);
     }
 
     @PutMapping("/{examId}/students/{studentId}")
-    public ExamDTO gradeStudent(
+    public ResponseEntity<ExamDTO> gradeStudent(
             @PathVariable Long examId,
             @PathVariable Long studentId,
             @RequestBody(required = true) GradeStudentRequest studentGrade,
             Authentication authentication
     ) {
-        return examService.gradeStudent(examId, studentId, studentGrade, authentication);
+        ExamDTO result = examService.gradeStudent(examId, studentId, studentGrade, authentication);
+        return ResponseEntity
+                .ok()
+                .body(result);
     }
 
     @GetMapping("/{examId}/students")
-    public List<ExamWithStudentInfoResponse> findRegisteredToExamStudents(
+    public ResponseEntity<List<ExamWithStudentInfoResponse>> findRegisteredToExamStudents(
             @PathVariable("examId") Long performanceExamId
     ){
-        return examService.getStudentsWhoRegisteredExam(performanceExamId);
+        List<ExamWithStudentInfoResponse> response = examService.getStudentsWhoRegisteredExam(performanceExamId);
+        return ResponseEntity
+                .ok()
+                .body(response);
     }
 
 
