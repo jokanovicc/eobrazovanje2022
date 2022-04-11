@@ -1,5 +1,6 @@
 package com.ftn.eobrazovanje.service.impl;
 
+import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.StudentMapper;
 import com.ftn.eobrazovanje.helper.CSVHelper;
@@ -9,6 +10,7 @@ import com.ftn.eobrazovanje.model.UserRole;
 import com.ftn.eobrazovanje.repository.StudentRepository;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,6 +84,7 @@ public class StudentServiceImpl implements StudentService {
 
                 student.setPasswordToken(passwordToken);
                 student.setFirstLogin(true);
+                student.setCompletedSVForm(false);
 
 
                 studentRepository.save(student);
@@ -98,9 +101,32 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void setSVForm(SVFormDTO dto, User user, Student student) {
+        user.setName(dto.getName());
+        user.setLastname(dto.getLastName());
+        user.setAddress(dto.getAddress());
+        user.setJmbg(dto.getJmbg());
+        user.setGender(dto.getGender());
+        userService.update(user);
+
+
+        student.setIndexNumber(dto.getIndex());
+        student.setCompletedSVForm(true);
+        studentRepository.save(student);
+
+
+    }
+
+    @Override
     public StudentDTO findById(Long id) {
         return StudentMapper.toDto(studentRepository.findById(id).orElse(null));
     }
+
+    @Override
+    public Student findByUserId(Long id) {
+        return studentRepository.findById(id).orElse(null);
+    }
+
 
     @Override
     public List<StudentDTO> findExamRegisteredStudents(Long examId) {

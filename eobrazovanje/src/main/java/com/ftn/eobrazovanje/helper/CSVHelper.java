@@ -16,7 +16,7 @@ import java.util.List;
 public class CSVHelper {
 
     public static String TYPE = "text/csv";
-    static String[] HEADERs = {"email", "jmbg" };
+    static String[] HEADERs = {"email"};
     public static boolean hasCSVFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
@@ -33,7 +33,6 @@ public class CSVHelper {
 
                 User user = new User();
                 user.setEmail(csvRecord.get("email"));
-                user.setJmbg(csvRecord.get("jmbg"));
                 users.add(user);
             }
             return users;
