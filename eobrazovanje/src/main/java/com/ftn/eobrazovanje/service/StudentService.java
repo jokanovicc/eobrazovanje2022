@@ -1,12 +1,14 @@
 package com.ftn.eobrazovanje.service;
 
 import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
+import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
 
 import com.ftn.eobrazovanje.model.Student;
 
 import com.ftn.eobrazovanje.model.User;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -17,11 +19,17 @@ public interface StudentService {
 
     Student findOneByPasswordToken(String token);
 
+    StudentDTO findById(Long id);
+
+    Student findByUserId(Long id);
+
+    List<StudentDTO> findExamRegisteredStudents(Long examId);
+
     void setFirstPassword(Student student, String password);
 
     void createFromCSV(MultipartFile file);
 
-    StudentDTO findById(Long id);
+    void setSVForm(SVFormDTO dto, User user, Student student);
 
-    List<StudentDTO> findExamRegisteredStudents(Long examId);
+
 }

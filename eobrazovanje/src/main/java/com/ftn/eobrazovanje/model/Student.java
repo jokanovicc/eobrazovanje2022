@@ -29,6 +29,8 @@ public class Student {
 
     private boolean firstLogin;
 
+    private boolean completedSVForm;
+
 
     public Student(Long id, String indexNumber, User user, String referenceNumber) {
         this.id = id;

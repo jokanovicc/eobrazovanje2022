@@ -11,7 +11,7 @@ INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUE
 ', 'TEACHER', 'MALE');
 
 INSERT INTO teacher(user_id) VALUES  (1);
-INSERT INTO student(user_id,index_number,password_token,first_login,reference_number) VALUES  (2,'RA-123/2020','',true,'1ADRHF322');
+INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', false);
 INSERT INTO teacher(user_id) VALUES  (3);
 
 

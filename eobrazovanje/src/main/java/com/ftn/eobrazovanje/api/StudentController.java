@@ -1,11 +1,15 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
+import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.helper.CSVHelper;
 import com.ftn.eobrazovanje.model.Student;
+import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.service.StudentService;
+import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,8 +19,11 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService) {
+    private final UserService userService;
+
+    public StudentController(StudentService studentService, UserService userService) {
         this.studentService = studentService;
+        this.userService = userService;
     }
 
     @PostMapping
@@ -24,7 +31,7 @@ public class StudentController {
         if(CSVHelper.hasCSVFormat(file)){
             try {
                 studentService.createFromCSV(file);
-                return new ResponseEntity(HttpStatus.OK);
+                return new ResponseEntity(HttpStatus.CREATED);
             }catch (Exception e){
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
@@ -45,7 +52,17 @@ public class StudentController {
 
         return new ResponseEntity(HttpStatus.OK);
 
+    }
 
+    @PostMapping(path = "/svForm")
+    public ResponseEntity setSVForm(Authentication authentication,  @RequestBody SVFormDTO formDTO){
+        User user = userService.getUser(authentication);
+        Student student = studentService.findByUserId(user.getId());
+        if(student.isCompletedSVForm()){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        studentService.setSVForm(formDTO, user, student);
 
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
