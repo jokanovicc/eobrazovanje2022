@@ -14,6 +14,8 @@ public interface PerformanceService {
 
     Performance findById(Long id);
 
+    Performance findByCourseId(Long id);
+
     void addTeacherToPerformance(Teacher teacher, String role, Performance performance);
 
     void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher);

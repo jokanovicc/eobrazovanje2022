@@ -123,6 +123,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student findOneByIndexNumber(String index) {
+        return studentRepository.findFirstByIndexNumber(index);
+    }
+
+    @Override
+    public List<StudentDTO> findByPerformanceId(Long id) {
+        return StudentMapper.toDTOList(studentRepository.findByPerformanceId(id));
+    }
+
+    @Override
     public Student findByUserId(Long id) {
         return studentRepository.findById(id).orElse(null);
     }

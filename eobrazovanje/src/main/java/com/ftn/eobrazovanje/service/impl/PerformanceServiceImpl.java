@@ -46,6 +46,12 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
+    public Performance findByCourseId(Long id) {
+        Course course = courseRepository.findById(id).orElse(null);
+        return performanceRepository.findFirstByCourse(course);
+    }
+
+    @Override
     public void addTeacherToPerformance(Teacher teacher, String role, Performance performance) {
         CourseTeacher courseTeacher = new CourseTeacher();
         TeacherRole teacherRole = teacherService.findByName(role);

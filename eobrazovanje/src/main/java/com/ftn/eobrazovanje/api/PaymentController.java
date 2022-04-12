@@ -23,7 +23,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping(value = "/students/{id}")
+    @GetMapping("/students/{id}")
     public ResponseEntity getAllByStudentId(@PathVariable Long id){
         List<RespPaymentDTO> payments = paymentService.findAllByStudentId(id);
 
