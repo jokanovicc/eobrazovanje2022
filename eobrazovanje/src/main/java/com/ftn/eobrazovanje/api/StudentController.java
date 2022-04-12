@@ -2,6 +2,7 @@ package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
 import com.ftn.eobrazovanje.api.dto.SVFormDTO;
+import com.ftn.eobrazovanje.api.dto.StudentDTO;
 import com.ftn.eobrazovanje.helper.CSVHelper;
 import com.ftn.eobrazovanje.model.Student;
 import com.ftn.eobrazovanje.model.User;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
@@ -26,6 +29,14 @@ public class StudentController {
         this.userService = userService;
     }
 
+    @GetMapping("performance/{performanceId}")
+    public ResponseEntity getByCourseId(@PathVariable Long performanceId){
+        List<StudentDTO> studentDTOS = studentService.findByPerformanceId(performanceId);
+
+        return new ResponseEntity(studentDTOS, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity uploadFile(@RequestParam("file")MultipartFile file){
         if(CSVHelper.hasCSVFormat(file)){
@@ -39,7 +50,7 @@ public class StudentController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(path = "/firstPassword")
+    @PostMapping("/firstPassword")
     public ResponseEntity setFirstPassword(@RequestBody FirstPasswordDTO firstPasswordDTO){
         Student student = studentService.findOneByPasswordToken(firstPasswordDTO.getToken());
         if(student == null){
@@ -54,7 +65,7 @@ public class StudentController {
 
     }
 
-    @PostMapping(path = "/svForm")
+    @PostMapping("/svForm")
     public ResponseEntity setSVForm(Authentication authentication,  @RequestBody SVFormDTO formDTO){
         User user = userService.getUser(authentication);
         Student student = studentService.findByUserId(user.getId());

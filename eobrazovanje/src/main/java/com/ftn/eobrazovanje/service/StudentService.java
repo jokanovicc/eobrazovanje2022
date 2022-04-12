@@ -21,6 +21,10 @@ public interface StudentService {
 
     StudentDTO findById(Long id);
 
+    Student findOneByIndexNumber(String index);
+
+    List<StudentDTO> findByPerformanceId(Long id);
+
     Student findByUserId(Long id);
 
     List<StudentDTO> findExamRegisteredStudents(Long examId);
