@@ -6,21 +6,21 @@ import com.ftn.eobrazovanje.api.dto.mapper.NotificationMapper;
 
 import com.ftn.eobrazovanje.model.*;
 
-import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.Notification;
 import com.ftn.eobrazovanje.model.Performance;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
 
 import com.ftn.eobrazovanje.repository.NotificationRepository;
+import com.ftn.eobrazovanje.repository.TeacherRepository;
 import com.ftn.eobrazovanje.service.NotificationService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.RemoteAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -31,6 +31,9 @@ public class NotificationServiceImpl implements NotificationService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     @Override
     public NotificationResponse create(NotificationRequest request, Authentication authentication) {
 
@@ -38,11 +41,13 @@ public class NotificationServiceImpl implements NotificationService {
 
         Notification notification = new Notification(
                 new Performance(request.getPerformanceId()),
+//                teacherRepository.findById(teacher.getId()).get(),
                 new Teacher(teacher.getId()),
                 request.getMessage()
         );
-        Notification created = notificationRepository.save(notification);
-
+            Notification created = notificationRepository.save(notification);
+        System.out.print(created.getTeacher().getUser());
+        Notification test = notificationRepository.findById(created.getId()).get();
         return NotificationMapper.toDto(notificationRepository.findById(created.getId()).get());
 
     }

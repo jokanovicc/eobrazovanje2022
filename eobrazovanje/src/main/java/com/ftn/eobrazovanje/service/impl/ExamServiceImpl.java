@@ -183,7 +183,6 @@ public class ExamServiceImpl implements ExamService {
             );
         }
 
-        //dodati neku logiku koliko ce koji ispit da kosta, po rokovima ili po koji se put prijavljuje
         if(card.getBalance() < 300) {
             throw new ExamRegistrationFailedException("Insufficient funds");
         }

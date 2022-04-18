@@ -16,7 +16,7 @@ public class Teacher {
     @Id
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "user_id")
     @MapsId
     private User user;
