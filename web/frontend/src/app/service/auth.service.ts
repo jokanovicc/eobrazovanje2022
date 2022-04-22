@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { tap } from 'rxjs';
+import { UserInfo } from '../layouts/dashboard/dashboard.component';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,11 +26,8 @@ export class AuthService {
   }
 
   fetchCurrentUser() {
-    return this.http.get('http://localhost:8080/api/users').pipe(
-      tap((response: any) => {
-        this.currentUser = response;
-      })
-    );
+    return this.http.get<UserInfo>(`http://localhost:8080/api/users`);
+
   }
 
   getCurrentUserInfo() {

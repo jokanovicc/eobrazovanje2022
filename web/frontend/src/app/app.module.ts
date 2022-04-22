@@ -8,9 +8,12 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavigationBarComponent } from './components/notifications/navigation-bar/navigation-bar.component';
+import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, NotificationsComponent],
+  declarations: [AppComponent, NotificationsComponent, NavigationBarComponent, UpdateProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +21,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   exports: [FormsModule, ReactiveFormsModule],
   providers: [

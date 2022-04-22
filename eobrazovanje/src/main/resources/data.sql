@@ -1,18 +1,18 @@
-INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
 ('Marko','Petrovic','1203983840001', 'Liman 3, Novi Sad', 'markop','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
-', 'TEACHER', 'MALE');
+', 'TEACHER', 'MALE', 'petrovic@gmail.com');
 
-INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
     ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
-', 'STUDENT', 'MALE');
+', 'STUDENT', 'MALE', 'markovic@gmail.com');
 
-INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
     ('Novica','Nedeljkovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
-', 'TEACHER', 'MALE');
+', 'TEACHER', 'MALE', 'nedeljkovic@gmail.com');
 
-INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender) VALUES
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
     ('Jovica','Jovanovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
-', 'STUDENT', 'MALE');
+', 'STUDENT', 'MALE', 'jovanovic@gmail.com');
 
 INSERT INTO teacher(user_id) VALUES  (1);
 INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', false);

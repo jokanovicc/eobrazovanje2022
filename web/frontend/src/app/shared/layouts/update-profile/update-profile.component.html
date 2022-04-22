@@ -1,0 +1,8 @@
+<form #loginForm="ngForm" (ngSubmit)="updateData(loginForm.value)">
+    <div class="main">
+      <div class="input-fields">
+        <input name="name" value={{user.name}} ngModel placeholder="Name" id="name" type="text" class="input-field" />
+      </div>
+      <button>Update Data </button>
+    </div>
+  </form>

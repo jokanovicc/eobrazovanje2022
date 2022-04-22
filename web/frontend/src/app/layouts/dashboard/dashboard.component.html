@@ -1,4 +1,62 @@
-<p>dashboard works!</p>
-<div>
-  <a routerLink="/notifications" routerLinkActive="active"> notifications</a>
+
+<div  class="row" style="padding-top: 5vh; background-color: aliceblue;">
+  <div class="container">
+    <div class="text-center">
+        <h1 >Dоbrodošao {{user.name}} {{user.lastname}}</h1>
+        <h4><i>RA-123/2019</i></h4>
+        <div>
+          <p>Smer: Racunarstvo i Automatika</p>
+          <p>Godina studija: 3</p>
+        </div>
+      </div>
+
+
+    <div class="card border container" style="margin-top: 5vh; margin-bottom: 5vh; padding: 20px;">
+        <h4>Bitni linkovi</h4>
+        <hr/>
+        <div>
+            <ul className="linkovi" style="font-size: 20px;">
+                <li><a routerLink="/profile-info" routerLinkActive="active">Moj profil 🙍</a></li>
+                <li><a href="/">Notifikacije 📰</a></li>
+                <li><a href="/">Ispiti 📕</a></li>
+                <li><a href="/">Finanskijska kartica 💵</a></li>
+            </ul>
+          </div>
+      </div>
+      <div class="card border container" style="margin-top: 2vh; margin-bottom: 20vh; padding: 20px;">
+        <h4>Osobne informacije</h4>
+        <table class="table">
+          <tbody>
+          <tr scope="row">
+            <th>Ime i Prezime</th>
+            <td>{{user.name}} {{user.lastname}}</td>
+          </tr>
+          <tr scope="row">
+            <th>Adresa</th>
+            <td>{{user.address}}</td>
+          </tr>
+          <tr scope="row">
+            <th>JMBG</th>
+            <td>{{user.jmbg}}</td>
+          </tr>
+          <tr scope="row">
+            <th>Korisničko ime</th>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr scope="row">
+            <th>Email</th>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+        </table>
+        <button type="button" class="btn btn-info">Izmeni informacije</button>
+      </div>
+    </div>
+
+
+
+
 </div>
+
+
+<!-- <app-profile-info></app-profile-info> -->
