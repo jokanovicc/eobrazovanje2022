@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from 'src/app/layouts/dashboard/dashboard.component';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-profile',
@@ -17,15 +18,12 @@ export class UpdateProfileComponent implements OnInit {
 
   }
 
-  updateData(value:any){
-    let body = {
-      name: value.name,
-      lastname: value.lastname,
-      address:value.address,
-      username: value.username,
-      email: value.username
-    }
-    console.log(body);
+  updateData(){
+    this.authService.updateUserProfile(this.user.id, this.user)
+    .subscribe(data => {
+      console.log(data);
+    })
+
   }
 
   getUser(){
@@ -34,5 +32,15 @@ export class UpdateProfileComponent implements OnInit {
       console.log(this.user);
     })
   }
+
+  onSubmit(){
+    this.updateData();
+    Swal.fire({
+      icon: 'success',
+      title: 'Profil uspešno ažuriran!',
+    })
+  }
+
+
 
 }

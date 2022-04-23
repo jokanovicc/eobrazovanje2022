@@ -1,9 +1,6 @@
 package com.ftn.eobrazovanje.api;
 
-import com.ftn.eobrazovanje.api.dto.LoginDTO;
-import com.ftn.eobrazovanje.api.dto.TeacherDTO;
-import com.ftn.eobrazovanje.api.dto.UserDTO;
-import com.ftn.eobrazovanje.api.dto.UserUpdateDTO;
+import com.ftn.eobrazovanje.api.dto.*;
 import com.ftn.eobrazovanje.api.dto.mapper.TeacherMapper;
 import com.ftn.eobrazovanje.api.dto.mapper.UserMapper;
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
@@ -79,6 +76,7 @@ public class UserController {
     }
 
     @PutMapping
+    @CrossOrigin(origins = "*")
     public void updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userPrincipal.getUsername());

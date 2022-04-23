@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { LoginComponent } from './layouts/login/login.component';
+import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
     // component: LoginComponent,
     loadChildren: () =>
       import('./layouts/login/login.module').then((m) => m.LoginModule),
+  },
+
+  {
+    path: 'update-profile',
+    component: UpdateProfileComponent
+
   },
 ];
 

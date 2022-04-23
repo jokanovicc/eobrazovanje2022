@@ -2,12 +2,9 @@
 <div  class="row" style="padding-top: 5vh; background-color: aliceblue;">
   <div class="container">
     <div class="text-center">
-        <h1 >Dоbrodošao {{user.name}} {{user.lastname}}</h1>
+        <h1 >Dоbrodošao // {{user.name}} {{user.lastname}}</h1>
         <h4><i>RA-123/2019</i></h4>
-        <div>
-          <p>Smer: Racunarstvo i Automatika</p>
-          <p>Godina studija: 3</p>
-        </div>
+        <p><i>S T U D E N T</i></p>
       </div>
 
 
@@ -49,7 +46,7 @@
           </tr>
         </tbody>
         </table>
-        <button type="button" class="btn btn-info">Izmeni informacije</button>
+        <button (click)="updateEmployee()" class="btn btn-info" style="margin-left: 10px">Update</button>
       </div>
     </div>
 

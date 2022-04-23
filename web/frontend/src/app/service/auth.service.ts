@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UserInfo } from '../layouts/dashboard/dashboard.component';
 
 
@@ -33,6 +33,11 @@ export class AuthService {
   getCurrentUserInfo() {
     return this.currentUser;
   }
+
+  updateUserProfile(id:number, userDTO:any){
+    return this.http.put("http://localhost:8080/api/users", userDTO);
+  }
+
 
   getToken() {
     return localStorage.getItem('token');
