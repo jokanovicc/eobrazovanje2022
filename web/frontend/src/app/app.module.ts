@@ -13,7 +13,12 @@ import { NavigationBarComponent } from './components/notifications/navigation-ba
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, NotificationsComponent, NavigationBarComponent, UpdateProfileComponent],
+  declarations: [
+    AppComponent,
+    NotificationsComponent,
+    NavigationBarComponent,
+    UpdateProfileComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

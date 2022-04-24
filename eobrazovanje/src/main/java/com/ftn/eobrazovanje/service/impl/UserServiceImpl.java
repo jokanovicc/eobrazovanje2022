@@ -54,12 +54,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user, UserUpdateDTO userUpdateDTO) {
+    public User update(User user, UserUpdateDTO userUpdateDTO) {
         user.setAddress(userUpdateDTO.getAddress());
         user.setUsername(userUpdateDTO.getUsername());
         user.setLastname(userUpdateDTO.getLastname());
         user.setName(userUpdateDTO.getName());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override

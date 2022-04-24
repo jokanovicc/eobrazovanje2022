@@ -6,41 +6,37 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
-  styleUrls: ['./update-profile.component.css']
+  styleUrls: ['./update-profile.component.css'],
 })
 export class UpdateProfileComponent implements OnInit {
-  user:UserInfo;
+  user: UserInfo;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getUser();
-
   }
 
-  updateData(){
-    this.authService.updateUserProfile(this.user.id, this.user)
-    .subscribe(data => {
-      console.log(data);
-    })
-
+  updateData() {
+    this.authService
+      .updateUserProfile(this.user.id, this.user)
+      .subscribe((data: any) => {
+        this.authService.user$.next(data);
+      });
   }
 
-  getUser(){
-    this.authService.fetchCurrentUser().subscribe((Response)=> {
+  getUser() {
+    this.authService.fetchCurrentUser().subscribe((Response) => {
       this.user = Response;
       console.log(this.user);
-    })
+    });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.updateData();
     Swal.fire({
       icon: 'success',
       title: 'Profil uspešno ažuriran!',
-    })
+    });
   }
-
-
-
 }

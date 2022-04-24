@@ -77,15 +77,13 @@ public class UserController {
 
     @PutMapping
     @CrossOrigin(origins = "*")
-    public void updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
+    public UserDTO updateInfo(Authentication authentication, @RequestBody UserUpdateDTO userUpdateDTO){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userPrincipal.getUsername());
         if(user == null) {
             throw new UserNonExistentException("User doesn't exist");
         }
-        userService.update(user, userUpdateDTO);
-
-
+        return UserMapper.toDto(userService.update(user, userUpdateDTO));
     }
 
 
