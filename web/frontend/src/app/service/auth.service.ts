@@ -8,7 +8,8 @@ import jwtDecode from 'jwt-decode';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser: User;
-  private user$: BehaviorSubject<UserInfo> = new BehaviorSubject(null);
+  public user$: BehaviorSubject<UserInfo> = new BehaviorSubject(null as any);
+  public token$: BehaviorSubject<string> = new BehaviorSubject(null as any);
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,7 @@ export class AuthService {
       )
       .pipe(
         tap((token: any) => {
+          this.token$.next(token);
           this.saveToken(token);
         })
       );
@@ -46,7 +48,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  removeToken(){
+  removeToken() {
     return localStorage.removeItem('token');
   }
 
@@ -54,20 +56,20 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  decodeToken(token:string):any{
-    try{
-      return jwtDecode(token)
-    }catch(error){
+  decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
       return null;
     }
   }
 
-  getRole(){
+  getRole() {
     const token = this.getToken();
-    const decoded_token = token ? this.decodeToken(token):null;
-    if(decoded_token){
+    const decoded_token = token ? this.decodeToken(token) : null;
+    if (decoded_token) {
       return decoded_token.role.authority;
-    }else{
+    } else {
       return null;
     }
   }

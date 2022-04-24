@@ -1,34 +1,28 @@
-
-
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';    
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
-    
-@Component({    
-    selector:'app-navigation-bar',    
-    templateUrl:'./navigation-bar.component.html',    
-    styleUrls:['./navigation-bar.component.css']    
-    }) 
-export class NavigationBarComponent implements OnInit{
 
-    token:string|null;
+@Component({
+  selector: 'app-navigation-bar',
+  templateUrl: './navigation-bar.component.html',
+  styleUrls: ['./navigation-bar.component.css'],
+})
+export class NavigationBarComponent implements OnInit {
+  token: string | null;
 
-    constructor(private authService: AuthService, private changeDetector: ChangeDetectorRef,private router: Router){
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    }
+  constructor(private authService: AuthService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
-    ngOnInit(): void {
-        this.token = this.authService.getToken();
-        this.changeDetector.detectChanges();
+  ngOnInit(): void {
+    this.authService.token$.subscribe((token: string) => {
+      this.token = token;
+    });
+  }
 
-        //ili je string ili je null
-        
-    }
-
-    logoutButton(){
-        this.authService.removeToken();
-        this.token = null;
-        this.changeDetector.detectChanges();
-    }
-
+  logoutButton() {
+    this.authService.removeToken();
+    this.token = null;
+    this.router.navigate(['']);
+  }
 }

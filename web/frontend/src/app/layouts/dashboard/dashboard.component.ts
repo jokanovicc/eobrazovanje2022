@@ -23,17 +23,10 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.fetchCurrentUser().subscribe((user: UserInfo) => {
+    this.authService.user$.subscribe((user: UserInfo) => {
       this.user = user;
     });
   }
-
-  // getUser() {
-  //   this.authService.fetchCurrentUser().subscribe((Response) => {
-  //     this.user = Response;
-  //     console.log(this.user);
-  //   });
-  // }
 
   updateEmployee() {
     this.router.navigate(['update-profile']);

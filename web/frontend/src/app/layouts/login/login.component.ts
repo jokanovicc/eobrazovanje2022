@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: this.onAuthSuccess,
         error: this.onAuthError,
       });
-      this.cd.detectChanges();
-
+    this.cd.detectChanges();
   }
 
   private onAuthSuccess = (response: string) => {
@@ -55,17 +54,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       .fetchCurrentUser()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        if(this.authService.getRole() == 'ROLE_STUDENT'){
+        if (this.authService.getRole() == 'ROLE_STUDENT') {
           this.router.navigate(['/dashboard']);
-        }else{
-          alert('TEACHER NOT IMPLEMENTED')
+        } else {
+          alert('TEACHER NOT IMPLEMENTED');
         }
       });
   };
 
   private onAuthError = (error: HttpErrorResponse) => {
-    console.log(error);
-    console.log('??!!');
     if (error.status === HttpStatusCode.BadRequest) {
       this.wrongCredentials = true;
       this.cd.detectChanges();
