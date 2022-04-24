@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserInfo } from '../layouts/dashboard/dashboard.component';
-
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser: User;
+  private user$: BehaviorSubject<UserInfo> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
 
@@ -26,18 +26,20 @@ export class AuthService {
   }
 
   fetchCurrentUser() {
-    return this.http.get<UserInfo>(`http://localhost:8080/api/users`);
-
+    return this.http.get<UserInfo>(`http://localhost:8080/api/users`).pipe(
+      tap((user: any) => {
+        this.user$.next(user);
+      })
+    );
   }
 
   getCurrentUserInfo() {
     return this.currentUser;
   }
 
-  updateUserProfile(id:number, userDTO:any){
-    return this.http.put("http://localhost:8080/api/users", userDTO);
+  updateUserProfile(id: number, userDTO: any) {
+    return this.http.put('http://localhost:8080/api/users', userDTO);
   }
-
 
   getToken() {
     return localStorage.getItem('token');
