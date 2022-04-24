@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Observable, tap } from 'rxjs';
 import { UserInfo } from '../layouts/dashboard/dashboard.component';
+import jwtDecode from 'jwt-decode';
 
 
 @Injectable({ providedIn: 'root' })
@@ -43,8 +44,30 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  removeToken(){
+    return localStorage.removeItem('token');
+  }
+
   private saveToken(token: string) {
     localStorage.setItem('token', token);
+  }
+
+  decodeToken(token:string):any{
+    try{
+      return jwtDecode(token)
+    }catch(error){
+      return null;
+    }
+  }
+
+  getRole(){
+    const token = this.getToken();
+    const decoded_token = token ? this.decodeToken(token):null;
+    if(decoded_token){
+      return decoded_token.role.authority;
+    }else{
+      return null;
+    }
   }
 
   logout() {
