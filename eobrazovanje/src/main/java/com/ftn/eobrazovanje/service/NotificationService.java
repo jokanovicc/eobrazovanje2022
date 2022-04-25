@@ -15,4 +15,6 @@ public interface NotificationService {
     NotificationResponse create(NotificationRequest notification, Authentication authentication);
 
     List<NotificationResponse> getNotifications(Authentication authentication);
+
+    void delete(Long notificationId);
 }

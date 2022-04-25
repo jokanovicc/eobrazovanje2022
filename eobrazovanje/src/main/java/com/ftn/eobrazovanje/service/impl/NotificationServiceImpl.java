@@ -12,6 +12,7 @@ import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
 
 import com.ftn.eobrazovanje.repository.NotificationRepository;
+import com.ftn.eobrazovanje.repository.PerformanceRepository;
 import com.ftn.eobrazovanje.repository.TeacherRepository;
 import com.ftn.eobrazovanje.service.NotificationService;
 import com.ftn.eobrazovanje.service.UserService;
@@ -34,21 +35,22 @@ public class NotificationServiceImpl implements NotificationService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    @Autowired
+    private PerformanceRepository performanceRepository;
+
     @Override
     public NotificationResponse create(NotificationRequest request, Authentication authentication) {
 
        User teacher = userService.getUser(authentication);
 
         Notification notification = new Notification(
-                new Performance(request.getPerformanceId()),
-//                teacherRepository.findById(teacher.getId()).get(),
-                new Teacher(teacher.getId()),
+                performanceRepository.findById(request.getPerformanceId()).get(),
+                teacherRepository.findById(teacher.getId()).get(),
                 request.getMessage()
         );
             Notification created = notificationRepository.save(notification);
-        System.out.print(created.getTeacher().getUser());
-        Notification test = notificationRepository.findById(created.getId()).get();
-        return NotificationMapper.toDto(notificationRepository.findById(created.getId()).get());
+
+        return NotificationMapper.toDto(notification);
 
     }
 
@@ -65,5 +67,10 @@ public class NotificationServiceImpl implements NotificationService {
         }
 
         return NotificationMapper.toDtoList(notificationRepository.getOfStudent(current.getId()));
+    }
+
+    @Override
+    public void delete(Long notificationId) {
+        notificationRepository.deleteById(notificationId);
     }
 }

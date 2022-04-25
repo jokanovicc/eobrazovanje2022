@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Notification } from '../models/notification.interface';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -16,5 +17,11 @@ export class NotificationsService {
       performanceId,
       message,
     });
+  }
+
+  delete(notificationId: number) {
+    return this.http.delete(
+      `http://localhost:8080/api/notifications/${notificationId}`
+    );
   }
 }

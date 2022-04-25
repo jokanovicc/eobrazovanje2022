@@ -1,8 +1,46 @@
-<p>notifications works!</p>
-<div *ngFor="let notification of notifications">
-  <div>
-    <p>{{ notification }}</p>
-    <!-- <p>{{ notification.teacher.name }}</p>
-    <p>{{ notification.message }}</p> -->
+<div style="background-color: #f5f5f5">
+  <h3 style="margin: 15px auto; text-align: center">Obaveštenja</h3>
+  <div *ngIf="!notifications?.length">
+    <h4 style="margin: 15px auto; text-align: center">Nema obaveštenja</h4>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-md-12"
+        *ngFor="let notification of notifications"
+        style="margin: 10px"
+      >
+        <div
+          class="card notification-card"
+          style="width: 80%; margin: 0 auto; padding: 10px"
+        >
+          <div>
+            <div class="card-body">
+              <h5 class="card-title">{{ notification.teacher.name }}</h5>
+              <h6 class="card-footer mb-1">
+                {{ notification.message }}
+              </h6>
+              <p class="card-text"></p>
+              <div
+                *ngIf="
+                  currentUser?.role == 'TEACHER' || currentUser?.role == 'ADMIN'
+                "
+                style="display: flex; justify-content: flex-end"
+              >
+                <a href="#" class="btn btn-primary">Izmeni</a>
+                <a
+                  href="#"
+                  class="btn btn-secondary"
+                  style="margin-left: 10px"
+                  (click)="delete(notification.id)"
+                  >Izbriši</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

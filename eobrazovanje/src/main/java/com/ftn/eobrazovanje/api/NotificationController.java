@@ -54,4 +54,10 @@ public class NotificationController {
         return notificationService.getNotifications(authentication);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @DeleteMapping("/{notificationId}")
+    public void delete(@PathVariable Long notificationId) {
+        notificationService.delete(notificationId);
+    }
+
 }

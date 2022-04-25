@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfo } from 'src/app/layouts/dashboard/dashboard.component';
+import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
 
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-profile.component.css'],
 })
 export class UpdateProfileComponent implements OnInit {
-  user: UserInfo;
+  user: User;
 
   constructor(private authService: AuthService) {}
 

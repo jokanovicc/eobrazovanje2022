@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { UserInfo } from '../layouts/dashboard/dashboard.component';
 import jwtDecode from 'jwt-decode';
+import { User } from '../models/user.interface';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser: User;
-  public user$: BehaviorSubject<UserInfo> = new BehaviorSubject(null as any);
+  public user$: BehaviorSubject<User> = new BehaviorSubject(null as any);
   public token$: BehaviorSubject<string> = new BehaviorSubject(null as any);
 
   constructor(private http: HttpClient) {}
@@ -29,8 +29,9 @@ export class AuthService {
   }
 
   fetchCurrentUser() {
-    return this.http.get<UserInfo>(`http://localhost:8080/api/users`).pipe(
+    return this.http.get<User>(`http://localhost:8080/api/users`).pipe(
       tap((user: any) => {
+        this.currentUser = user;
         this.user$.next(user);
       })
     );
@@ -75,7 +76,8 @@ export class AuthService {
   }
 
   logout() {
-    this.currentUser = new User(null);
+    this.currentUser = null;
+    this.user$.next(null);
     localStorage.clear();
   }
 }

@@ -1,17 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/service/auth.service';
-
-export interface UserInfo {
-  id: number;
-  name: string;
-  address: string;
-  jmbg: string;
-  lastname: string;
-  gender: string;
-  username: string;
-  email: string;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +9,7 @@ export interface UserInfo {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  user: UserInfo;
+  user: User;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {

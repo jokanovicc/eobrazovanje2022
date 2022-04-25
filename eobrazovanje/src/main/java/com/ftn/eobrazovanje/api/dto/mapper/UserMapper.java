@@ -34,7 +34,8 @@ public class UserMapper {
                 user.getAddress(),
                 user.getUsername(),
                 user.getGender(),
-                user.getEmail()
+                user.getEmail(),
+                user.getRole().name()
         );
     }
 
