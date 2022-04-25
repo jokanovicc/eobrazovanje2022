@@ -9,7 +9,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavigationBarComponent } from './components/notifications/navigation-bar/navigation-bar.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 @NgModule({
