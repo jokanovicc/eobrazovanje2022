@@ -1,0 +1,48 @@
+<div class="row" style="padding-top: 5vh; background-color: aliceblue">
+    <div class="container" *ngIf="user">
+      <div class="text-center">
+        <h1>Dоbrodošao // {{ user.name }} {{ user.lastname }}</h1>
+        <p><i>N A S T A V N I K </i></p>
+      </div>
+  
+      <div
+        class="card border container"
+        style="margin-top: 2vh; margin-bottom: 20vh; padding: 20px"
+      >
+        <h4>Osobne informacije</h4>
+        <table class="table">
+          <tbody>
+            <tr scope="row">
+              <th>Ime i Prezime</th>
+              <td>{{ user.name }} {{ user.lastname }}</td>
+            </tr>
+            <tr scope="row">
+              <th>Adresa</th>
+              <td>{{ user.address }}</td>
+            </tr>
+            <tr scope="row">
+              <th>JMBG</th>
+              <td>{{ user.jmbg }}</td>
+            </tr>
+            <tr scope="row">
+              <th>Korisničko ime</th>
+              <td>{{ user.username }}</td>
+            </tr>
+            <tr scope="row">
+              <th>Email</th>
+              <td>{{ user.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          (click)="updateEmployee()"
+          class="btn btn-info"
+          style="margin-left: 10px"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <app-profile-info></app-profile-info> -->
