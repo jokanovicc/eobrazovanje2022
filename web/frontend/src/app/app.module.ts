@@ -11,6 +11,11 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ExamHistoryComponent } from './components/exam-history/exam-history.component';
+import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
+import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
+import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +23,11 @@ import { UpdateProfileComponent } from './shared/layouts/update-profile/update-p
     NotificationsComponent,
     NavigationBarComponent,
     UpdateProfileComponent,
+    SidebarComponent,
+    ExamHistoryComponent,
+    PassedExamsComponent,
+    RegisteredExamsComponent,
+    RegisterExamComponent,
   ],
   imports: [
     BrowserModule,

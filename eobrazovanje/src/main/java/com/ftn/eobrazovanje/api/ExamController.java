@@ -41,6 +41,13 @@ public class ExamController {
                 .body(result);
     }
 
+    @GetMapping("/registration")
+    public ResponseEntity<List<PerformanceExamResponse>> getExamsForRegistration(Authentication authentication) {
+        return ResponseEntity
+                .ok()
+                .body(examService.getExamsForRegistration(authentication));
+    }
+
     @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")
     @PostMapping("/{performanceExamId}/attending/{attendingId}")
     public ResponseEntity<ExamDTO> registerExam(

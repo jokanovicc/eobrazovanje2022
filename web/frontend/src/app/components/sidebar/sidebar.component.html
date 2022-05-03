@@ -1,0 +1,39 @@
+<div
+  class="bg-light border-right"
+  id="sidebar-wrapper"
+  [ngClass]="status ? 'hide' : 'show'"
+>
+  <div class="sidebar-heading">Dostupni linkovi</div>
+  <div class="list-group list-group-flush">
+    <a
+      routerLink="/dashboard"
+      class="list-group-item list-group-item-action bg-light"
+      >Glavna stranica</a
+    >
+    <a
+      routerLink="/notifications"
+      class="list-group-item list-group-item-action bg-light"
+      >Obaveštenja</a
+    >
+    <a
+      routerLink="/exam-registration"
+      class="list-group-item list-group-item-action bg-light"
+      >Prijava ispita</a
+    >
+    <a
+      routerLink="/exam-history"
+      class="list-group-item list-group-item-action bg-light"
+      >Istorija polaganja</a
+    >
+    <a
+      routerLink="/passed-exams"
+      class="list-group-item list-group-item-action bg-light"
+      >Položeni predmeti</a
+    >
+    <a
+      routerLink="/registered-exams"
+      class="list-group-item list-group-item-action bg-light"
+      >Prijavljeni ispiti</a
+    >
+  </div>
+</div>

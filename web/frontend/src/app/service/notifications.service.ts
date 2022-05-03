@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notification } from '../models/notification.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -8,12 +9,12 @@ export class NotificationsService {
 
   getNotifications() {
     return this.http.get<Notification[]>(
-      `http://localhost:8080/api/notifications`
+      environment.backend_endpoint + `notifications`
     );
   }
 
   sendNotification(message: string, performanceId: number) {
-    return this.http.post(`http://localhost:8080/api/notifications`, {
+    return this.http.post(environment.backend_endpoint + `notifications`, {
       performanceId,
       message,
     });
@@ -21,7 +22,7 @@ export class NotificationsService {
 
   delete(notificationId: number) {
     return this.http.delete(
-      `http://localhost:8080/api/notifications/${notificationId}`
+      environment.backend_endpoint + `notifications/${notificationId}`
     );
   }
 }

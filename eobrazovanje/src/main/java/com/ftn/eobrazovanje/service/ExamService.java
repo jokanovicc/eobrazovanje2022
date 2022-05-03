@@ -12,4 +12,5 @@ public interface ExamService {
     ExamDTO gradeStudent(Long examId, Long studentId, GradeStudentRequest studentGrade, Authentication authentication);
     List<ExamWithStudentInfoResponse> getStudentsWhoRegisteredExam(Long performanceExamId);
     PerformanceExamResponse createExam(CreateExamRequest request);
+    List<PerformanceExamResponse> getExamsForRegistration(Authentication authentication);
 }

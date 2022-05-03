@@ -148,6 +148,13 @@ public class ExamServiceImpl implements ExamService {
         return PerformanceExamMapper.toDto(performanceExamRepository.save(exam));
     }
 
+    @Override
+    public List<PerformanceExamResponse> getExamsForRegistration(Authentication authentication) {
+        User student = userService.getUser(authentication);
+        List<PerformanceExam> exams = performanceExamRepository.getByStudentId(student.getId());
+        return PerformanceExamMapper.toDtoList(exams);
+    }
+
     @Transactional
     private void chargeStudentForExam(FinancialCard card, Student student) {
         Payment payment = new Payment(

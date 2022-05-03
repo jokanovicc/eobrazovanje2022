@@ -1,14 +1,18 @@
 package com.ftn.eobrazovanje.api;
 
+import com.ftn.eobrazovanje.api.dto.AttendingDTO;
 import com.ftn.eobrazovanje.api.dto.StudentsAttendingPerformanceDTO;
 import com.ftn.eobrazovanje.exception.StudentNonExistentException;
 import com.ftn.eobrazovanje.service.AttendingService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/attendings")
 public class AttendingController {
@@ -41,5 +45,15 @@ public class AttendingController {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/performances/{performanceId}/latest")
+    public ResponseEntity<AttendingDTO> getLatestAttendingOfCourseForStudent(
+            Authentication authentication,
+            @PathVariable Long performanceId
+    ) {
+        return ResponseEntity
+                .ok()
+                .body(attendingService.findLatestOfCourseForStudent(authentication, performanceId));
     }
 }

@@ -1,0 +1,27 @@
+<h3 style="margin: 0 auto; text-align: center">Istorija polaganja</h3>
+<table class="table table-striped" style="width: 60%; margin: 0 auto">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Naziv predmeta</th>
+      <th scope="col">ESPB</th>
+      <th scope="col">Ispitni rok</th>
+      <th scope="col">Datum polaganja</th>
+      <th scope="col">Ocena</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ exam.course.name }}
+      </td>
+      <td>{{ exam.course.espb }}</td>
+      <td>{{ exam.examPeriod }}</td>
+      <td>{{ exam.date }}</td>
+      <td>{{ exam.grade ? exam.grade : "/" }}</td>
+      <td>{{ getExamStatusName(exam.status) }}</td>
+    </tr>
+  </tbody>
+</table>
