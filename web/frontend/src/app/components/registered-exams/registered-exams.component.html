@@ -1,0 +1,26 @@
+<h3>Položeni predmeti</h3>
+<br />
+<table class="table table-striped" style="padding: 20px">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Naziv predmeta</th>
+      <th scope="col">ESPB</th>
+      <th scope="col">Ispitni rok</th>
+      <th scope="col">Datum polaganja</th>
+      <th scope="col">Učionica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ exam.course.name }}
+      </td>
+      <td>{{ exam.course.espb }}</td>
+      <td>{{ exam.examPeriod }}</td>
+      <td>{{ exam.date }}</td>
+      <td>{{ exam.classroom }}</td>
+    </tr>
+  </tbody>
+</table>
