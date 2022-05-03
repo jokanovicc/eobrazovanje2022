@@ -1,0 +1,64 @@
+<h3 style="margin: 0 auto; text-align: center">Prijava ispita</h3>
+
+<p *ngIf="showSuccessMessage" style="color: green">
+  Ispit je uspešno prijavljen
+</p>
+<p *ngIf="showErrorMessage" style="color: red">
+  Došlo je do greške prilikom prijave ispita
+</p>
+<table class="table table-striped" style="width: 60%; margin: 0 auto">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Naziv predmeta</th>
+      <th scope="col">ESPB</th>
+      <th scope="col">Datum polaganja</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ exam.performance.course.name }}
+      </td>
+      <td>{{ exam.performance.course.espb }}</td>
+      <td>{{ exam.date }}</td>
+      <td>
+        <a
+          class="btn btn-primary"
+          (click)="selectedExam = exam; open(confirmRegistration)"
+          >Prijavi ispit</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #confirmRegistration let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Potvrda prijave ispita</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="registerExam()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    Jeste li sigurni da želite da prijavite ispit iz predmeta
+    {{ selectedExam.performance.course.name }} ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+      Odustani
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="registerExam(); modal.close('Save click')"
+    >
+      Prijavi ispit
+    </button>
+  </div>
+</ng-template>

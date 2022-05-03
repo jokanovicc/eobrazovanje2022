@@ -15,6 +15,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ExamHistoryComponent } from './components/exam-history/exam-history.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
+import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RegisteredExamsComponent } from './components/registered-exams/register
     ExamHistoryComponent,
     PassedExamsComponent,
     RegisteredExamsComponent,
+    RegisterExamComponent,
   ],
   imports: [
     BrowserModule,

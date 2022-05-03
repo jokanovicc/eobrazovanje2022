@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Exam } from '../models/exam.interface';
 import { ExamStatus } from '../models/exam-status.enum';
+import { PerformanceExam } from '../models/performance-exam.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExamService {
@@ -17,6 +18,21 @@ export class ExamService {
 
     return this.http.get<Exam[]>(
       environment.backend_endpoint + `exams`,
+      options
+    );
+  }
+
+  getExamsForRegistration() {
+    return this.http.get<PerformanceExam[]>(
+      environment.backend_endpoint + `exams/registration`
+    );
+  }
+
+  registerExam(performanceExamId: number, attendingId: number) {
+    const options = {};
+    return this.http.post(
+      environment.backend_endpoint +
+        `exams/${performanceExamId}/attending/${attendingId}`,
       options
     );
   }

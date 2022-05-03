@@ -3,10 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ExamHistoryComponent } from './components/exam-history/exam-history.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
+import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { DashboardComponent } from './layouts/dashboard/dashboard.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 const routes: Routes = [
@@ -32,6 +30,10 @@ const routes: Routes = [
   {
     path: 'registered-exams',
     component: RegisteredExamsComponent,
+  },
+  {
+    path: 'exam-registration',
+    component: RegisterExamComponent,
   },
   {
     path: '',
