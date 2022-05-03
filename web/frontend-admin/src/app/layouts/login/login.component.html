@@ -1,0 +1,22 @@
+
+<body style="background-color: #f5f5f5">
+    <div class="container text-center" style="width: 25%;">
+      <form style="padding: 10px; padding-top: 10vh;" [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin">
+        <img class="mb-4" src="https://www.nicepng.com/png/detail/504-5042883_sixteen-clock-hours-of-continuing-education-credits-youtube.png" alt="" width="112"
+          height="100">
+        <h3>Prijavite se na sistem</h3>
+        <p><i>ADMINSKI SERVIS</i></p>
+        <hr/>
+        <label for="username" class="sr-only">Korisničko ime</label>
+        <input placeholder="Корисничко име" type="text" id="username" name="username" formControlName="username" class="form-control" required autofocus>
+        <label for="inputPassword" class="sr-only">Lozinka</label>
+        <input type="password" id="password" name="password" formControlName="password" class="form-control"
+          placeholder="Лозинка" required>
+        <button class="btn btn-lg btn-primary btn-block" style="margin-top: 20px;" type="submit">Prijava</button>
+        <p class="mt-5 mb-3 text-muted">&copy; Školska 2021/2022.</p>
+      </form>
+      
+      </div>
+  
+  </body>
+  

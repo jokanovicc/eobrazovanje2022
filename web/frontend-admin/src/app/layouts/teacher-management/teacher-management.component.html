@@ -1,0 +1,26 @@
+
+<div>
+
+
+<p>You can bind our <code>NgbPagination</code> component with slicing the data list</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Country</th>
+    <th scope="col">Area</th>
+    <th scope="col">Population</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let teacher of teachers">
+    <th scope="row">{{ teacher.id }}</th>
+    <td>{{ teacher.name}}</td>
+    <td>{{ teacher.lastname}}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+</div>

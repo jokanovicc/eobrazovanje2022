@@ -14,11 +14,15 @@ INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email
     ('Jovica','Jovanovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
 ', 'STUDENT', 'MALE', 'jovanovic@gmail.com');
 
+INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
+    ('Ado','Adminic','11039123213431', 'Nemanjina, Beograd', 'ado','$2a$12$lGAL1aaPLq8CC5YcDbhLj.61yYKK.6UMouXP6fy/vLWLWAb6G/1si', 'ADMIN', 'MALE', 'adminic@gmail.com');
+
 INSERT INTO teacher(user_id) VALUES  (1);
 INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', false);
 INSERT INTO teacher(user_id) VALUES  (3);
 INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (4,'RA-22/2020','',true,'1ADRHF322', false);
 
+INSERT INTO admin(user_id) VALUES  (5);
 
 INSERT INTO teacher_role(name) VALUES ('PREDAVAC');
 INSERT INTO teacher_role(name) VALUES ('ASISTENT');
