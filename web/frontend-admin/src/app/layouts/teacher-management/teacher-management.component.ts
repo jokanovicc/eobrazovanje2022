@@ -10,13 +10,21 @@ import { Teacher } from '../../models/models.interface';
 })
 export class TeacherManagementComponent implements OnInit {
 
-  teachers: Observable<Teacher[]>;
+  public teachers: Teacher[];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.teachers = this.userService.fetchTeachers();
-    console.log(this.teachers);
+    this.fetchTeachers();
+
+  }
+
+
+  fetchTeachers(){
+    this.userService.getTeachers().subscribe((response) => {
+      this.teachers = response;
+    })
+
   }
 
 }

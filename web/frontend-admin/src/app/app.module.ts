@@ -11,11 +11,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddTeacherComponent } from './layouts/add-teacher/add-teacher.component';
+import { Router } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TeacherManagementComponent
+    TeacherManagementComponent,
+    AddTeacherComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

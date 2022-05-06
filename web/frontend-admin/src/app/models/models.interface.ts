@@ -6,6 +6,7 @@ export interface Teacher{
     username:string;
     gender:string;
     password:string;
+    lastname:string;
 }
 
 export interface User {
