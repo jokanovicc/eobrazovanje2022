@@ -1,0 +1,38 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container" style="margin-top: 20px;">
+      <h3>Dosadašnji ispiti</h3>
+      <hr/>
+    
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Bodovi iz predispitnih obaveza</th>
+        <th scope="col">Bodovi na zavrsnom ispitu</th>
+        <th scope="col">Ocena</th>
+        <th scope="col">Status</th>
+        <th scope="col">Ime studenta</th>
+        <th scope="col">Broj indeksa</th>    
+   
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let student of students">
+        <td scope="row">{{ student.preExamDutyPoints }}</td>
+        <td scope="row">{{ student.finalExamPoints }}</td>    
+        <td scope="row">{{ student.grade}}</td>    
+        <td scope="row">{{ student.status}}</td>
+        <td scope="row">{{ student.studentName}}</td>    
+        <td scope="row">{{ student.studentIndex}}</td>
+    
+    
+      </tr>
+      </tbody>
+    </table>
+        
+    
+    </div>
+    
+    </body>
+    

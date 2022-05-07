@@ -17,4 +17,7 @@ public interface PerformanceExamRepository extends JpaRepository<PerformanceExam
             "and attending.id not in (select attending_id from exam where status = 'PASSED' or status = 'REGISTERED') " +
             "group by performance_exam.id", nativeQuery = true)
     List<PerformanceExam> getByStudentId(Long studentId);
+
+    @Query(value = "select pe.id,pe.classroom,pe.date,pe.exam_period_id,pe.performance_id from performance_exam pe join performance p on pe.performance_id = p.id join performance_teacher_relationship ptr on p.id = ptr.performance_id and ptr.teacher_id = ?1", nativeQuery = true)
+    List<PerformanceExam> findExamPeriodByTeacher(Long teacherId);
 }

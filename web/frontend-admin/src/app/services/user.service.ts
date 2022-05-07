@@ -19,7 +19,6 @@ export class UserService {
     return this.http.post(environment.backend_endpoint+`users`, teacher).subscribe((result)=> {
       console.warn(result)
     })
-    console.warn(teacher);
 
   
   }

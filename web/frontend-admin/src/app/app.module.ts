@@ -14,13 +14,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddTeacherComponent } from './layouts/add-teacher/add-teacher.component';
 import { Router } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeacherManagementComponent,
     AddTeacherComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddSubjectComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

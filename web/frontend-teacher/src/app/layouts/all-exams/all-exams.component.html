@@ -1,0 +1,36 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container" style="margin-top: 20px;">
+      <h3>Dosadašnji ispiti</h3>
+      <hr/>
+    
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Rok</th>
+        <th scope="col">Naziv predmeta</th>
+        <th scope="col">Kabinet</th>
+        <th scope="row">Studenti</th>    
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let examPeriod of examPeriods">
+        <td scope="row">{{ examPeriod.date }}</td>
+        <td scope="row">{{ examPeriod.examPeriod }}</td>    
+        <td scope="row">{{ examPeriod.name}}</td>    
+        <td scope="row">{{ examPeriod.classroom}}</td>
+        <td scope="row"><button type="button" (click)="getStudents(examPeriod.id)" class="btn btn-primary">Prijavljeni studenti </button>
+        </td>    
+    
+    
+      </tr>
+      </tbody>
+    </table>
+        
+    
+    </div>
+    
+    </body>
+    

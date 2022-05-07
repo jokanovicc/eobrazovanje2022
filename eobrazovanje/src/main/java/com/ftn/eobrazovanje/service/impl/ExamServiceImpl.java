@@ -102,6 +102,12 @@ public class ExamServiceImpl implements ExamService {
         return ExamMapper.toDto(registered);
     }
 
+    @Override
+    public List<ExamDTO> findExamByTeacher(Authentication authentication) {
+        User user = userService.getUser(authentication);
+        return ExamMapper.toDtoList(examRepository.findAllExamsByTeacher(user.getId()));
+    }
+
     //profesoru ce na interfejsu biti prikazana lista EXAMA za svakog pojedinacnog studenta znaci nece biti
     //performance exam generalni, nego pojedinacna polaganja, tako da cu za svako polaganje imati direkt id pojedinacnog polaganja
     @Override
@@ -155,8 +161,14 @@ public class ExamServiceImpl implements ExamService {
         return PerformanceExamMapper.toDtoList(exams);
     }
 
+    @Override
+    public List<PerformanceExamDTO> getExamPeriodsByTeacher(Authentication authentication) {
+        User u = userService.getUser(authentication);
+        return PerformanceExamDTO.convertToDtoList(performanceExamRepository.findExamPeriodByTeacher(u.getId()));
+    }
+
     @Transactional
-    private void chargeStudentForExam(FinancialCard card, Student student) {
+    void chargeStudentForExam(FinancialCard card, Student student) {
         Payment payment = new Payment(
                 student,
                 (double) -300,

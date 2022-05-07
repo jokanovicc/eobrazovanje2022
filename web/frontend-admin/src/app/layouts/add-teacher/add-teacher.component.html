@@ -1,3 +1,4 @@
+<meta charset = "UTF-8" />
 <body style="background-color: #f5f5f5">
 
 <div class="container text-center" style="width: 45%;">
@@ -5,7 +6,7 @@
     <h1>Dodavanje nastavnika</h1>
     <form style="padding: 10px;" #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
         <label for="name" class="sr-only">Ime</label>
-        <input type="text" class="form-control" required autofocus name="name" ngModel placeholder="name"><br />
+        <input type="text" class="form-control" required autofocus name="name" ngModel placeholder="name" required /><br />
         <label for="lastname" class="sr-only">Prezime</label>
         <input type="text" class="form-control" required autofocus name="lastname" ngModel placeholder="lastname"><br />
         <label for="jmbg" class="sr-only">JMBG</label>

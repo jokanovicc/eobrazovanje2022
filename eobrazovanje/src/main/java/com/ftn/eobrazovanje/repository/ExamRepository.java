@@ -44,4 +44,8 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     @Query(value = "select * from exam where exam_id = ?1 and status = 'REGISTERED'",
             nativeQuery = true)
     List<Exam> findAllRegisteredForPerformanceExam(Long performanceExamId);
+
+    @Query(value = "select * from exam e join performance_exam pe on e.exam_id = pe.id join performance p on pe.performance_id = p.id join performance_teacher_relationship ptr on " +
+            " p.id = ptr.performance_id and ptr.teacher_id = ?1", nativeQuery = true)
+    List<Exam> findAllExamsByTeacher(Long teacherId);
 }

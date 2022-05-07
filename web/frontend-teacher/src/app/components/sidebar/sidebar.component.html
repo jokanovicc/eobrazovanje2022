@@ -1,0 +1,22 @@
+<div
+  class="bg-light border-right"
+  id="sidebar-wrapper"
+  [ngClass]="status ? 'hide' : 'show'"
+>
+  <div class="sidebar-heading">Dostupni linkovi</div>
+  <div class="list-group list-group-flush">
+    <a
+      routerLink="/dashboard"
+      class="list-group-item list-group-item-action bg-light"
+      >Glavna stranica</a
+    >
+    <a
+      routerLink="/exams"
+      class="list-group-item list-group-item-action bg-light"
+      >Vaši ispiti</a
+    >
+
+
+  </div>
+</div>
+

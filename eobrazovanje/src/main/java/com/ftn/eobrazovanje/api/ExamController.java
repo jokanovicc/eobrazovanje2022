@@ -1,6 +1,7 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.*;
+import com.ftn.eobrazovanje.model.ExamPeriod;
 import com.ftn.eobrazovanje.service.ExamService;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
@@ -97,6 +98,13 @@ public class ExamController {
                 .created(new URI("/api/exams/" + response.getId()))
                 .body(response);
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @GetMapping("/teacher-exams")
+    public List<PerformanceExamDTO> getExamsByTeacher(Authentication authentication){
+        return examService.getExamPeriodsByTeacher(authentication);
+    }
+
 
 
 }

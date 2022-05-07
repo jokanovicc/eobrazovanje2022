@@ -12,12 +12,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { UpdateProfileComponent } from './layouts/update-profile/update-profile.component';
+import { AllExamsComponent } from './layouts/all-exams/all-exams.component';
+import { StudentsExamsComponent } from './layouts/students-exams/students-exams.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     UpdateProfileComponent,
+    AllExamsComponent,
+    StudentsExamsComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
