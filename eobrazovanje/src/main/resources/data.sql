@@ -38,11 +38,13 @@ INSERT into course(espb,name,sylabus) values ('8ESPB','Osnove web programiranje'
 INSERT into course(espb,name,sylabus) values ('4ESPB','Web Dizajn','Lorem');
 INSERT into course(espb,name,sylabus) values ('6ESPB','Baze podataka','Lorem');
 INSERT into course(espb,name,sylabus) values ('6ESPB','Osnove softverskih arhitektura','Lorem');
+INSERT into course(espb,name,sylabus) values ('8ESPB','E Obrazovanje','Lorem');
 
 insert into study_program_courses(courses_id, study_program_id) values (1,1);
 insert into study_program_courses(courses_id, study_program_id) values (2,1);
 insert into study_program_courses(courses_id, study_program_id) values (3,1);
 insert into study_program_courses(courses_id, study_program_id) values (4,1);
+insert into study_program_courses(courses_id, study_program_id) values (5,1);
 
 insert into studying_information(financial_type,school_year,start_school_year,student_user_id,study_program_id) VALUES
 ('budget','3','2019',2,1);
@@ -51,6 +53,7 @@ insert into performance(school_year, course_id) values ('2022', 1);
 insert into performance(school_year, course_id) values ('2022', 2);
 insert into performance(school_year, course_id) values ('2022', 3);
 insert into performance(school_year, course_id) values ('2022', 4);
+insert into performance(school_year, course_id) values ('2022', 5);
 
 INSERT into course_teacher(teacher_user_id, teacher_role_id) values (1, 1);
 INSERT into course_teacher(teacher_user_id, teacher_role_id) values (3, 2);
@@ -66,16 +69,21 @@ insert into attending(performance_id,student_user_id) values (1,2);
 insert into attending(performance_id,student_user_id) values (2,2);
 insert into attending(performance_id,student_user_id) values (3,2);
 insert into attending(performance_id,student_user_id) values (4,2);
+insert into attending(performance_id,student_user_id) values (5,2);
 
 insert into exam_period(start_date, end_date, name) values ('2022-01-15', '2022-01-30', 'januarski');
 insert into exam_period(start_date, end_date, name) values ('2022-04-01', '2022-02-17', 'februarski');
-insert into exam_period(start_date, end_date, name) values ('2022-04-09', '2022-05-15', 'aprilski aktuelni');
+insert into exam_period(start_date, end_date, name) values ('2022-04-15', '2022-05-15', 'majski aktuelni');
+insert into exam_period(start_date, end_date, name) values ('2022-06-03', '2022-06-20', 'junski kasniji al moze');
+insert into exam_period(start_date, end_date, name) values ('2022-07-08', '2022-07-29', 'julski kasniji');
 
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 1, '2022-01-17', '417', 1);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 2, '2022-01-25', '310', 1);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 3, '2022-01-26', '312', 1);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 3, '2022-02-13', '312', 2);
-insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 4, '2022-05-08', '315', 3);
+insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 4, '2022-05-11', '314', 3);
+insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 5, '2022-05-14', '315', 3);
+insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 5, '2022-06-06', '330', 4);
 
 insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)
 values ( 45, 31, 8, 'PASSED', 1, 1);

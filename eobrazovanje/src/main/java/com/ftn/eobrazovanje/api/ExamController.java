@@ -43,10 +43,13 @@ public class ExamController {
     }
 
     @GetMapping("/registration")
-    public ResponseEntity<List<PerformanceExamResponse>> getExamsForRegistration(Authentication authentication) {
+    public ResponseEntity<List<PerformanceExamResponse>> getExamsForRegistration(
+            @RequestParam(required = false) Long examPeriodId,
+            Authentication authentication
+    ) {
         return ResponseEntity
                 .ok()
-                .body(examService.getExamsForRegistration(authentication));
+                .body(examService.getExamsForRegistration(authentication, examPeriodId));
     }
 
     @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")

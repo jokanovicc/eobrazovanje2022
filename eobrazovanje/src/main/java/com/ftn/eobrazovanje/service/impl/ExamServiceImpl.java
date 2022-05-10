@@ -155,10 +155,17 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<PerformanceExamResponse> getExamsForRegistration(Authentication authentication) {
+    public List<PerformanceExamResponse> getExamsForRegistration(
+            Authentication authentication,
+            Long examPeriodId
+    ) {
         User student = userService.getUser(authentication);
-        List<PerformanceExam> exams = performanceExamRepository.getByStudentId(student.getId());
-        return PerformanceExamMapper.toDtoList(exams);
+        if(examPeriodId == null) {
+            return PerformanceExamMapper.toDtoList(performanceExamRepository.getByStudentId(student.getId()));
+        }
+        return PerformanceExamMapper.toDtoList(
+                performanceExamRepository.getByStudentIdInExamPeriod(student.getId(), examPeriodId)
+        );
     }
 
     @Override
