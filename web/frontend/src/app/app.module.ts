@@ -16,6 +16,11 @@ import { ExamHistoryComponent } from './components/exam-history/exam-history.com
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
 import { RegisterExamComponent } from './components/register-exam/register-exam.component';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,9 @@ import { RegisterExamComponent } from './components/register-exam/register-exam.
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
   ],
   exports: [FormsModule, ReactiveFormsModule],
   providers: [

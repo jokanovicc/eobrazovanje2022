@@ -22,6 +22,19 @@ export class ExamService {
     );
   }
 
+  getExamsInPeriod(periodId: number) {
+    const options = {
+      params: {
+        examPeriodId: periodId,
+      },
+    };
+
+    return this.http.get<PerformanceExam[]>(
+      environment.backend_endpoint + `exams/registration`,
+      options
+    );
+  }
+
   getExamsForRegistration() {
     return this.http.get<PerformanceExam[]>(
       environment.backend_endpoint + `exams/registration`
