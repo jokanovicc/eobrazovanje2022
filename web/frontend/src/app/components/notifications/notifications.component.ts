@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NotificationResponse } from 'src/app/models/notification-response.interface';
 import { Notification } from 'src/app/models/notification.interface';
 import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/service/auth.service';
@@ -13,9 +14,11 @@ export class NotificationsComponent implements OnInit {
   public notifications: Notification[];
   public currentUser: User;
 
+  public page: number = 0;
+  public totalPagesCount: number;
+
   constructor(
     private notificationService: NotificationsService,
-    private cd: ChangeDetectorRef,
     private authService: AuthService
   ) {}
 
@@ -24,11 +27,12 @@ export class NotificationsComponent implements OnInit {
     this.getCurrentUser();
   }
 
-  fetchNotifications() {
+  fetchNotifications(pageNumber?: number) {
     this.notificationService
-      .getNotifications()
-      .subscribe((response: Notification[]) => {
-        this.notifications = response;
+      .getNotifications(pageNumber)
+      .subscribe((response: NotificationResponse) => {
+        this.notifications = response.notifications;
+        this.totalPagesCount = response.pagesCount;
       });
   }
 
@@ -36,6 +40,16 @@ export class NotificationsComponent implements OnInit {
     this.authService.fetchCurrentUser().subscribe((user) => {
       this.currentUser = user;
     });
+  }
+
+  nextPage() {
+    this.page = this.page + 1;
+    this.fetchNotifications(this.page);
+  }
+
+  previousPage() {
+    this.page = this.page - 1;
+    this.fetchNotifications(this.page);
   }
 
   delete(notificationId: number) {

@@ -2,7 +2,6 @@ package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.CoursePerformanceDTO;
 import com.ftn.eobrazovanje.api.dto.CreateCoursePerformanceRequest;
-import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import com.ftn.eobrazovanje.api.dto.TeacherToAttendingDTO;
 import com.ftn.eobrazovanje.model.CourseTeacher;
 import com.ftn.eobrazovanje.model.Performance;

@@ -1,14 +1,13 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.NotificationRequest;
+import com.ftn.eobrazovanje.api.dto.NotificationDTO;
 import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import com.ftn.eobrazovanje.api.dto.mapper.NotificationMapper;
 
 import com.ftn.eobrazovanje.model.*;
 
 import com.ftn.eobrazovanje.model.Notification;
-import com.ftn.eobrazovanje.model.Performance;
-import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
 
 import com.ftn.eobrazovanje.repository.NotificationRepository;
@@ -17,7 +16,9 @@ import com.ftn.eobrazovanje.repository.TeacherRepository;
 import com.ftn.eobrazovanje.service.NotificationService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.remoting.RemoteAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService {
     private PerformanceRepository performanceRepository;
 
     @Override
-    public NotificationResponse create(NotificationRequest request, Authentication authentication) {
+    public NotificationDTO create(NotificationRequest request, Authentication authentication) {
 
        User teacher = userService.getUser(authentication);
 
@@ -55,18 +56,24 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<NotificationResponse> getNotifications(Authentication authentication) {
+    public NotificationResponse getNotifications(Authentication authentication, int page) {
+
+        Pageable pageable = PageRequest.of(page, 10);
+
         User current = userService.getUser(authentication);
 
+
         if(current.getRole() == UserRole.ADMIN) {
-            return NotificationMapper.toDtoList(notificationRepository.findAll());
+            Page<Notification> notifications = notificationRepository.findAll(pageable);
+            return new NotificationResponse(NotificationMapper.toDtoList(notifications.getContent()), notifications.getTotalPages());
         }
 
         if(current.getRole() == UserRole.TEACHER) {
-            return NotificationMapper.toDtoList(notificationRepository.getOfTeacher(current.getId()));
+            Page<Notification> notifications = notificationRepository.getOfTeacher(current.getId(), pageable);
+            return new NotificationResponse(NotificationMapper.toDtoList(notifications.getContent()), notifications.getTotalPages());
         }
-
-        return NotificationMapper.toDtoList(notificationRepository.getOfStudent(current.getId()));
+        Page<Notification> notifications = notificationRepository.getOfStudent(current.getId(), pageable);
+        return new NotificationResponse(NotificationMapper.toDtoList(notifications.getContent()), notifications.getTotalPages());
     }
 
     @Override

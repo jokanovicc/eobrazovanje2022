@@ -1,3 +1,23 @@
 .notification-card {
   width: 100%;
 }
+
+.pagination-btn {
+  background-color: lightskyblue !important;
+}
+
+.notifications-container {
+  width: 80%;
+}
+
+.pagination {
+  float: right !important;
+}
+
+.margin-sm {
+  margin: 5px !important;
+}
+
+.margin-md {
+  margin: 10px !important;
+}

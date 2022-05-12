@@ -4,7 +4,7 @@
     <h4 style="margin: 15px auto; text-align: center">Nema obaveštenja</h4>
   </div>
 
-  <div class="container">
+  <div class="container notifications-container">
     <div class="row">
       <div
         class="col-md-12"
@@ -13,7 +13,7 @@
       >
         <div
           class="card notification-card"
-          style="width: 80%; margin: 0 auto; padding: 10px"
+          style="margin: 0 auto; padding: 10px"
         >
           <div>
             <div class="card-body">
@@ -41,6 +41,28 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="pagination">
+      <span class="margin-md"
+        >Stranica {{ page + 1 }} od {{ totalPagesCount }}</span
+      >
+      <button
+        class="margin-sm pagination-btn"
+        (click)="previousPage()"
+        [disabled]="page <= 0"
+      >
+        prethodna
+      </button>
+      <button class="margin-sm pagination-btn">
+        {{ page + 1 }}
+      </button>
+      <button
+        class="margin-sm pagination-btn"
+        [disabled]="page + 1 >= totalPagesCount"
+        (click)="nextPage()"
+      >
+        sledeća
+      </button>
     </div>
   </div>
 </div>

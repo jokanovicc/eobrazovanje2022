@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notification } from '../models/notification.interface';
 import { environment } from 'src/environments/environment';
+import { NotificationResponse } from '../models/notification-response.interface';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
   constructor(private http: HttpClient) {}
 
-  getNotifications() {
-    return this.http.get<Notification[]>(
-      environment.backend_endpoint + `notifications`
+  getNotifications(pageNumber?: number) {
+    const options = {
+      params: {
+        page: pageNumber ? pageNumber : 0,
+      },
+    };
+
+    return this.http.get<NotificationResponse>(
+      environment.backend_endpoint + `notifications`,
+      options
     );
   }
 
