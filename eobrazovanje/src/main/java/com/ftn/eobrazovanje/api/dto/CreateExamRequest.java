@@ -15,7 +15,7 @@ public class CreateExamRequest {
     @NotNull
     private Long performanceId;
     @NotNull
-    private ExamPeriod examPeriod;
+    private Long examPeriodId;
 
     private LocalDate date;
 

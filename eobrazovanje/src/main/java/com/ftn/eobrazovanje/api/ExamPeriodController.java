@@ -21,8 +21,9 @@ public class ExamPeriodController {
     private ExamPeriodService examPeriodService;
 
     @GetMapping
-    public ResponseEntity<List<ExamPeriod>> getActive() {
-        List<ExamPeriod> result = examPeriodService.getActive();
+    public ResponseEntity<List<ExamPeriod>> get(
+            @RequestParam(required = false, defaultValue = "false") boolean active) {
+        List<ExamPeriod> result = examPeriodService.getAll(active);
         return ResponseEntity
                 .ok()
                 .body(result);

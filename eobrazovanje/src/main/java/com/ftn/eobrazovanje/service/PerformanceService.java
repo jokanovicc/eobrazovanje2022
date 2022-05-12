@@ -25,5 +25,5 @@ public interface PerformanceService {
 
     CoursePerformanceDTO create(CreateCoursePerformanceRequest coursePerformance);
 
-    List<CoursePerformanceDTO> getForTeacher(Authentication authentication);
+    List<CoursePerformanceDTO> get(Authentication authentication);
 }

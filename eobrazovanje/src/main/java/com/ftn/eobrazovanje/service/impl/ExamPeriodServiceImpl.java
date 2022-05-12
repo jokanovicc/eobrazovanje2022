@@ -17,12 +17,15 @@ public class ExamPeriodServiceImpl implements ExamPeriodService {
     private ExamPeriodRepository examPeriodRepository;
 
     @Override
-    public List<ExamPeriod> getActive() {
+    public List<ExamPeriod> getAll(boolean active) {
         List<ExamPeriod> all = examPeriodRepository.findAll();
-        List<ExamPeriod> active = all.stream().filter(this::periodIsInRange)
+        if(!active) {
+            return all;
+        }
+        List<ExamPeriod> activePeriods = all.stream().filter(this::periodIsInRange)
                 .collect(Collectors.toList());
 
-        return active;
+        return activePeriods;
     }
 
     private boolean periodIsInRange(ExamPeriod period) {

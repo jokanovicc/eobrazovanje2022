@@ -1,0 +1,78 @@
+<div class="create-exam-form">
+  <br />
+  <h3>Objavi novi ispit</h3>
+  <br />
+  <span *ngIf="showSuccessMsg" style="color: green"
+    >Ispit je uspešno kreiran</span
+  >
+  <span *ngIf="showErrorMsg" style="color: red"
+    >Došlo je do greške prilikom kreiranja ispita</span
+  >
+  <form>
+    <div class="form-group form-margin">
+      <label for="exampleInputEmail1" class="margin-right">Predmet</label>
+      <div ngbDropdown class="d-inline-block">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          {{
+            selectedCourse ? selectedCourse.course.name : "Izaberite predmet"
+          }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <div *ngFor="let course of courses; index as i">
+            <button ngbDropdownItem (click)="pickCourse(course)">
+              {{ course.course.name }} ( {{ course.schoolYear }} )
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-margin">
+      <label for="exampleInputPassword1" class="margin-right"
+        >Ispitni rok</label
+      >
+      <div ngbDropdown class="d-inline-block">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          {{ selectedPeriod ? selectedPeriod.name : "Izaberite ispitni rok" }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <div *ngFor="let period of periods; index as i">
+            <button ngbDropdownItem (click)="pickPeriod(period)">
+              {{ period.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-margin">
+      <label for="date" class="margin-right">Datum</label>
+      <input class="form-control" type="date" [(ngModel)]="date" name="date" />
+    </div>
+    <div class="form-group">
+      <label for="classroom">Učionica</label>
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="classroom"
+        name="classroom"
+      />
+    </div>
+    <br />
+    <button
+      type="submit"
+      class="btn btn-primary create-exam-btn"
+      (click)="createExam()"
+    >
+      Objavi ispit
+    </button>
+  </form>
+</div>

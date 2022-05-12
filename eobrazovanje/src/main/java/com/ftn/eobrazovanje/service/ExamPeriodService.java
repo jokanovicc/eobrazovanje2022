@@ -5,5 +5,5 @@ import com.ftn.eobrazovanje.model.ExamPeriod;
 import java.util.List;
 
 public interface ExamPeriodService {
-    List<ExamPeriod> getActive();
+    List<ExamPeriod> getAll(boolean active);
 }

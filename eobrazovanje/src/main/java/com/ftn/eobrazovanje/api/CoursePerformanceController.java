@@ -77,9 +77,9 @@ public class CoursePerformanceController {
                 .created(new URI("/api/performances/" + result.getId()))
                 .body(result);
     }
-    @PreAuthorize("hasRole('TEACHER')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'ADMIN')")
     @GetMapping
-    public ResponseEntity getForTeacher(Authentication authentication) {
-        return ResponseEntity.ok(performanceService.getForTeacher(authentication));
+    public ResponseEntity get(Authentication authentication) {
+        return ResponseEntity.ok(performanceService.get(authentication));
     }
 }

@@ -94,11 +94,14 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
-    public List<CoursePerformanceDTO> getForTeacher(Authentication authentication) {
+    public List<CoursePerformanceDTO> get(Authentication authentication) {
         User current = userService.getUser(authentication);
-        return CoursePerformanceMapper.toDtoList(
-                performanceRepository.findAllByTeacher(current.getId())
-        );
+        if(current.getRole() == UserRole.TEACHER) {
+            return CoursePerformanceMapper.toDtoList(
+                    performanceRepository.findAllByTeacher(current.getId())
+            );
+        }
+        return CoursePerformanceMapper.toDtoList(performanceRepository.findAll());
     }
 
     private void mapTeachers(List<CourseTeacherRequest> teacherRequest, Performance performance) {

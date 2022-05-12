@@ -7,15 +7,9 @@ import { ExamPeriod } from '../models/exam-period.interface';
 export class ExamPeriodService {
   constructor(private http: HttpClient) {}
 
-  getActive() {
-    const options = {
-      params: {
-        active: true,
-      },
-    };
+  get() {
     return this.http.get<ExamPeriod[]>(
-      environment.backend_endpoint + `exam-periods`,
-      options
+      environment.backend_endpoint + `exam-periods`
     );
   }
 }

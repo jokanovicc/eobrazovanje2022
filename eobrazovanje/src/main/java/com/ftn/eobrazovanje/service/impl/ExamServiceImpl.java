@@ -141,13 +141,14 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public PerformanceExamResponse createExam(CreateExamRequest request) {
         Optional<Performance> performance = performanceRepository.findById(request.getPerformanceId());
-        if(performance.isEmpty()) {
-            throw new BadRequestException("Provided performance id not found");
+        Optional<ExamPeriod> period = examPeriodRepository.findById(request.getExamPeriodId());
+        if(performance.isEmpty() || period.isEmpty()) {
+            throw new BadRequestException("Provided performance or period id not found");
         }
         PerformanceExam exam = new PerformanceExam(
                 performance.get(),
                 request.getDate(),
-                request.getExamPeriod(),
+                period.get(),
                 request.getClassroom()
         );
 
