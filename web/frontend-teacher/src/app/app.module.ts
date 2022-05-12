@@ -15,6 +15,8 @@ import { UpdateProfileComponent } from './layouts/update-profile/update-profile.
 import { AllExamsComponent } from './layouts/all-exams/all-exams.component';
 import { StudentsExamsComponent } from './layouts/students-exams/students-exams.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { AddNotificationModalComponent } from './components/add-notification-modal/add-notification-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AllExamsComponent,
     StudentsExamsComponent,
     SidebarComponent,
+    NotificationsComponent,
+    AddNotificationModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,11 +38,13 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ReactiveFormsModule,
     NgbModule,
   ],
-  providers: [    {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true,
-  },],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

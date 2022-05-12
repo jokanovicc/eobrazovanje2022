@@ -7,6 +7,9 @@ import com.ftn.eobrazovanje.model.CourseTeacher;
 import com.ftn.eobrazovanje.model.Performance;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.TeacherRole;
+import org.springframework.security.core.Authentication;
+
+import java.util.List;
 
 public interface PerformanceService {
 
@@ -21,4 +24,6 @@ public interface PerformanceService {
     void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher);
 
     CoursePerformanceDTO create(CreateCoursePerformanceRequest coursePerformance);
+
+    List<CoursePerformanceDTO> getForTeacher(Authentication authentication);
 }

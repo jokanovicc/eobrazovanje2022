@@ -21,9 +21,6 @@ import {
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -48,9 +45,6 @@ import { MatTableModule } from '@angular/material/table';
     NoopAnimationsModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    MatTableModule, // <-- Added Table Module
-    MatPaginatorModule, // <-- Added Paginator Module
-    MatProgressBarModule,
   ],
   exports: [FormsModule, ReactiveFormsModule],
   providers: [

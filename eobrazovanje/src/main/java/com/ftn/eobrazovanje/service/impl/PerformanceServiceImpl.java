@@ -12,7 +12,9 @@ import com.ftn.eobrazovanje.repository.PerformanceRepository;
 import com.ftn.eobrazovanje.repository.TeacherRepository;
 import com.ftn.eobrazovanje.service.PerformanceService;
 import com.ftn.eobrazovanje.service.TeacherService;
+import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PerformanceServiceImpl implements PerformanceService {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PerformanceRepository performanceRepository;
@@ -86,6 +91,14 @@ public class PerformanceServiceImpl implements PerformanceService {
 
         performanceRepository.save(performance);
         return CoursePerformanceMapper.toDto(performance);
+    }
+
+    @Override
+    public List<CoursePerformanceDTO> getForTeacher(Authentication authentication) {
+        User current = userService.getUser(authentication);
+        return CoursePerformanceMapper.toDtoList(
+                performanceRepository.findAllByTeacher(current.getId())
+        );
     }
 
     private void mapTeachers(List<CourseTeacherRequest> teacherRequest, Performance performance) {

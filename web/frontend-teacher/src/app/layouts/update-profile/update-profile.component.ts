@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/model.interface';
+import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -33,7 +33,6 @@ export class UpdateProfileComponent implements OnInit {
 
   onSubmit() {
     this.updateData();
-    alert("Uspesno azurirano!")
-
+    alert('Uspesno azurirano!');
   }
 }

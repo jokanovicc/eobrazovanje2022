@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationResponse } from 'src/app/models/notification-response.interface';
 import { Notification } from 'src/app/models/notification.interface';
 import { User } from 'src/app/models/user.interface';
-import { AuthService } from 'src/app/service/auth.service';
-import { NotificationsService } from 'src/app/service/notifications.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -54,5 +54,15 @@ export class NotificationsComponent implements OnInit {
   previousPage() {
     this.page = this.page - 1;
     this.fetchNotifications();
+  }
+
+  delete(notificationId: number) {
+    this.notificationService.delete(notificationId).subscribe(() => {
+      this.fetchNotifications();
+    });
+  }
+
+  openModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 }

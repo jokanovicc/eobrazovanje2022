@@ -78,6 +78,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void delete(Long notificationId) {
+        System.out.print("ID NOTIFIKACIJE: " + notificationId);
         notificationRepository.deleteById(notificationId);
     }
 }

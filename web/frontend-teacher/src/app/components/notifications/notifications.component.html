@@ -5,6 +5,13 @@
   </div>
 
   <div class="container notifications-container">
+    <button
+      class="btn btn-primary add-notification-btn"
+      *ngIf="currentUser?.role == 'TEACHER'"
+      (click)="openModal(addNotification)"
+    >
+      Postavi obaveštenje
+    </button>
     <div class="row">
       <div
         class="col-md-12"
@@ -22,6 +29,19 @@
                 {{ notification.message }}
               </h6>
               <p class="card-text"></p>
+              <div
+                *ngIf="
+                  currentUser?.role == 'TEACHER' || currentUser?.role == 'ADMIN'
+                "
+                style="display: flex; justify-content: flex-end"
+              >
+                <a
+                  class="btn btn-primary"
+                  style="margin-left: 10px"
+                  (click)="delete(notification.id)"
+                  >Izbriši</a
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -51,3 +71,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #addNotification let-modal>
+  <add-notification-modal
+    (closeModal)="modal.close(); fetchNotifications()"
+  ></add-notification-modal>
+</ng-template>

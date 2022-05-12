@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Dodaj obaveštenje</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Zatvori"
+    (click)="close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="mb-3">
+      <label for="dateOfBirth">Tekst</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="message"
+          class="form-control"
+          name="message"
+          placeholder="Sadržaj obaveštenja"
+          [(ngModel)]="message"
+        />
+      </div>
+      <label for="dateOfBirth">Predmet</label>
+      <div class="input-group">
+        <div ngbDropdown class="d-inline-block">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            {{
+              selectedCourse ? selectedCourse.course.name : "Izaberite predmet"
+            }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <div *ngFor="let course of courses; index as i">
+              <button ngbDropdownItem (click)="pickCourse(course)">
+                {{ course.course.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="sendNotification()"
+  >
+    Pošalji obaveštenje
+  </button>
+</div>

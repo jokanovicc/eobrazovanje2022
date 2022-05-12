@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -75,5 +76,10 @@ public class CoursePerformanceController {
         return ResponseEntity
                 .created(new URI("/api/performances/" + result.getId()))
                 .body(result);
+    }
+    @PreAuthorize("hasRole('TEACHER')")
+    @GetMapping
+    public ResponseEntity getForTeacher(Authentication authentication) {
+        return ResponseEntity.ok(performanceService.getForTeacher(authentication));
     }
 }
