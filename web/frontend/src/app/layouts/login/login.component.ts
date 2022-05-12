@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
 
   ngOnInit(): void {
+    this.checkIfAlreadyLoggedIn();
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -35,7 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    console.log('Called!');
     this.authService
       .login(
         this.loginForm.get('username')?.value,
@@ -56,8 +56,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         if (this.authService.getRole() == 'ROLE_STUDENT') {
           this.router.navigate(['/dashboard']);
-        } else {
-          alert('TEACHER NOT IMPLEMENTED');
         }
       });
   };
@@ -68,4 +66,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   };
+
+  private checkIfAlreadyLoggedIn() {
+    const token = this.authService.getToken();
+    if (token) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 }

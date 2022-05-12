@@ -16,12 +16,16 @@ export class NavigationBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.token$.subscribe((token: string) => {
+      if (!token) {
+        this.token = localStorage.getItem('token');
+        return;
+      }
       this.token = token;
     });
   }
 
   logoutButton() {
-    this.authService.removeToken();
+    this.authService.logout();
     this.token = null;
     this.router.navigate(['']);
   }

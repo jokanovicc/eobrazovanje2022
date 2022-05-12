@@ -56,11 +56,11 @@
         <td>{{ exam.date }}</td>
         <td>
           <div
-            matTooltip="
-          examRegistrationPeriodPassed(exam)
-            ? 'Prosao je rok za prijavu ovog ispita'
-            : ''
-        "
+            [matTooltip]="
+              examRegistrationPeriodPassed(exam)
+                ? 'Prošao je rok za prijavu ovog ispita'
+                : ''
+            "
             [matTooltipDisabled]="!examRegistrationPeriodPassed(exam)"
           >
             <button
