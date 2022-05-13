@@ -1,0 +1,30 @@
+<div class="container text-center" style="width: 45%; height: 800px">
+  <h3 style="padding: 20px">Dodavanje studenata u sistem</h3>
+
+  <p>Izaberite fajl sa podacima</p>
+  <form>
+    <input
+      style="padding: 10px"
+      type="file"
+      class="file-upload"
+      (change)="selectFile($event)"
+    />
+    <div class="container text-center" style="padding: 20px">
+      <div>
+        <button
+          class="btn btn-md btn-primary btn-style"
+          [disabled]="!selectedFiles"
+          (click)="upload()"
+        >
+          Posalji
+        </button>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="message" class="alert alert-success" role="alert">
+    {{ message }}
+  </div>
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+    {{ errorMsg }}
+  </div>
+</div>

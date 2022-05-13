@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CreateExamComponent } from './create-exam/create-exam.component';
+import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CreateExamComponent } from './create-exam/create-exam.component';
     NavbarComponent,
     AddSubjectComponent,
     SidebarComponent,
-    CreateExamComponent
+    CreateExamComponent,
+    InsertStudentsComponent
   ],
   imports: [
     BrowserModule,
