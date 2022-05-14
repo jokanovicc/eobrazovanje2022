@@ -91,7 +91,7 @@ public class StudentServiceImpl implements StudentService {
 
                 emailService.sendEmail(user.getEmail(), "Set password",
                         "Please follow the link and set your password." + " Link: " +
-                        "http://localhost:4200/setPassword/token?=" + passwordToken);
+                        "http://localhost:4200/setPassword?token=" + passwordToken);
 
             }
 
