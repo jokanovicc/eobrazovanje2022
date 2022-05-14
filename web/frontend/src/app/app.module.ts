@@ -21,6 +21,7 @@ import {
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PassedExamsComponent,
     RegisteredExamsComponent,
     RegisterExamComponent,
+    SetFirstPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
 import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
+import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'update-profile',
     component: UpdateProfileComponent,
+  },
+  {
+    path: 'setPassword',
+    component: SetFirstPasswordComponent,
   },
 ];
 
