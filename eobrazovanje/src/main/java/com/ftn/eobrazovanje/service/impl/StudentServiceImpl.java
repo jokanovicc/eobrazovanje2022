@@ -106,7 +106,12 @@ public class StudentServiceImpl implements StudentService {
         user.setLastname(dto.getLastName());
         user.setAddress(dto.getAddress());
         user.setJmbg(dto.getJmbg());
-        user.setGender(dto.getGender());
+        if (dto.getGender().equals("muški")) {
+            user.setGender("MALE");
+        } else{
+            user.setGender("FEMALE");
+        }
+
         userService.update(user);
 
 

@@ -38,14 +38,16 @@ export class SetFirstPasswordComponent implements OnInit {
         next: (x: any) => {
           this.router.navigate(['']);
         },
-        error: (err: any) => {
-          console.log(err);
-          if (err.error && err.error.responseMessage) {
-            this.errorMsg = err.error.responseMessage;
-          } else {
-            this.errorMsg = 'Greška!';
-          }
-        },
+        error: (err: any) => this.handleError(err),
       });
+  }
+
+  handleError(err: any) {
+    console.log(err);
+    if (err.error && err.error.responseMessage) {
+      this.errorMsg = err.error.responseMessage;
+    } else {
+      this.errorMsg = 'Greška!';
+    }
   }
 }

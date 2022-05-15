@@ -6,11 +6,14 @@ import { PassedExamsComponent } from './components/passed-exams/passed-exams.com
 import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
 import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
+import { SvFormComponent } from './components/sv-form/sv-form.component';
+import { svFormGuard } from './service/svFormGuard.service';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
+    canActivate: [svFormGuard],
     loadChildren: () =>
       import('./layouts/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -19,36 +22,45 @@ const routes: Routes = [
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [svFormGuard],
   },
   {
     path: 'exam-history',
     component: ExamHistoryComponent,
+    canActivate: [svFormGuard],
   },
   {
     path: 'passed-exams',
     component: PassedExamsComponent,
+    canActivate: [svFormGuard],
   },
   {
     path: 'registered-exams',
     component: RegisteredExamsComponent,
+    canActivate: [svFormGuard],
   },
   {
     path: 'exam-registration',
     component: RegisterExamComponent,
+    canActivate: [svFormGuard],
   },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./layouts/login/login.module').then((m) => m.LoginModule),
-  },
-
   {
     path: 'update-profile',
     component: UpdateProfileComponent,
+    canActivate: [svFormGuard],
   },
   {
     path: 'setPassword',
     component: SetFirstPasswordComponent,
+  },
+  {
+    path: 'svForm',
+    component: SvFormComponent,
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./layouts/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

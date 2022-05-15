@@ -23,40 +23,53 @@ export class InsertStudentsComponent implements OnInit {
   }
 
   upload(): void {
-    this.errorMsg = '';
-
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-
-      if (file) {
-        this.currentFile = file;
-
-        this.insertStudentsService.uploadFile(this.currentFile).subscribe({
-          next: (x: any) => {
-            if (x.type === HttpEventType.UploadProgress) {
-              console.log(
-                'Upload progress: ' +
-                  Math.round((100 * x.loaded) / x.total) +
-                  '%'
-              );
-            } else if (x instanceof HttpResponse && x.status == 201) {
-              this.message = 'Studenti su uspešno dodati u bazu';
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Greška prilikom slanja fajla!';
-            }
-
-            this.currentFile = undefined;
-          },
-        });
-      }
-
-      this.selectedFiles = undefined;
+    if (this.validation()) {
+      const file: File = this.selectedFiles.item(0);
+      this.currentFile = file;
+      this.insertStudentsService.uploadFile(this.currentFile).subscribe({
+        next: (x: any) => {
+          this.handleSuccess(x);
+          this.selectedFiles = undefined;
+        },
+        error: (err: any) => {
+          this.handleError(err);
+          this.currentFile = undefined;
+        },
+      });
     }
+  }
+
+  validation() {
+    this.errorMsg = '';
+    if (!this.selectedFiles) {
+      this.errorMsg = 'Niste odabrali fajl';
+      return false;
+    }
+    return true;
+  }
+
+  handleSuccess(x: any) {
+    if (x.type === HttpEventType.UploadProgress) {
+      this.fileUploadProgress(x);
+    } else if (x instanceof HttpResponse && x.status == 201) {
+      this.message = 'Studenti su uspešno dodati u bazu';
+    }
+  }
+
+  handleError(err: any) {
+    console.log(err);
+    if (err.error && err.error.responseMessage) {
+      this.errorMsg = err.error.responseMessage;
+    } else {
+      this.errorMsg = 'Greška!';
+    }
+  }
+
+  fileUploadProgress(x: any) {
+    this.message =
+      'Slanje fajla: ' +
+      Math.round((100 * x.loaded) / x.total) +
+      '%' +
+      '. Sačekajte';
   }
 }
