@@ -1,0 +1,47 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container" style="margin-top: 20px; width: 65%">
+      <h3>Svi predmeti</h3>
+      <hr/>
+    
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Naziv</th>
+        <th scope="col">Silabus</th>
+        <th scope="col">ESPB</th>
+        <th scope="col">Adresa</th>
+        <th scope="col">Update</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let c of courses">
+        <th scope="row">{{ c.name }}</th>
+        <td>{{ c.sylabus}}</td>
+        <td>{{ c.name}}</td>
+        <td>{{ c.espb}}</td>
+        <td><button type="button" (click)="getSubject(c.id)" class="btn btn-primary">Izmeni </button></td>
+    
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <span class="margin-md">Stranica {{ page + 1 }} od {{ totalPagesCount }}</span>
+      <button class="margin-sm pagination-btn" (click)="previousPage()" [disabled]="page <= 0">
+        prethodna
+      </button>
+      <button class="margin-sm pagination-btn">
+        {{ page + 1 }}
+      </button>
+      <button class="margin-sm pagination-btn" [disabled]="page + 1 >= totalPagesCount" (click)="nextPage()">
+        sledeća
+      </button>
+    </div>
+    
+    <button style="margin-top: 5vh;" type="button" (click)="createCourse()"  class="btn btn-primary">Dodaj novi predmet </button>
+    
+    </div>
+    
+    </body>
+    

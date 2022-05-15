@@ -1,6 +1,7 @@
 package com.ftn.eobrazovanje.service;
 
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
+import com.ftn.eobrazovanje.api.dto.CourseResponseDTO;
 import com.ftn.eobrazovanje.api.dto.CreateCourseDTO;
 import com.ftn.eobrazovanje.model.Course;
 import com.ftn.eobrazovanje.model.User;
@@ -14,7 +15,9 @@ public interface CourseService {
 
     Course createCourse(Course course);
 
-    Course findById(Long id);
+    CourseDTO findById(Long id);
 
-    void updateCourse(Course course, CourseDTO courseDTO);
+    void updateCourse(Long id, CourseDTO courseDTO);
+
+    CourseResponseDTO getAll(Integer pageNo);
 }

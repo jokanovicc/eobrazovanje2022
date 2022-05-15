@@ -1,6 +1,7 @@
 package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
+import com.ftn.eobrazovanje.api.dto.CourseResponseDTO;
 import com.ftn.eobrazovanje.api.dto.CreateCourseDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.CourseMapper;
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
@@ -12,6 +13,9 @@ import com.ftn.eobrazovanje.repository.ExamRepository;
 import com.ftn.eobrazovanje.service.CourseService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -58,16 +62,30 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findById(Long id) {
-        return courseRepository.findById(id).orElse(null);
+    public CourseDTO findById(Long id) {
+        return CourseMapper.toDto(courseRepository.findById(id).orElse(null));
     }
 
     @Override
-    public void updateCourse(Course course, CourseDTO courseDTO) {
+    public void updateCourse(Long id, CourseDTO courseDTO) {
+        Course course = courseRepository.findById(id).orElse(null);
         course.setName(courseDTO.getName());
-        course.setESPB(courseDTO.getESPB());
+        course.setESPB(courseDTO.getEspb());
         course.setSylabus(courseDTO.getSylabus());
         courseRepository.save(course);
+    }
+
+    @Override
+    public CourseResponseDTO getAll(Integer page) {
+
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Course> courses = courseRepository.findAll(pageable);
+        return new CourseResponseDTO(CourseMapper.toDtoList(courses.getContent()), courses.getTotalPages());
+
+
+
+
+
     }
 
     private List<CourseDTO> getCoursesForStudent(Long studentId) {

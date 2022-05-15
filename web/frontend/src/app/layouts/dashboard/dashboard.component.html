@@ -2,26 +2,10 @@
   <div class="container" *ngIf="user">
     <div class="text-center">
       <h1>Dоbrodošao // {{ user.name }} {{ user.lastname }}</h1>
-      <h4><i>RA-123/2019</i></h4>
       <p><i>S T U D E N T</i></p>
     </div>
 
-    <div
-      class="card border container"
-      style="margin-top: 2vh; margin-bottom: 20vh; padding: 20px"
-    >
-    <h4>Bitni linkovi</h4>
-    <hr/>   
-    <div>
-      <ul className="linkovi" style="font-size: 20px;">
-          <li><a routerLink="/profile-info" routerLinkActive="active">Moj profil 🙍</a></li>
-          <li><a href="/">Notifikacije 📰</a></li>
-          <li><a href="/">Ispiti 📕</a></li>
-          <li><a href="/">Finanskijska kartica 💵</a></li>
-      </ul>
-  </div> 
-  <hr/>   
-
+    <div class="card border container" style="margin-top: 2vh; margin-bottom: 20vh; padding: 20px">
       <h4>Osobne informacije</h4>
       <table class="table">
         <tbody>
@@ -47,14 +31,10 @@
           </tr>
         </tbody>
       </table>
-      <button
-        (click)="updateEmployee()"
-        class="btn btn-info"
-        style="margin-left: 10px"
-      >
+      <button (click)="updateEmployee()" class="btn btn-info" style="margin-left: 10px">
         Update
       </button>
-      
+
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TeacherResponse } from 'src/app/models/teacherResponse.interface';
 import { UserService } from 'src/app/services/user.service';
 import { Teacher } from '../../models/models.interface';
 
@@ -10,9 +12,11 @@ import { Teacher } from '../../models/models.interface';
 })
 export class TeacherManagementComponent implements OnInit {
 
-  public teachers: Teacher[];
+  public teachers: Teacher[]
+  public page: number = 0;
+  public totalPagesCount: number;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private cd: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchTeachers();
@@ -20,11 +24,30 @@ export class TeacherManagementComponent implements OnInit {
   }
 
 
-  fetchTeachers(){
-    this.userService.getTeachers().subscribe((response) => {
-      this.teachers = response;
-    })
+  fetchTeachers() {
+    this.userService
+      .getTeachers(this.page)
+      .subscribe((response: TeacherResponse) => {
+        this.teachers = response.teachers
+        this.totalPagesCount = response.pagesCount;
+        this.cd.detectChanges();
+      });
 
+
+
+  }
+  nextPage() {
+    this.page = this.page + 1;
+    this.fetchTeachers();
+  }
+
+  previousPage() {
+    this.page = this.page - 1;
+    this.fetchTeachers();
+  }
+
+  addTeacher() {
+    this.router.navigate(['/add-teacher'])
   }
 
 }

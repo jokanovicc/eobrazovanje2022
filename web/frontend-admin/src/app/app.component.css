@@ -1,4 +1,5 @@
 .sidebar {
     display: inline;
     float: left;
+    height: 500px;
 }

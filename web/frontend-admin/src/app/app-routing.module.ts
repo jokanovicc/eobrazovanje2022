@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CourseUpdateComponent } from './components/course-update/course-update.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
+import { SubjectsComponent } from './components/subjects/subjects.component';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
 import { AddTeacherComponent } from './layouts/add-teacher/add-teacher.component';
@@ -39,6 +41,14 @@ const routes: Routes = [
     path: 'insert-students',
     component: InsertStudentsComponent,
   },
+  {
+    path:'courses',
+    component:SubjectsComponent
+  },
+  {
+    path:'course/:id',
+    component: CourseUpdateComponent
+  }
 ];
 
 @NgModule({

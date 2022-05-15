@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-subject',
@@ -16,6 +17,7 @@ export class AddSubjectComponent implements OnInit {
 
   onSubmit(data:any){
     this.courseService.createCourse(data);
+    Swal.fire('Uspešno!', 'Predmet je dodat u sistem', 'success')
     this.router.navigate(['/dashboard'])
 
   }

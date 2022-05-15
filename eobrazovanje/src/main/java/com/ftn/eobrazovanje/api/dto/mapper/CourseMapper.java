@@ -38,7 +38,7 @@ public class CourseMapper {
                 dto.getId(),
                 dto.getName(),
                 dto.getSylabus(),
-                dto.getESPB()
+                dto.getEspb()
         );
     }
 }
