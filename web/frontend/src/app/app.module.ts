@@ -22,6 +22,7 @@ import {
 } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
+import { SvFormComponent } from './components/sv-form/sv-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SetFirstPasswordComponent } from './components/set-first-password/set-f
     RegisteredExamsComponent,
     RegisterExamComponent,
     SetFirstPasswordComponent,
+    SvFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,4 +21,6 @@ public class StudentDTO {
     private UserDTO user;
 
     private String referenceNumber;
+
+    private boolean completedSV;
 }

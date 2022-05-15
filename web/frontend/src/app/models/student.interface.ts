@@ -5,4 +5,5 @@ export interface Student {
   indexNumber: string;
   referenceNumber: string;
   user: User;
+  completedSV: boolean;
 }

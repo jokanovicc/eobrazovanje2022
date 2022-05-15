@@ -25,7 +25,8 @@ public class StudentMapper {
                 student.getId(),
                 student.getIndexNumber(),
                 UserMapper.toDto(student.getUser()),
-                student.getReferenceNumber()
+                student.getReferenceNumber(),
+                student.isCompletedSVForm()
         );
     }
 

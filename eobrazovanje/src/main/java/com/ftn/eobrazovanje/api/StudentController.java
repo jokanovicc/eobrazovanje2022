@@ -3,6 +3,9 @@ package com.ftn.eobrazovanje.api;
 import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
 import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
+import com.ftn.eobrazovanje.api.dto.UserDTO;
+import com.ftn.eobrazovanje.api.dto.mapper.UserMapper;
+import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.helper.CSVHelper;
 import com.ftn.eobrazovanje.model.Student;
 import com.ftn.eobrazovanje.model.User;
@@ -11,6 +14,8 @@ import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +42,18 @@ public class StudentController {
         return new ResponseEntity(studentDTOS, HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity getCurrentStudent(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userPrincipal.getUsername());
+        StudentDTO student = studentService.findById(user.getId());
+        if(user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(student,HttpStatus.OK);
+
+    }
+
 
     @PostMapping
     public ResponseEntity uploadFile(@RequestParam("file")MultipartFile file){
@@ -54,6 +71,9 @@ public class StudentController {
     @PostMapping("/firstPassword")
     public ResponseEntity setFirstPassword(@RequestBody FirstPasswordDTO firstPasswordDTO){
         Student student = studentService.findOneByPasswordToken(firstPasswordDTO.getToken());
+        if(firstPasswordDTO.getPassword().trim().equals("")){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         if(student == null){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -67,7 +87,7 @@ public class StudentController {
     }
 
     @PostMapping("/svForm")
-    public ResponseEntity setSVForm(Authentication authentication,  @RequestBody SVFormDTO formDTO){
+    public ResponseEntity setSVForm(Authentication authentication, @Validated @RequestBody SVFormDTO formDTO){
         User user = userService.getUser(authentication);
         Student student = studentService.findByUserId(user.getId());
         if(student.isCompletedSVForm()){
