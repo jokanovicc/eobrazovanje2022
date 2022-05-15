@@ -18,6 +18,8 @@ import { AddSubjectComponent } from './layouts/add-subject/add-subject.component
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
+import { SubjectsComponent } from './components/subjects/subjects.component';
+import { CourseUpdateComponent } from './components/course-update/course-update.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { InsertStudentsComponent } from './components/insert-students/insert-stu
     AddSubjectComponent,
     SidebarComponent,
     CreateExamComponent,
-    InsertStudentsComponent
+    InsertStudentsComponent,
+    SubjectsComponent,
+    CourseUpdateComponent
   ],
   imports: [
     BrowserModule,

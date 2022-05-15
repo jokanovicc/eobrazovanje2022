@@ -1,6 +1,8 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.CourseDTO;
+import com.ftn.eobrazovanje.api.dto.CourseResponseDTO;
+import com.ftn.eobrazovanje.api.dto.NotificationResponse;
 import com.ftn.eobrazovanje.api.dto.TeacherToAttendingDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.CourseMapper;
 import com.ftn.eobrazovanje.model.*;
@@ -44,11 +46,24 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public CourseDTO updateCourse(@RequestBody CourseDTO courseDTO, @PathVariable("id") Long id){
-        Course course = courseService.findById(id);
-        courseService.updateCourse(course, courseDTO);
-
-        return CourseMapper.toDto(course);
+    public void updateCourse(@RequestBody CourseDTO courseDTO, @PathVariable("id") Long id){
+        CourseDTO course = courseService.findById(id);
+        courseService.updateCourse(course.getId(), courseDTO);
 
     }
+    @GetMapping("/all")
+    public CourseResponseDTO getAllCourses(
+            @RequestParam(defaultValue = "0") Integer page) {
+        return courseService.getAll(page);
+    }
+
+    @GetMapping("/{id}")
+    public CourseDTO getCourseById(@PathVariable Long id){
+        System.out.println("sdsaas");
+        return courseService.findById(id);
+
+
+    }
+
+
 }

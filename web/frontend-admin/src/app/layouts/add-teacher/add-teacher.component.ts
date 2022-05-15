@@ -16,9 +16,8 @@ export class AddTeacherComponent implements OnInit {
   }
 
   onSubmit(data:any){
-    alert("klik")
     this.userService.createTeacher(data);
-    this.router.navigate(['/teachers']);
+    location.reload();
 
   }
 

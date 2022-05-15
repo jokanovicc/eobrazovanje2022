@@ -1,5 +1,8 @@
 package com.ftn.eobrazovanje.service.impl;
 
+import com.ftn.eobrazovanje.api.dto.TeacherDTO;
+import com.ftn.eobrazovanje.api.dto.TeacherResponseDTO;
+import com.ftn.eobrazovanje.api.dto.mapper.TeacherMapper;
 import com.ftn.eobrazovanje.model.CourseTeacher;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.TeacherRole;
@@ -34,14 +37,15 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherRepository.save(teacher);
     }
 
-    public List<Teacher> getAllTeachers(Integer pageNo){
+    public TeacherResponseDTO getAllTeachers(Integer pageNo){
         Pageable paging = PageRequest.of(pageNo,5);
         Page<Teacher> pagedResult = teacherRepository.findAll(paging);
-        if(pagedResult.hasContent()){
-            return pagedResult.getContent();
-        }else{
-            return new ArrayList<Teacher>();
-        }
+        List<TeacherDTO> teacherDTOS = TeacherMapper.toDTOList(pagedResult.getContent());
+        TeacherResponseDTO teacherResponseDTO = new TeacherResponseDTO();
+        teacherResponseDTO.setTeachers(teacherDTOS);
+        teacherResponseDTO.setPagesCount(pagedResult.getTotalPages());
+        return teacherResponseDTO;
+
 
     }
 

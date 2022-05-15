@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class CourseDTO {
-    private String name;
-    private Long id;
-    private String sylabus;
-    private String espb;
+public class CourseResponseDTO {
+
+    List<CourseDTO> courses;
+    int pagesCount;
 }

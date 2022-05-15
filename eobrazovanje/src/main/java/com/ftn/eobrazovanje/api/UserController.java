@@ -98,11 +98,9 @@ public class UserController {
 
     //param je /teachers?pageNo=1
     @GetMapping("/teachers")
-    public List<TeacherDTO> getAllTeacher(@RequestParam(defaultValue = "0") Integer pageNo){
-        List<Teacher> list = teacherService.getAllTeachers(pageNo);
-        List<TeacherDTO> teacherDTOS = TeacherMapper.toDTOList(list);
+    public TeacherResponseDTO getAllTeacher(@RequestParam(defaultValue = "0") Integer page){
+        return teacherService.getAllTeachers(page);
 
-        return teacherDTOS;
 
     }
 

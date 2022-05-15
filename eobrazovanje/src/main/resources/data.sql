@@ -1,21 +1,21 @@
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
-('Marko','Petrovic','1203983840001', 'Liman 3, Novi Sad', 'markop','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
+    ('Marko','Petrovic','1203983840001', 'Liman 3, Novi Sad', 'markop','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
 ', 'TEACHER', 'MALE', 'petrovic@gmail.com');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
-   ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
+    ('Nikola','Markovic','1201983840001', 'Silbas', 'nikola','$2a$10$QtN25QQqHmQuBzvI4my65O1zQp5lQihr7FFD5Ru4bV7ojhcFGPQ92
 ', 'STUDENT', 'MALE', 'markovic@gmail.com');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
-   ('Novica','Nedeljkovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
+    ('Novica','Nedeljkovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
 ', 'TEACHER', 'MALE', 'nedeljkovic@gmail.com');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
-   ('Jovica','Jovanovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
+    ('Jovica','Jovanovic','1103981840001', 'Vracar Historical, Beograd', 'novica','$2a$12$cTceNi6rBsXNRk5P2Nc5iu.H8hf0eg03446/LF2qtKUmhFkofyn3W
 ', 'STUDENT', 'MALE', 'jovanovic@gmail.com');
 
 INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email) VALUES
-   ('Ado','Adminic','11039123213431', 'Nemanjina, Beograd', 'ado','$2a$12$lGAL1aaPLq8CC5YcDbhLj.61yYKK.6UMouXP6fy/vLWLWAb6G/1si', 'ADMIN', 'MALE', 'adminic@gmail.com');
+    ('Ado','Adminic','11039123213431', 'Nemanjina, Beograd', 'ado','$2a$12$lGAL1aaPLq8CC5YcDbhLj.61yYKK.6UMouXP6fy/vLWLWAb6G/1si', 'ADMIN', 'MALE', 'adminic@gmail.com');
 
 INSERT INTO teacher(user_id) VALUES  (1);
 INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', false);
@@ -47,7 +47,7 @@ insert into study_program_courses(courses_id, study_program_id) values (4,1);
 insert into study_program_courses(courses_id, study_program_id) values (5,1);
 
 insert into studying_information(financial_type,school_year,start_school_year,student_user_id,study_program_id) VALUES
-('budget','3','2019',2,1);
+    ('budget','3','2019',2,1);
 
 insert into performance(school_year, course_id) values ('2022', 1);
 insert into performance(school_year, course_id) values ('2022', 2);
