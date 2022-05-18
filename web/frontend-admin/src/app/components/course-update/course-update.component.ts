@@ -13,6 +13,8 @@ export class CourseUpdateComponent implements OnInit {
 
   public course:Course;
   public id: any;
+  public message = '';
+  errorMsg = '';
 
   constructor(private courseService: CourseService, private route:ActivatedRoute) { }
 
@@ -31,16 +33,27 @@ export class CourseUpdateComponent implements OnInit {
 
   onSubmit(){
     this.courseService.updateCourse(this.id, this.course)
-    .subscribe(data => {
-      console.log(data);
-    })
+    .subscribe({
+      next: (x: any) => {
+        Swal.fire(
+          'Uspešno!',
+          'Predmet je ažuriran!',
+          'success'
+        )      },
+      error: (err: any) => this.handleError(err),
+    });
 
-    Swal.fire(
-      'Uspešno!',
-      'Predmet je ažuriran!',
-      'success'
-    )
 
+  }
+
+
+  handleError(err: any) {
+    console.log(err);
+    if (err.error && err.error.responseMessage) {
+      this.errorMsg = err.error.responseMessage;
+    } else {
+      this.errorMsg = 'Sva polja moraju biti pravilno popunjena!';
+    }
   }
 
 

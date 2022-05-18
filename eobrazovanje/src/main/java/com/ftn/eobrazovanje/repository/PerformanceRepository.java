@@ -16,4 +16,7 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
             "performance_teacher_relationship.teacher_id = ?1",
             nativeQuery = true)
     List<Performance> findAllByTeacher(Long teacherId);
+
+    @Query(value = "select * from performance p join course c on p.course_id = c.id join study_program_courses spc on c.id = spc.courses_id join study_program sp on sp.id = spc.study_program_id", nativeQuery = true)
+    List<Performance> findAllByPerf();
 }

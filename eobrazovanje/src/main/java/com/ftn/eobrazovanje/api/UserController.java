@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -88,7 +89,7 @@ public class UserController {
 
 
     @PostMapping
-    public void createTeacher(@RequestBody TeacherDTO teacherDTO){
+    public void createTeacher(@Validated @RequestBody TeacherDTO teacherDTO){
         Teacher teacher = TeacherMapper.toEntity(teacherDTO);
         teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
         teacherService.createTeacher(teacher);
