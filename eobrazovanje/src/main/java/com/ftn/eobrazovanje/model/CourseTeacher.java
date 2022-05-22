@@ -23,6 +23,8 @@ public class CourseTeacher {
     @ManyToOne
     private TeacherRole teacherRole;
 
+    private boolean active;
+
     public CourseTeacher(Long id) {
         this.id = id;
     }

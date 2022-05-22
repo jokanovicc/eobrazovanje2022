@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddToPerformanceComponent } from './components/add-to-performance/add-to-performance.component';
+import { CoursePerformanceComponent } from './components/course-performance/course-performance.component';
 import { CourseUpdateComponent } from './components/course-update/course-update.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
+import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
@@ -48,6 +51,18 @@ const routes: Routes = [
   {
     path:'course/:id',
     component: CourseUpdateComponent
+  },
+  {
+    path:'performances',
+    component: CoursePerformanceComponent
+  },
+  {
+    path:'performances/:id',
+    component: PerformanceTeacherComponent
+  },
+  {
+    path:'add-to-performance/:id',
+    component: AddToPerformanceComponent
   }
 ];
 

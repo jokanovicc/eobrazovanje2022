@@ -54,6 +54,7 @@ export class AddTeacherComponent implements OnInit {
     });
 
   }
+  
 
   handleError(err: any) {
     console.log(err);

@@ -1,0 +1,44 @@
+<meta charset="UTF-8" />
+
+<body style="background-color: #f5f5f5">
+
+    <div class="container text-center" style="width: 45%; margin-top: 25px;">
+
+        <h4>Dodavanje nastavnika na izvođenje predmeta</h4>
+        <hr/>
+        <form *ngIf="teachers?.length >0" style="margin: 20px" [formGroup]="addPerformanceForm" (ngSubmit)="addToPerf()">
+
+            <label class="sr-only">Uloga</label>
+            <select class="custom-select mb-3" class="form-control" formControlName="gender"
+                (change)="changeRole($event)">
+                <option value="">Izaberite rolu profesora</option>
+                <option *ngFor="let role of roles">
+                    {{ role }}
+                </option>
+            </select>
+            <label class="sr-only">Nastavnik</label>
+            <select class="custom-select mb-3" name="teacher" (change)="changeTeacher($event)" formControlName="teacher" class="form-control">
+                <option value="">Nastavnici >> </option>
+                <option [value]="t.id" *ngFor="let t of teachers">
+                    {{t.name}} {{t.lastname}} - {{t.jmbg}}
+
+                </option>
+            </select>
+
+
+            <button style="margin: 20px" *ngIf="teachers?.length >0" type="submit" class="btn btn-md btn-primary btn-block">Dodaj</button>
+            
+        </form>
+        <div *ngIf="teachers?.length ==0" class="alert alert-primary" role="alert">
+            Nema aktivnih nastavnika // svi su već dodati
+
+        </div>
+        <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+            {{ errorMsg }}
+        </div>
+
+
+
+    </div>
+
+</body>

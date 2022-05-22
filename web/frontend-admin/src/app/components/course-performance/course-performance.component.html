@@ -1,0 +1,33 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container" style="margin-top: 20px; width: 65%">
+      <h3>Izvođenja predmeta</h3>
+      <hr/>
+      <input class="form-control mt-2 mb-2" type="text" [(ngModel)]="searchText"  (input)="Search()" placeholder="Filtriraj po smeru/predmetu..." /> 
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Školska Godina</th>
+        <th scope="col">Predmet</th>
+        <th scope="col">Studijski program</th>
+        <th scope="col">Izvođači</th>
+
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let c of performances">
+        <th scope="row">{{ c.schoolYear }}</th>
+        <td>{{ c.courseName}}</td>
+        <td>{{ c.studyProgram}}</td>
+        <td><a (click)="sendTeacher(c.id)">Nastavnici </a></td>
+
+
+      </tr>
+      </tbody>
+    </table>
+        
+    </div>
+    
+    </body>
+    
