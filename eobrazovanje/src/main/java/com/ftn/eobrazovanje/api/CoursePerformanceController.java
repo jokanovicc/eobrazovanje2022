@@ -61,23 +61,19 @@ public class CoursePerformanceController {
 
     }
 
-    @GetMapping("/{performanceId}/teachers/{teacherId}")
+    @DeleteMapping("/{performanceId}/teachers/{teacherId}")
     public ResponseEntity removeTeacherFromPerformance(
             @PathVariable("performanceId") Long performId,
             @PathVariable("teacherId") Long teacherId
     ){
+        System.out.println("aaaa" + teacherId);
         Performance performance = performanceService.findById(performId);
         if(performance == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        CourseTeacher courseTeacher = teacherService.findByCourseTeacherByTeacher(teacherId);
-        System.out.println("dsadasd" + courseTeacher);
-        if(courseTeacher == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        performanceService.removeTeacherFromPerformance(performance, courseTeacher);
+        performanceService.removeTeacherFromPerformance(performance, teacherId);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    };
 
 
 

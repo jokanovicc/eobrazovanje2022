@@ -55,8 +55,8 @@ insert into performance(school_year, course_id) values ('2022', 3);
 insert into performance(school_year, course_id) values ('2022', 4);
 insert into performance(school_year, course_id) values ('2022', 5);
 
-INSERT into course_teacher(teacher_user_id, teacher_role_id,active) values (1, 1, true);
-INSERT into course_teacher(teacher_user_id, teacher_role_id, active) values (3, 2, true);
+INSERT into course_teacher(teacher_user_id, teacher_role_id) values (1, 1);
+INSERT into course_teacher(teacher_user_id, teacher_role_id) values (3, 2);
 
 insert into performance_teacher_relationship(performance_id, teacher_id) values (1, 1);
 insert into performance_teacher_relationship(performance_id, teacher_id) values (1, 2);

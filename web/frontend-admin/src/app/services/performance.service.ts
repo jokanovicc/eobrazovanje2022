@@ -37,7 +37,7 @@ export class PerformanceService {
   }
 
   deleteTeacherFromPerformance(perfId:any, teachId:any){
-    this.http.get(environment.backend_endpoint + `performances/${perfId}/teachers/${teachId}`)
+    this.http.delete(environment.backend_endpoint + `performances/${perfId}/teachers/${teachId}`)
         .subscribe(() =>'Delete successful');
   }
 

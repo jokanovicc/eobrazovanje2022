@@ -75,6 +75,12 @@ export class AuthService {
     }
   }
 
+   didTokenExpire() {
+    const token = this.getToken();
+    const decodedToken = token ? this.decodeToken(token) : null;
+    return decodedToken ? decodedToken.exp_date < Date.now() : null;
+}
+
   logout() {
     this.currentUser = null;
     this.user$.next(null!);

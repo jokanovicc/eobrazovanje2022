@@ -23,7 +23,7 @@ public interface PerformanceService {
 
     void addTeacherToPerformance(Teacher teacher, String role, Performance performance);
 
-    void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher);
+    void removeTeacherFromPerformance(Performance performance, Long id);
 
     CoursePerformanceDTO create(CreateCoursePerformanceRequest coursePerformance);
 

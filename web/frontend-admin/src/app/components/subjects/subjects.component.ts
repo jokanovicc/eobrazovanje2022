@@ -14,6 +14,8 @@ export class SubjectsComponent implements OnInit {
   public courses: Course[]
   public page:number = 0;
   public totalPagesCount:number;
+  searchText = "";
+
 
 
 
@@ -56,6 +58,32 @@ export class SubjectsComponent implements OnInit {
   getSubject(id:any){
     this.router.navigate(['/course/' + id]);
 
+  }
+
+  Search() {
+    if (this.searchText !== "") {
+      let searchValue = this.searchText.toLocaleLowerCase();
+
+      this.courses = this.courses.filter((contact: any) => {
+        return contact.name.toLocaleLowerCase().match(searchValue)
+          ;
+        // you can keep on adding object properties here   
+
+      });
+
+      console.log(this.courses);
+    }
+    else {
+      this.courseService
+      .getCourses(this.page)
+      .subscribe((response: CourseResponse) => {
+
+        this.courses = response.courses
+        this.totalPagesCount = response.pagesCount;
+        this.cd.detectChanges();
+      });
+
+    }
   }
 
   createCourse(){

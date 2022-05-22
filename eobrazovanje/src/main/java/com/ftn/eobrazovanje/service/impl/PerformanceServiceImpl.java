@@ -80,9 +80,7 @@ public class PerformanceServiceImpl implements PerformanceService {
         List<Long> teachers = teacherRepository.getTeachers(id);
         for(Long t: teachers){
             CourseTeacher ct = courseTeacherRepository.findById(t).orElse(null);
-                if(ct.isActive()){
                     ctd.add(CourseTeacherMapper.toDto(ct));
-                }
         }
 
         ptd.setCourseTeacher(ctd);
@@ -98,7 +96,6 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Override
     public void addTeacherToPerformance(Teacher teacher, String role, Performance performance) {
         CourseTeacher courseTeacher = new CourseTeacher();
-        courseTeacher.setActive(true);
         TeacherRole teacherRole = teacherService.findByName(role);
         if(teacherRole == null) {
             System.out.println("PRC");
@@ -111,9 +108,12 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
-    public void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher) {
-        courseTeacher.setActive(false);
+    public void removeTeacherFromPerformance(Performance performance, Long id) {
+        CourseTeacher ctr = courseTeacherRepository.findById(id).orElse(null);
+        performance.getCourseTeachers().remove(ctr);
         save(performance);
+
+
     }
 
     @Override
