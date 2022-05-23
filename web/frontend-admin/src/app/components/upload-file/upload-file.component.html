@@ -1,0 +1,33 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container text-center" style="width: 45%; margin-top: 25px;">
+
+        <h3>Dodavanje dokumenta u sistem</h3>
+        <hr/>
+
+        <div style="margin-top: 50px;" *ngIf="currentFile" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }">
+                {{ progress }}%
+            </div>
+        </div>
+        <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)" />
+        </label>
+        <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+            Otpremi
+        </button>
+        <div class="alert alert-light" role="alert">{{ message }}</div>
+        <div class="card">
+            <div class="card-header">Lista PDF dokumenata</div>
+            <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
+                <li class="list-group-item">
+                    <a class="link-primary" (click)="downloadFile(file.url)">{{ file.name }}</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>

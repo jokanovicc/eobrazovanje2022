@@ -4,6 +4,7 @@ import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
 import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
 
+import com.ftn.eobrazovanje.api.dto.StudentResponseDTO;
 import com.ftn.eobrazovanje.model.Student;
 
 import com.ftn.eobrazovanje.model.User;
@@ -34,6 +35,10 @@ public interface StudentService {
     void createFromCSV(MultipartFile file);
 
     void setSVForm(SVFormDTO dto, User user, Student student);
+
+    StudentResponseDTO getAll(Integer pageNo);
+
+
 
 
 }

@@ -7,6 +7,7 @@ import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.model.Teacher;
 import com.ftn.eobrazovanje.model.User;
 import com.ftn.eobrazovanje.security.TokenUtils;
+import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.TeacherService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class UserController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    StudentService studentService;
 
 
     @PostMapping("/login")
@@ -103,6 +107,11 @@ public class UserController {
         return teacherService.getAllTeachers(page);
 
 
+    }
+
+    @GetMapping("/students")
+    public StudentResponseDTO getAllStudents(@RequestParam(defaultValue = "0") Integer page){
+        return studentService.getAll(page);
     }
 
 

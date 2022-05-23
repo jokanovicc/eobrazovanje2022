@@ -24,6 +24,9 @@ import { CoursePerformanceComponent } from './components/course-performance/cour
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { AddToPerformanceComponent } from './components/add-to-performance/add-to-performance.component';
 import {DecimalPipe} from '@angular/common';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { StudentsComponent } from './components/students/students.component';
+import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import {DecimalPipe} from '@angular/common';
     CourseUpdateComponent,
     CoursePerformanceComponent,
     PerformanceTeacherComponent,
-    AddToPerformanceComponent
+    AddToPerformanceComponent,
+    UploadFileComponent,
+    StudentsComponent,
+    StudentCardboardComponent
   ],
   imports: [
     BrowserModule,

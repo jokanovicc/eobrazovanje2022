@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DocumentsComponent } from './components/documents/documents.component';
 import { ExamHistoryComponent } from './components/exam-history/exam-history.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'svForm',
     component: SvFormComponent,
+  },
+  {
+    path:'documents',
+    component:DocumentsComponent
   },
   {
     path: '**',

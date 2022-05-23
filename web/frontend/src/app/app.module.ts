@@ -23,6 +23,7 @@ import {
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
 import { SvFormComponent } from './components/sv-form/sv-form.component';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SvFormComponent } from './components/sv-form/sv-form.component';
     RegisterExamComponent,
     SetFirstPasswordComponent,
     SvFormComponent,
+    DocumentsComponent,
   ],
   imports: [
     BrowserModule,

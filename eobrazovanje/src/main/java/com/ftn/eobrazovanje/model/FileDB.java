@@ -6,28 +6,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Document {
+public class FileDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    private List<DocumentFile> documentFiles = new ArrayList<>();
-
     private String name;
+    private String type;
+    @Lob
+    private byte[] data;
 
     @ManyToOne
-    private DocumentType type;
+    @JoinColumn(name="student_id")
+    private Student student;
 
 
+    public FileDB(String name, String type, byte[] data, Student student) {
+        this.name = name;
+        this.type = type;
+        this.data = data;
+        this.student = student;
+    }
 
 }

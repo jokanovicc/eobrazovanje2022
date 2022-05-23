@@ -23,4 +23,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             " performance on attending.performance_id = performance.id where performance.id =?",nativeQuery = true)
     List<Student> findByPerformanceId(Long id);
 
+
 }

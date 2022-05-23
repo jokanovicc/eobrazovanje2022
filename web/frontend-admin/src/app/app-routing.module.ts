@@ -5,7 +5,10 @@ import { CoursePerformanceComponent } from './components/course-performance/cour
 import { CourseUpdateComponent } from './components/course-update/course-update.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
+import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+import { StudentsComponent } from './components/students/students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
 import { AddTeacherComponent } from './layouts/add-teacher/add-teacher.component';
@@ -63,6 +66,14 @@ const routes: Routes = [
   {
     path:'add-to-performance/:id',
     component: AddToPerformanceComponent
+  },
+  {
+    path:'cardboard/:id',
+    component: StudentCardboardComponent
+  },
+  {
+    path:'students',
+    component:StudentsComponent
   }
 ];
 
