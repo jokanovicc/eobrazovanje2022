@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -39,14 +40,14 @@ public class CourseController {
     }
 
     @PostMapping
-    public CourseDTO createCourse(@RequestBody CourseDTO courseDTO){
+    public CourseDTO createCourse(@Validated @RequestBody CourseDTO courseDTO){
         Course course = CourseMapper.toEntity(courseDTO);
         courseService.createCourse(course);
         return courseDTO;
     }
 
     @PutMapping("/{id}")
-    public void updateCourse(@RequestBody CourseDTO courseDTO, @PathVariable("id") Long id){
+    public void updateCourse(@Validated @RequestBody CourseDTO courseDTO, @PathVariable("id") Long id){
         CourseDTO course = courseService.findById(id);
         courseService.updateCourse(course.getId(), courseDTO);
 

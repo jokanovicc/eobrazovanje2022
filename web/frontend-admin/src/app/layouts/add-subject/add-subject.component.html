@@ -1,21 +1,45 @@
-<meta charset = "UTF-8" />
-<body style="background-color: #f5f5f5">
+<div class="text-center" style="padding: 30px; width: 70%; margin: 0 auto">
+    <h2>Dodavanje novog predmeta</h2>
+    <hr/>
+  </div>
+  <div class="text-center" style="width: 70%; margin: 0 auto">
+    <form style="margin: 20px" [formGroup]="addCourseForm" (ngSubmit)="setCourse()">
+      <div style="width: 70%; margin: auto; padding: 10px">
+        <input
+          style="margin: 10px"
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Ime"
+          required
+        />
+        <textarea
+          style="margin: 10px"
+          type="text"
+          formControlName="sylabus"
+          class="form-control"
+          rows="3"
+          placeholder="Silabus"
+          required>
+        </textarea>
+        <input
+          style="margin: 10px"
+          type="text"
+          formControlName="espb"
+          class="form-control"
+          placeholder="espb"
+          required
+        />  
 
-<div class="container text-center" style="width: 45%;">
-
-    <h1>Dodavanje predmeta</h1>
-    <form style="padding: 10px;" #subjectPost="ngForm" (ngSubmit)="onSubmit(subjectPost.value)">
-        <label for="name" class="sr-only">Naziv</label>
-        <input type="text" class="form-control" required autofocus name="name" ngModel placeholder="Naziv" required /><br />
-        <label for="sylabus" class="sr-only">Silabus</label>
-        <textarea class="form-control" id="sylabus" name="sylabus" ngModel rows="3"></textarea>
-        <label for="ESPB" class="sr-only">ESPB</label>
-        <input type="text" class="form-control" required autofocus name="espb" ngModel placeholder="ESPB"><br />
-
-        <button type="submit" class="btn btn-lg btn-primary btn-block">submit</button>
-
+      </div>
+      <br />
+      <button type="submit" class="btn btn-outline-dark">Pošalji</button>
     </form>
-
-</div>
-
-</body>
+    <!-- <div *ngIf="message" class="alert alert-success" role="alert">
+      {{ message }}
+    </div> -->
+    <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+      {{ errorMsg }}
+    </div>
+  </div>
+  

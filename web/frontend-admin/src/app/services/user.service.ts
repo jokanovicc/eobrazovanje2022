@@ -26,10 +26,22 @@ export class UserService {
     
   }
 
+  getStudents(pageNumber?: number){
+    const options = {
+      params: {
+        page: pageNumber ? pageNumber : 0
+      }
+    }
+
+    return this.http.get<TeacherResponse>(
+      environment.backend_endpoint + `users/students`,
+      options
+    )
+    
+  }
+
   createTeacher(teacher: any){
-    return this.http.post(environment.backend_endpoint+`users`, teacher).subscribe((result)=> {
-      console.warn(result)
-    })
+    return this.http.post(environment.backend_endpoint+`users`, teacher);
 
   
   }

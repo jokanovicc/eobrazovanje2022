@@ -20,6 +20,14 @@ import { CreateExamComponent } from './create-exam/create-exam.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { CourseUpdateComponent } from './components/course-update/course-update.component';
+import { CoursePerformanceComponent } from './components/course-performance/course-performance.component';
+import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
+import { AddToPerformanceComponent } from './components/add-to-performance/add-to-performance.component';
+import {DecimalPipe} from '@angular/common';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { StudentsComponent } from './components/students/students.component';
+import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,13 @@ import { CourseUpdateComponent } from './components/course-update/course-update.
     CreateExamComponent,
     InsertStudentsComponent,
     SubjectsComponent,
-    CourseUpdateComponent
+    CourseUpdateComponent,
+    CoursePerformanceComponent,
+    PerformanceTeacherComponent,
+    AddToPerformanceComponent,
+    UploadFileComponent,
+    StudentsComponent,
+    StudentCardboardComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +61,7 @@ import { CourseUpdateComponent } from './components/course-update/course-update.
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true,
-  },],
+  }, DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

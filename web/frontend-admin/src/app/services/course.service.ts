@@ -9,18 +9,18 @@ import { CourseResponse } from '../models/courseResponse.interface';
   providedIn: 'root',
 })
 export class CourseService {
-  
+
 
   public course$: BehaviorSubject<Course> = new BehaviorSubject(null as any);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
 
   getCourses(pageNumber?: number) {
     const options = {
       params: {
-        page: pageNumber ? pageNumber: 0
+        page: pageNumber ? pageNumber : 0
       }
     }
 
@@ -30,19 +30,20 @@ export class CourseService {
     )
   }
 
-  updateCourse(id:any, userDTO:any){
+  updateCourse(id: any, userDTO: any) {
     return this.http.put(environment.backend_endpoint + `courses/${id}`, userDTO);
   }
 
   createCourse(data: any) {
-    return this.http
-      .post(environment.backend_endpoint + `courses`, data)
-      .subscribe((result) => {
-        console.warn(result);
-      });
+    console.log(data);
+    return this.http.post(
+      environment.backend_endpoint + `courses`,
+      data
+    );
   }
 
-  getCourse(id:any){
+
+  getCourse(id: any) {
     return this.http.get<Course>(environment.backend_endpoint + `courses/${id}`)
   }
 }

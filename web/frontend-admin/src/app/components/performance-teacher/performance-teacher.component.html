@@ -1,0 +1,37 @@
+<body style="background-color: #f5f5f5">
+
+    <div class="container" style="margin-top: 20px; width: 65%">
+      <h3>{{performance.courseName}}</h3>
+      <hr/>
+      <b>Sylabus</b>: <p>{{performance.courseSylabus}}</p>
+      <b>Školska godina</b> <p>{{performance.schoolYear}}</p>
+
+      <h4>Izvođači nastave</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Ime</th>
+          <th scope="col">Korisničko ime</th>
+          <th scope="col">Uloga</th>
+          <th scope="col">Ukloni sa izvođenja</th>
+
+  
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of performance.courseTeacher">
+          <th scope="row">{{ c.name }}</th>
+          <td>{{ c.username}}</td>
+          <td>{{ c.teacherRole}}</td>
+          <td><button type="button" (click)="remove(c.id)" class="btn btn-primary">Ukloni </button></td>
+
+        </tr>
+        </tbody>
+      </table>
+      <td><button type="button" (click)="addNew(performance.id)" class="btn btn-primary">Dodaj izvođača </button></td>
+
+        
+    </div>
+    
+    </body>
+    

@@ -3,4 +3,6 @@ export interface Teacher {
   name: string;
   teacherRole: string;
   username: string;
+  jmbg:string;
+  lastname: string;
 }

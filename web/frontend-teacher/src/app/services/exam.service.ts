@@ -12,13 +12,13 @@ export class ExamService {
 
   getExams() {
     return this.http.get<PerformanceExam[]>(
-      'http://localhost:8080/api/exams/teacher-exams'
+      environment.backend_endpoint + `exams/teacher-exams`
     );
   }
 
   getRegisteredToExamStudents(id: any) {
     return this.http.get<any[]>(
-      `http://localhost:8080/api/exams/${id}/students`
+      environment.backend_endpoint+`exams/${id}/students`
     );
   }
 

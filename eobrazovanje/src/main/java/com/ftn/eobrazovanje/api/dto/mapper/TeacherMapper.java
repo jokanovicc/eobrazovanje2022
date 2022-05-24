@@ -23,7 +23,8 @@ public class TeacherMapper {
                 teacher.getUser().getAddress(),
                 teacher.getUser().getUsername(),
                 teacher.getUser().getGender(),
-                teacher.getUser().getPassword()
+                teacher.getUser().getPassword(),
+                teacher.getUser().getEmail()
         );
     }
 
@@ -44,7 +45,8 @@ public class TeacherMapper {
                 dto.getUsername(),
                 UserRole.TEACHER,
                 dto.getGender(),
-                dto.getPassword()
+                dto.getPassword(),
+                dto.getEmail()
         );
 
         return new Teacher(dto.getId(), user);

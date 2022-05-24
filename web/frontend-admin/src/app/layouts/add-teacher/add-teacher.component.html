@@ -1,33 +1,51 @@
-<meta charset = "UTF-8" />
+<meta charset="UTF-8" />
+
 <body style="background-color: #f5f5f5">
 
-<div class="container text-center" style="width: 45%;">
+    <div class="container text-center" style="width: 45%;">
 
-    <h1>Dodavanje nastavnika</h1>
-    <form style="padding: 10px;" #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
-        <label for="name" class="sr-only">Ime</label>
-        <input type="text" class="form-control" required autofocus name="name" ngModel placeholder="name" required /><br />
-        <label for="lastname" class="sr-only">Prezime</label>
-        <input type="text" class="form-control" required autofocus name="lastname" ngModel placeholder="lastname"><br />
-        <label for="jmbg" class="sr-only">JMBG</label>
-        <input type="text" class="form-control" required autofocus name="jmbg" ngModel placeholder="jmbg"><br />
-        <label for="address" class="sr-only">Adresa</label>
-        <input type="text" class="form-control" required autofocus name="address" ngModel placeholder="address"><br />
-        <label for="username" class="sr-only">Korisničko ime</label>
-        <input type="text" class="form-control" required autofocus name="username" ngModel placeholder="username"><br />
-        <label for="gender" class="sr-only">Pol</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Izaberite pol</option>
-            <option value="MALE">Muški</option>
-            <option value="FEMALE">Ženski</option>
-        </select>
-        <label for="password" class="sr-only">Lozinka</label>
-        <input type="password" class="form-control" required autofocus name="password" ngModel placeholder="password"><br />
+        <h2>Dodavanje nastavnika</h2>
+        <hr/>
+        <form style="margin: 20px" [formGroup]="addTeacherForm" (ngSubmit)="addTeacher()">
+            <label for="name" class="sr-only">Ime</label>
+            <input style="margin: 10px" type="text" formControlName="name" class="form-control" placeholder="Ime"
+                required />
+            <label for="lastname" class="sr-only">Prezime</label>
+            <input style="margin: 10px" type="text" formControlName="lastname" class="form-control"
+                placeholder="Prezime" required />
+            <label for="jmbg" class="sr-only">JMBG</label>
+            <input style="margin: 10px" type="text" formControlName="jmbg" class="form-control" placeholder="JMBG"
+                required />
+            <label for="address" class="sr-only">Adresa</label>
+            <input style="margin: 10px" type="text" formControlName="address" class="form-control" placeholder="Adresa"
+                required />
 
-        <button type="submit" class="btn btn-lg btn-primary btn-block">submit</button>
+            <label for="username" class="sr-only">Korisnicko ime</label>
+            <input style="margin: 10px" type="text" formControlName="username" class="form-control"
+                placeholder="Korisnicko" required />
+            <label for="password" class="sr-only">Lozinka</label>
+            <input style="margin: 10px" type="text" formControlName="password" class="form-control"
+                placeholder="Lozinka" required />
+                <label for="email" class="sr-only">Email</label>
 
-    </form>
+            <input style="margin: 10px" type="text" formControlName="email" class="form-control"
+                placeholder="Email" required />
+            <select style="width: 80%" class="custom-select mb-3" formControlName="gender"
+                (change)="changeGender($event)">
+                <option value="">Izaberite pol</option>
+                <option *ngFor="let gender of genders">
+                    {{ gender }}
+                </option>
+            </select>
 
-</div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">submit</button>
+
+        </form>
+
+        <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+            {{ errorMsg }}
+        </div>
+
+    </div>
 
 </body>

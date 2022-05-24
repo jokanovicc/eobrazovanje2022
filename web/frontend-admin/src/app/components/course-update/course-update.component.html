@@ -15,6 +15,9 @@
   
         <button class="btn btn-md btn-primary btn-block" style="margin-top: 20px;">Ažuriraj</button>
       </form>
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+        {{ errorMsg }}
+      </div>
     </div>
   
   </body>

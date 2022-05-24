@@ -2,6 +2,7 @@ package com.ftn.eobrazovanje.service.impl;
 
 import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
+import com.ftn.eobrazovanje.api.dto.StudentResponseDTO;
 import com.ftn.eobrazovanje.api.dto.mapper.StudentMapper;
 import com.ftn.eobrazovanje.helper.CSVHelper;
 import com.ftn.eobrazovanje.model.Student;
@@ -10,6 +11,9 @@ import com.ftn.eobrazovanje.model.UserRole;
 import com.ftn.eobrazovanje.repository.StudentRepository;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -120,6 +124,17 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
 
 
+    }
+
+    @Override
+    public StudentResponseDTO getAll(Integer pageNo) {
+        Pageable paging = PageRequest.of(pageNo,5);
+        Page<Student> pagedResult = studentRepository.findAll(paging);
+        List<StudentDTO> studentDTOS = StudentMapper.toDTOList(pagedResult.getContent());
+        StudentResponseDTO studentResponseDTO = new StudentResponseDTO();
+        studentResponseDTO.setStudents(studentDTOS);
+        studentResponseDTO.setPagesCount(pagedResult.getTotalPages());
+        return studentResponseDTO;
     }
 
     @Override

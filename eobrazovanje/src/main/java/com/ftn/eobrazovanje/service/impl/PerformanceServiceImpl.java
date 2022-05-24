@@ -1,13 +1,13 @@
 package com.ftn.eobrazovanje.service.impl;
 
-import com.ftn.eobrazovanje.api.dto.CoursePerformanceDTO;
-import com.ftn.eobrazovanje.api.dto.CourseTeacherRequest;
-import com.ftn.eobrazovanje.api.dto.CreateCoursePerformanceRequest;
-import com.ftn.eobrazovanje.api.dto.TeacherToAttendingDTO;
+import com.ftn.eobrazovanje.api.dto.*;
 import com.ftn.eobrazovanje.api.dto.mapper.CoursePerformanceMapper;
+import com.ftn.eobrazovanje.api.dto.mapper.CourseTeacherMapper;
+import com.ftn.eobrazovanje.api.dto.mapper.TeacherMapper;
 import com.ftn.eobrazovanje.exception.BadRequestException;
 import com.ftn.eobrazovanje.model.*;
 import com.ftn.eobrazovanje.repository.CourseRepository;
+import com.ftn.eobrazovanje.repository.CourseTeacherRepository;
 import com.ftn.eobrazovanje.repository.PerformanceRepository;
 import com.ftn.eobrazovanje.repository.TeacherRepository;
 import com.ftn.eobrazovanje.service.PerformanceService;
@@ -40,14 +40,51 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private CourseTeacherRepository courseTeacherRepository;
+
     @Override
     public Performance save(Performance performance) {
         return performanceRepository.save(performance);
     }
 
     @Override
+    public List<PerformanceResponseDTO> getAll() {
+        ArrayList<PerformanceResponseDTO> list = new ArrayList<>();
+        for (Performance p:performanceRepository.findAll()) {
+            list.add(new PerformanceResponseDTO(p));
+
+        }
+        for(PerformanceResponseDTO p: list){
+            p.setStudyProgram(performanceRepository.getStudyProgramName(p.getId()));
+
+        }
+        return list;
+    }
+
+    @Override
     public Performance findById(Long id) {
         return performanceRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public PerformanceTeachersDTO getByIdWithTeachers(Long id) {
+        Performance performance = performanceRepository.findById(id).orElse(null);
+
+        PerformanceTeachersDTO ptd = new PerformanceTeachersDTO();
+        ptd.setCourseName(performance.getCourse().getName());
+        ptd.setSchoolYear(performance.getSchoolYear());
+        ptd.setCourseSylabus(performance.getCourse().getSylabus());
+        ptd.setId(performance.getId());
+        List<CourseTeacherDTO> ctd = new ArrayList<>();
+        List<Long> teachers = teacherRepository.getTeachers(id);
+        for(Long t: teachers){
+            CourseTeacher ct = courseTeacherRepository.findById(t).orElse(null);
+                    ctd.add(CourseTeacherMapper.toDto(ct));
+        }
+
+        ptd.setCourseTeacher(ctd);
+        return ptd;
     }
 
     @Override
@@ -61,7 +98,7 @@ public class PerformanceServiceImpl implements PerformanceService {
         CourseTeacher courseTeacher = new CourseTeacher();
         TeacherRole teacherRole = teacherService.findByName(role);
         if(teacherRole == null) {
-            throw new BadRequestException("Invalid teacher role for teacher " + teacher.getUser().getUsername());
+            System.out.println("PRC");
         }
         courseTeacher.setTeacher(teacher);
         courseTeacher.setTeacherRole(teacherRole);
@@ -71,9 +108,12 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
-    public void removeTeacherFromPerformance(Performance performance, CourseTeacher courseTeacher) {
-        performance.getCourseTeachers().remove(courseTeacher);
+    public void removeTeacherFromPerformance(Performance performance, Long id) {
+        CourseTeacher ctr = courseTeacherRepository.findById(id).orElse(null);
+        performance.getCourseTeachers().remove(ctr);
         save(performance);
+
+
     }
 
     @Override
@@ -102,6 +142,14 @@ public class PerformanceServiceImpl implements PerformanceService {
             );
         }
         return CoursePerformanceMapper.toDtoList(performanceRepository.findAll());
+    }
+
+    @Override
+    public List<TeacherDTO> getTeachers(Long perfId) {
+        List<Teacher> teachers = teacherRepository.getNotPerformed(perfId);
+        return TeacherMapper.toDTOList(teachers);
+
+
     }
 
     private void mapTeachers(List<CourseTeacherRequest> teacherRequest, Performance performance) {
