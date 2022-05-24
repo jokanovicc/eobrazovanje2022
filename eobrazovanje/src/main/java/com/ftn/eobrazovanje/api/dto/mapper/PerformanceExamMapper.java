@@ -14,7 +14,8 @@ public class PerformanceExamMapper {
                 CoursePerformanceMapper.toDto(exam.getPerformance()),
                 exam.getDate(),
                 exam.getExamPeriod(),
-                exam.getClassroom()
+                exam.getClassroom(),
+                exam.getStatus()
         );
     }
 

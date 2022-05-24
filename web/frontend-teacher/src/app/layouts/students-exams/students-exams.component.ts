@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExamWithStudentInfoResponse } from 'src/app/models/exam-with-student-info-response.interface';
 import { ExamService } from 'src/app/services/exam.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PerformanceExam } from 'src/app/models/performance-exam.interface';
 
 @Component({
   selector: 'app-students-exams',
@@ -11,6 +13,8 @@ import { ExamService } from 'src/app/services/exam.service';
 export class StudentsExamsComponent implements OnInit {
   public id: any;
   public students: ExamWithStudentInfoResponse[];
+  public toggleButton: boolean = true;
+  public isButtonVisible: boolean = false;
 
   constructor(
     private route: ActivatedRoute,

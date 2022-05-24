@@ -19,7 +19,7 @@ public class PerformanceExamDTO {
     private String name;
     private String classroom;
     private String examPeriod;
-
+    private String status;
 
 
     public PerformanceExamDTO(PerformanceExam performanceExam){
@@ -28,6 +28,7 @@ public class PerformanceExamDTO {
         this.name = performanceExam.getPerformance().getCourse().getName();
         this.classroom = performanceExam.getClassroom();
         this.examPeriod = performanceExam.getExamPeriod().getName();
+        this.status = performanceExam.getStatus();
     }
 
     public static List<PerformanceExamDTO> convertToDtoList(List<PerformanceExam> performanceExams){

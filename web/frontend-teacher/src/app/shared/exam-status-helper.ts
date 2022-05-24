@@ -13,6 +13,10 @@ export default class ExamStatusHelper {
         return 'Pohađa';
       case ExamStatus.PRELIMINARY:
         return 'Preliminarno';
+      case ExamStatus.FINALLY:
+        return 'Ocenjeno';
+      case ExamStatus.UNRATED:
+        return 'Neocenjeno';
     }
   }
 }

@@ -21,4 +21,6 @@ public class PerformanceExamResponse {
     private ExamPeriod examPeriod;
 
     private String classroom;
+
+    private String status;
 }

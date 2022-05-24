@@ -24,4 +24,6 @@ public class ExamWithStudentInfoResponse {
     private String studentName;
 
     private String studentIndex;
+
+    private Long studentId;
 }

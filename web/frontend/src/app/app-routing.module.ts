@@ -4,6 +4,7 @@ import { DocumentsComponent } from './components/documents/documents.component';
 import { ExamHistoryComponent } from './components/exam-history/exam-history.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
+import { PreliminaryExamsComponent } from './components/preliminary-exams/preliminary-exams.component';
 import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 import { RegisteredExamsComponent } from './components/registered-exams/registered-exams.component';
 import { SetFirstPasswordComponent } from './components/set-first-password/set-first-password.component';
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'exam-history',
     component: ExamHistoryComponent,
+    canActivate: [svFormGuard],
+  },
+  {
+    path: 'preliminary-exams',
+    component: PreliminaryExamsComponent,
     canActivate: [svFormGuard],
   },
   {

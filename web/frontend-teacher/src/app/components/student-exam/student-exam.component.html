@@ -1,0 +1,33 @@
+<td scope="row">
+  <input
+    type="text"
+    [(ngModel)]="student.preExamDutyPoints"
+    [disabled]="toggleButton"
+  />
+</td>
+<td scope="row">
+  <input
+    type="text"
+    [disabled]="toggleButton"
+    [(ngModel)]="student.finalExamPoints"
+  />
+</td>
+<td scope="row">
+  {{ student.grade ? student.grade : "/" }}
+</td>
+<td scope="row">{{ getExamStatusName(student.status) }}</td>
+<td scope="row">{{ student.studentName }}</td>
+<td scope="row">{{ student.studentIndex }}</td>
+<td scope="row">
+  <div>
+    <button
+      *ngIf="isButtonVisible"
+      style="margin: 0 10px"
+      type="button"
+      (click)="studentAssessment()"
+    >
+      Sačuvaj
+    </button>
+    <button type="button" (click)="handleInputStatus()">Izmeni</button>
+  </div>
+</td>
