@@ -1,36 +1,55 @@
 <body style="background-color: #f5f5f5">
+  <div class="container" style="margin-top: 20px">
+    <h3>Dosadašnji ispiti</h3>
+    <hr />
 
-    <div class="container" style="margin-top: 20px;">
-      <h3>Dosadašnji ispiti</h3>
-      <hr/>
-    
     <table class="table table-striped">
       <thead>
-      <tr>
-        <th scope="col">Datum</th>
-        <th scope="col">Rok</th>
-        <th scope="col">Naziv predmeta</th>
-        <th scope="col">Kabinet</th>
-        <th scope="row">Studenti</th>    
-
-      </tr>
+        <tr>
+          <th scope="col">Datum</th>
+          <th scope="col">Rok</th>
+          <th scope="col">Naziv predmeta</th>
+          <th scope="col">Kabinet</th>
+          <th scope="row">Studenti</th>
+          <th scope="row">Rezultati</th>
+          <th scope="row">Status ispita</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let examPeriod of examPeriods">
-        <td scope="row">{{ examPeriod.date }}</td>
-        <td scope="row">{{ examPeriod.examPeriod }}</td>    
-        <td scope="row">{{ examPeriod.name}}</td>    
-        <td scope="row">{{ examPeriod.classroom}}</td>
-        <td scope="row"><button type="button" (click)="getStudents(examPeriod.id)" class="btn btn-primary">Prijavljeni studenti </button>
-        </td>    
-    
-    
-      </tr>
+        <tr *ngFor="let examPeriod of examPeriods">
+          <td scope="row">{{ examPeriod.date }}</td>
+          <td scope="row">{{ examPeriod.examPeriod }}</td>
+          <td scope="row">{{ examPeriod.name }}</td>
+          <td scope="row">{{ examPeriod.classroom }}</td>
+          <td scope="row">
+            <button
+              type="button"
+              (click)="getStudents(examPeriod.id)"
+              class="btn btn-primary"
+            >
+              Prijavljeni studenti
+            </button>
+          </td>
+          <td scope="row">
+            <button
+              type="button"
+              (click)="publishResults('preliminary', examPeriod.id)"
+              class="btn btn-primary"
+            >
+              Objavi preliminarne
+            </button>
+            <button
+              type="button"
+              style="margin: 0 10px"
+              (click)="publishResults('finally', examPeriod.id)"
+              class="btn btn-primary"
+            >
+              Objavi konacne
+            </button>
+          </td>
+          <td scope="row">{{ getExamStatusName(examPeriod.status) }}</td>
+        </tr>
       </tbody>
     </table>
-        
-    
-    </div>
-    
-    </body>
-    
+  </div>
+</body>

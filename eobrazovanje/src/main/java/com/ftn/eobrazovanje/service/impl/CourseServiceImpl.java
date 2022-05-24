@@ -62,6 +62,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public Course findByExamId(Long examId) {
+        return courseRepository.findByExamId(examId);
+    }
+
+    @Override
     public CourseDTO findById(Long id) {
         return CourseMapper.toDto(courseRepository.findById(id).orElse(null));
     }

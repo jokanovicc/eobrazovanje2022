@@ -9,13 +9,16 @@ import com.ftn.eobrazovanje.exception.ExamRegistrationFailedException;
 import com.ftn.eobrazovanje.exception.NotFoundException;
 import com.ftn.eobrazovanje.model.*;
 import com.ftn.eobrazovanje.repository.*;
+import com.ftn.eobrazovanje.service.CourseService;
 import com.ftn.eobrazovanje.service.ExamService;
+import com.ftn.eobrazovanje.service.PerformanceService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +55,12 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
     private ExamRegistrationRepository examRegistrationRepository;
 
+    @Autowired
+    private EmailServiceImpl emailService;
+
+    @Autowired
+    private CourseService courseService;
+
     public List<ExamDTO> getExamsForStudent(Authentication authentication, String examStatus) {
         User current = userService.getUser(authentication);
 
@@ -72,8 +81,12 @@ public class ExamServiceImpl implements ExamService {
             return ExamMapper.toDtoList(examRepository.findFailedByStudentId(studentId));
         }
 
+        if(status == ExamStatus.PRELIMINARY) {
+            return ExamMapper.toDtoList(examRepository.findPreliminaryByStudentId(studentId));
+        }
+
         //istorija polaganja
-        return ExamMapper.toDtoList(examRepository.findAllByStudentId(studentId));
+        return ExamMapper.toDtoList(examRepository.findAllByStudent(studentId));
     }
 
     @Override
@@ -124,11 +137,16 @@ public class ExamServiceImpl implements ExamService {
         exam.setPreExamDutyPoints(studentGrade.getPreExamDutyPoints());
         exam.setFinalExamPoints(studentGrade.getFinalExamPoints());
         exam.setGrade(grade);
-        exam.setStatus(String.valueOf(calculateExamStatus(grade)));
+//        exam.setStatus(String.valueOf(calculateExamStatus(grade)));
 
         examRepository.save(exam);
 
         return ExamMapper.toDto(exam);
+    }
+
+    @Override
+    public List<Exam> findExamsByPerformanceExam(Long id) {
+        return examRepository.findExamsByPerformanceExam(id);
     }
 
     @Override
@@ -149,7 +167,8 @@ public class ExamServiceImpl implements ExamService {
                 performance.get(),
                 request.getDate(),
                 period.get(),
-                request.getClassroom()
+                request.getClassroom(),
+                ExamStatus.UNRATED.toString()
         );
 
         return PerformanceExamMapper.toDto(performanceExamRepository.save(exam));
@@ -173,6 +192,59 @@ public class ExamServiceImpl implements ExamService {
     public List<PerformanceExamDTO> getExamPeriodsByTeacher(Authentication authentication) {
         User u = userService.getUser(authentication);
         return PerformanceExamDTO.convertToDtoList(performanceExamRepository.findExamPeriodByTeacher(u.getId()));
+    }
+
+    @Override
+    public PerformanceExamResponse publishPreliminaryResults(Authentication authentication,Long examId,
+                                          PerformanceExamDTO performanceExamDTO) throws BadRequestException {
+            User teacher = userService.getUser(authentication);
+            Course course = courseService.findByExamId(examId);
+            PerformanceExam performanceExam = performanceExamRepository.findById(examId).orElse(null);
+            List<Exam> exams = findExamsByPerformanceExam(examId);
+            if(exams.isEmpty()){
+                throw new BadRequestException("No students");
+            }
+            for(Exam exam : exams){
+                if(exam.getGrade() == null){
+                    throw new BadRequestException("Must grade student");
+                }
+                exam.setStatus(ExamStatus.PRELIMINARY.toString());
+                examRepository.save(exam);
+
+            }
+            performanceExam.setStatus(ExamStatus.PRELIMINARY.toString());
+            performanceExamRepository.save(performanceExam);
+            sendResultsNotifications(teacher,course,examId);
+
+            return PerformanceExamMapper.toDto(performanceExam);
+    }
+
+    @Override
+    public PerformanceExamResponse finalResults(Long examId, PerformanceExamDTO performanceExamDTO)throws BadRequestException{
+        PerformanceExam performanceExam = performanceExamRepository.findById(examId).orElse(null);
+        List<Exam> exams = findExamsByPerformanceExam(examId);
+        if(exams.isEmpty()){
+            throw new BadRequestException("No students");
+        }
+        for(Exam exam : exams){
+            if(exam.getStatus().equals(ExamStatus.REGISTERED.toString())){
+                throw new BadRequestException("Must preliminary results first");
+            }else{
+                if(exam.getGrade() > 5) {
+                    exam.setStatus(ExamStatus.PASSED.toString());
+                }
+                else if(exam.getGrade() < 6){
+                    exam.setStatus(ExamStatus.FAILED.toString());
+                }else{
+                    throw new BadRequestException("Grade is not valid");
+                }
+                examRepository.save(exam);
+            }
+
+        }
+        performanceExam.setStatus(ExamStatus.FINALLY.toString());
+        performanceExamRepository.save(performanceExam);
+        return PerformanceExamMapper.toDto(performanceExam);
     }
 
     @Transactional
@@ -214,6 +286,19 @@ public class ExamServiceImpl implements ExamService {
             throw new ExamRegistrationFailedException("Insufficient funds");
         }
 
+    }
+
+    private void sendResultsNotifications(User teacher, Course course, Long examId){
+        PerformanceExam exam = performanceExamRepository.getOne(examId);
+        List<User> users = userService.findRegisteredToExamUser(examId);
+        for(User user : users){
+            emailService.sendEmail(user.getEmail(),"Preliminarni rezultati ispita",
+                    "Poštovani, objavljeni su preliminarni rezultati iz predmeta " +
+                            course.getName() + " \r\n" + "Ispitni rok: " + exam.getExamPeriod().getName() +
+                            "\r\n" + "Datum polaganja: " + exam.getDate() + "\r\n" + "Nastavnik: " +
+                            teacher.getName() + " " + teacher.getLastname() + "\r\n" + "\r\n" + "Rezultate možete pogledati " +
+                            "na studentskom web servisu");
+        }
     }
 
     private boolean registeringTimePassed(PerformanceExam exam) {

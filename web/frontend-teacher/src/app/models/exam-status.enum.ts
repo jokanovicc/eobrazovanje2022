@@ -4,4 +4,7 @@ export enum ExamStatus {
   FAILED,
   LISTENING,
   ALL,
+  PRELIMINARY,
+  FINALLY,
+  UNRATED,
 }

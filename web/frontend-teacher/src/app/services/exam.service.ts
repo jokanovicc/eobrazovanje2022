@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { gradeStudent } from '../models/gradeStudent.interface';
 import { PerformanceExam } from '../models/performance-exam.interface';
 
 @Injectable({
@@ -17,6 +19,22 @@ export class ExamService {
   getRegisteredToExamStudents(id: any) {
     return this.http.get<any[]>(
       `http://localhost:8080/api/exams/${id}/students`
+    );
+  }
+
+  gradeStudent(examId: number, studentId: number, data: gradeStudent) {
+    return this.http.put(
+      environment.backend_endpoint + `exams/${examId}/students/${studentId}`,
+      data
+    );
+  }
+
+  publishResults(resultsType: string, examId: any, results: PerformanceExam) {
+    console.log(results);
+    return this.http.put(
+      environment.backend_endpoint +
+        `exams/results/${examId}?resultsType=${resultsType}`,
+      results
     );
   }
 }

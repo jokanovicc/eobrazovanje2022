@@ -15,6 +15,8 @@ public interface CourseService {
 
     Course createCourse(Course course);
 
+    Course findByExamId(Long examId);
+
     CourseDTO findById(Long id);
 
     void updateCourse(Long id, CourseDTO courseDTO);

@@ -41,11 +41,29 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
             nativeQuery = true)
     List<Exam> findByAttending(Long attendingId);
 
-    @Query(value = "select * from exam where exam_id = ?1 and status = 'REGISTERED'",
+    @Query(value = "select * from exam where exam_id = ?1",
             nativeQuery = true)
     List<Exam> findAllRegisteredForPerformanceExam(Long performanceExamId);
 
     @Query(value = "select * from exam e join performance_exam pe on e.exam_id = pe.id join performance p on pe.performance_id = p.id join performance_teacher_relationship ptr on " +
             " p.id = ptr.performance_id and ptr.teacher_id = ?1", nativeQuery = true)
     List<Exam> findAllExamsByTeacher(Long teacherId);
+
+    @Query(value = "select * from exam join exam_registration on " +
+            "exam_registration.exam_id = exam.id " +
+            "where exam_registration.student_user_id = ?1 " +
+            " and exam.status = 'PRELIMINARY'",
+            nativeQuery = true)
+    List<Exam> findPreliminaryByStudentId(Long studentId);
+
+    @Query(value = "select * from exam join exam_registration on " +
+            "exam_registration.exam_id = exam.id " +
+            "where exam_registration.student_user_id = ?1 " +
+            " and NOT exam.status = 'PRELIMINARY'",
+            nativeQuery = true)
+    List<Exam> findAllByStudent(Long studentId);
+
+    @Query(value = "SELECT * FROM ssluzba.exam where exam_id = ?",
+            nativeQuery = true)
+    List<Exam> findExamsByPerformanceExam(Long id);
 }

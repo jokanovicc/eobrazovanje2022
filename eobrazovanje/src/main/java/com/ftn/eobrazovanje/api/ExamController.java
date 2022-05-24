@@ -1,11 +1,14 @@
 package com.ftn.eobrazovanje.api;
 
 import com.ftn.eobrazovanje.api.dto.*;
+import com.ftn.eobrazovanje.exception.BadRequestException;
 import com.ftn.eobrazovanje.model.ExamPeriod;
+import com.ftn.eobrazovanje.model.PerformanceExam;
 import com.ftn.eobrazovanje.service.ExamService;
 import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -25,11 +28,6 @@ public class ExamController {
     @Autowired
     private ExamService examService;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private StudentService studentService;
 
     @GetMapping
     public ResponseEntity<List<ExamDTO>> getExams(
@@ -67,7 +65,7 @@ public class ExamController {
                 .body(response);
     }
 
-    @PreAuthorize("hasRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @PutMapping("/{examId}/students/{studentId}")
     public ResponseEntity<ExamDTO> gradeStudent(
             @PathVariable Long examId,
@@ -101,6 +99,32 @@ public class ExamController {
                 .created(new URI("/api/exams/" + response.getId()))
                 .body(response);
     }
+
+    @PutMapping("/results/{examId}")
+    public ResponseEntity publishPreliminaryResults(Authentication authentication, @PathVariable Long examId,
+                                                    @RequestParam(name = "resultsType") String resultsType,
+                                                    @RequestBody PerformanceExamDTO performanceExamDTO){
+        if(resultsType.equals("preliminary")) {
+            try {
+                PerformanceExamResponse responseDto = examService.publishPreliminaryResults(authentication, examId, performanceExamDTO);
+                return new ResponseEntity(responseDto, HttpStatus.OK);
+            }catch (BadRequestException e) {
+                return new ResponseEntity("Unesite bodove studentima",HttpStatus.BAD_REQUEST);
+            }
+        }else{
+            try {
+                PerformanceExamResponse responseDto = examService.finalResults(examId, performanceExamDTO);
+                return new ResponseEntity(responseDto, HttpStatus.OK);
+            }catch (BadRequestException e) {
+                return new ResponseEntity("Prvo morate objaviti preliminarne rezultate",HttpStatus.BAD_REQUEST);
+            }
+            catch (IllegalArgumentException e){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+
+        }
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @GetMapping("/teacher-exams")

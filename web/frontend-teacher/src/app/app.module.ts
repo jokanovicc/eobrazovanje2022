@@ -17,6 +17,7 @@ import { StudentsExamsComponent } from './layouts/students-exams/students-exams.
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { AddNotificationModalComponent } from './components/add-notification-modal/add-notification-modal.component';
+import { StudentExamComponent } from './components/student-exam/student-exam.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AddNotificationModalComponent } from './components/add-notification-mod
     SidebarComponent,
     NotificationsComponent,
     AddNotificationModalComponent,
+    StudentExamComponent,
   ],
   imports: [
     BrowserModule,
