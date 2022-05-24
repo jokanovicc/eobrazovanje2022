@@ -1,7 +1,5 @@
 <h3 style="margin: 0 auto; text-align: center">Prijava ispita</h3>
 
-<span *ngIf="!exams?.length">Nema ispita koje bi mogli da prijavite</span>
-
 <p *ngIf="showSuccessMessage" style="color: green">
   Ispit je uspešno prijavljen
 </p>
@@ -31,6 +29,8 @@
       </div>
     </div>
   </div>
+
+  <span *ngIf="!exams?.length">Nema ispita koje bi mogli da prijavite</span>
 
   <table
     *ngIf="exams?.length"

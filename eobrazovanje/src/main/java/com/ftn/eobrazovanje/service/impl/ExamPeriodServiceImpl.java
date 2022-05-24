@@ -33,8 +33,10 @@ public class ExamPeriodServiceImpl implements ExamPeriodService {
         LocalDate monthFromNow = today.plusDays(30);
         LocalDate monthBefore = today.minusDays(30);
 
-        return period.getStartDate().isBefore(monthFromNow) &&
-        period.getStartDate().isAfter(monthBefore);
+        return (period.getStartDate().isBefore(monthFromNow) &&
+        period.getStartDate().isAfter(monthBefore))
+                || (period.getEndDate().isAfter(monthBefore)
+                && period.getEndDate().isBefore(monthFromNow));
     }
 
 

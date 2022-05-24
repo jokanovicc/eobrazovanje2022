@@ -70,7 +70,7 @@ insert into attending(performance_id,student_user_id) values (5,2);
 
 insert into exam_period(start_date, end_date, name) values ('2022-01-15', '2022-01-30', 'januarski');
 insert into exam_period(start_date, end_date, name) values ('2022-04-01', '2022-02-17', 'februarski');
-insert into exam_period(start_date, end_date, name) values ('2022-04-15', '2022-05-15', 'majski aktuelni');
+insert into exam_period(start_date, end_date, name) values ('2022-04-15', '2022-05-30', 'majski aktuelni');
 insert into exam_period(start_date, end_date, name) values ('2022-06-03', '2022-06-20', 'junski kasniji al moze');
 insert into exam_period(start_date, end_date, name) values ('2022-07-08', '2022-07-29', 'julski kasniji');
 
@@ -78,8 +78,8 @@ insert into performance_exam(performance_id, date, classroom, exam_period_id) va
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 2, '2022-01-25', '310', 1);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 3, '2022-01-26', '312', 1);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 3, '2022-02-13', '312', 2);
-insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 4, '2022-05-11', '314', 3);
-insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 5, '2022-05-14', '315', 3);
+insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 4, '2022-05-30', '314', 3);
+insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 5, '2022-05-15', '315', 3);
 insert into performance_exam(performance_id, date, classroom, exam_period_id) values ( 5, '2022-06-06', '330', 4);
 
 insert into exam(pre_exam_duty_points, final_exam_points, grade, status, attending_id, exam_id)

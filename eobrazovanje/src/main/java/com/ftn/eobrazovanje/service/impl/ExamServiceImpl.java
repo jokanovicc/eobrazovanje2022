@@ -223,7 +223,7 @@ public class ExamServiceImpl implements ExamService {
 
     private boolean examPeriodIsActive(ExamPeriod period) {
         LocalDate today = LocalDate.now();
-        return dateIsInRange(today, period.getStartDate(), period.getEndDate());
+        return dateIsInRange(today, period.getStartDate().minusDays(20), period.getEndDate());
     }
 
     private boolean dateIsInRange(LocalDate date, LocalDate start, LocalDate end) {
