@@ -6,4 +6,5 @@ export interface ExamWithStudentInfoResponse {
   status: string;
   studentName: string;
   studentIndex: string;
+  studentId: number;
 }

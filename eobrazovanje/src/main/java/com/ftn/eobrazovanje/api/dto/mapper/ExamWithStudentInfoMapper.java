@@ -16,7 +16,8 @@ public class ExamWithStudentInfoMapper {
                 exam.getStatus(),
                 exam.getAttending().getStudent().getUser().getName() + " " +
                         exam.getAttending().getStudent().getUser().getLastname(),
-                exam.getAttending().getStudent().getIndexNumber()
+                exam.getAttending().getStudent().getIndexNumber(),
+                exam.getAttending().getStudent().getId()
         );
     }
 

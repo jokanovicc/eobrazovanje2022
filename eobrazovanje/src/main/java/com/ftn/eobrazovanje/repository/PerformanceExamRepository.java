@@ -27,6 +27,6 @@ public interface PerformanceExamRepository extends JpaRepository<PerformanceExam
             "group by performance_exam.id, performance_exam.exam_period_id", nativeQuery = true)
     List<PerformanceExam> getByStudentIdInExamPeriod(Long studentId, Long examPeriodId);
 
-    @Query(value = "select pe.id,pe.classroom,pe.date,pe.exam_period_id,pe.performance_id from performance_exam pe join performance p on pe.performance_id = p.id join performance_teacher_relationship ptr on p.id = ptr.performance_id and ptr.teacher_id = ?1", nativeQuery = true)
+    @Query(value = "select * from performance_exam pe join performance p on pe.performance_id = p.id join performance_teacher_relationship ptr on p.id = ptr.performance_id and ptr.teacher_id = ?1", nativeQuery = true)
     List<PerformanceExam> findExamPeriodByTeacher(Long teacherId);
 }
