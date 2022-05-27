@@ -6,6 +6,7 @@ import { CourseUpdateComponent } from './components/course-update/course-update.
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
 import { StudentsComponent } from './components/students/students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
@@ -74,7 +75,7 @@ const routes: Routes = [
   {
     path:'students',
     component:StudentsComponent
-  }
+  },
 ];
 
 @NgModule({

@@ -8,25 +8,12 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./navigation-bar.component.css'],
 })
 export class NavigationBarComponent implements OnInit {
-  token: string | null;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.authService.token$.subscribe((token: string) => {
-      if (!token) {
-        this.token = localStorage.getItem('token');
-        return;
-      }
-      this.token = token;
-    });
+
   }
 
-  logoutButton() {
-    this.authService.logout();
-    this.token = null;
-    this.router.navigate(['']);
-  }
 }

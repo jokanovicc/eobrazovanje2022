@@ -56,4 +56,9 @@ public class AttendingController {
                 .ok()
                 .body(attendingService.findLatestOfCourseForStudent(authentication, performanceId));
     }
+
+    @GetMapping("/performances/{performanceId}")
+    public List<AttendingDTO> getAttendingByPerformance(@PathVariable Long performanceId){
+        return attendingService.getStudentsOfCourse(performanceId);
+    }
 }
