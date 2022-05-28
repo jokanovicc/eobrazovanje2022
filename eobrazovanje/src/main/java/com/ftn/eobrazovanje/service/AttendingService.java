@@ -17,4 +17,8 @@ public interface AttendingService {
     boolean delete(Long studentId, Long performanceId);
 
     AttendingDTO findLatestOfCourseForStudent(Authentication authentication, Long performanceId);
+
+    List<AttendingDTO> getStudentsOfCourse(Long performanceId);
+
+
 }

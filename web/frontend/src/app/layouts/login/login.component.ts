@@ -54,9 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .fetchCurrentUser()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        if (this.authService.getRole() == 'ROLE_STUDENT') {
-          this.router.navigate(['/dashboard']);
-        }
+        this.router.navigate(['/dashboard']);
       });
   };
 

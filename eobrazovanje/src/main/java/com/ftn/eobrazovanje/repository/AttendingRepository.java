@@ -15,6 +15,10 @@ public interface AttendingRepository extends JpaRepository<Attending, Long> {
 
     Attending findFirstByStudentAndPerformance(Student student, Performance performance);
 
+    @Query(value = "select * from attending where performance_id = ?1",
+            nativeQuery = true)
+    List<Attending> findByPerformance(Long performanceId);
+
     @Query(value = "select * from attending where student_user_id = ?1 and performance_id = ?2",
             nativeQuery = true)
     List<Attending> findByStudentAndPerformance(Long studentId, Long performanceId);

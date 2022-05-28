@@ -27,6 +27,7 @@ import {DecimalPipe} from '@angular/common';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { StudentsComponent } from './components/students/students.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { StudentCardboardComponent } from './components/student-cardboard/studen
     AddToPerformanceComponent,
     UploadFileComponent,
     StudentsComponent,
-    StudentCardboardComponent
+    StudentCardboardComponent,
+    StudentsPerformanceComponent
   ],
   imports: [
     BrowserModule,

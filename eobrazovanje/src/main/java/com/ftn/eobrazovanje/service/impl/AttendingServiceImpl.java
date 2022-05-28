@@ -98,4 +98,17 @@ public class AttendingServiceImpl implements AttendingService {
         return AttendingMapper.toDTO(latest);
     }
 
+    @Override
+    public List<AttendingDTO> getStudentsOfCourse(Long performanceId) {
+        List<Attending> attendings = attendingRepository.findByPerformance(performanceId);
+        List<AttendingDTO> attendingDTOS = new ArrayList<>();
+        for(Attending a: attendings){
+            attendingDTOS.add(AttendingMapper.toDTO(a));
+        }
+
+        return attendingDTOS;
+
+
+    }
+
 }

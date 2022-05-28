@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 import { User } from '../models/models.interface';
 import { isNull } from '@angular/compiler/src/output/output_ast';
+import Swal from 'sweetalert2';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -22,10 +23,27 @@ export class AuthService {
       )
       .pipe(
         tap((token: any) => {
-          this.token$.next(token);
-          this.saveToken(token);
+          if(this.getRoleWithProps(token) == "ROLE_ADMIN"){
+            this.token$.next(token);
+            this.saveToken(token);
+        }else{
+          Swal.fire(
+            "Greška!",
+            "Nemate adekvatnu ulogu za pristup ovom servisu",
+            "error"
+          )
+        }
         })
       );
+  }
+
+  getRoleWithProps(token:string) {
+    const decoded_token = token ? this.decodeToken(token) : null;
+    if (decoded_token) {
+      return decoded_token.role.authority;
+    } else {
+      return null;
+    }
   }
 
   fetchCurrentUser() {
@@ -40,6 +58,8 @@ export class AuthService {
   getCurrentUserInfo() {
     return this.currentUser;
   }
+
+  
 
   updateUserProfile(id: number, userDTO: any) {
     return this.http.put('http://localhost:8080/api/users', userDTO);

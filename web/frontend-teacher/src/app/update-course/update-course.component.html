@@ -1,0 +1,23 @@
+<body style="background-color: #f5f5f5">
+    <div class="container text-center" style="width: 40%;">
+      <form style="padding: 10px; padding-top: 5vh;" (ngSubmit)="onSubmit()">
+        <h3>Ažuriranje predmeta</h3>
+        <hr/>
+          <label for="name">Naziv</label>
+          <input required type="text" class="form-control" id="name" required [(ngModel)]="course.name" name="name">  
+    
+          <label for="sylabus">Silabus</label>
+          <input type="text" class="form-control" id="sylabus" required [(ngModel)]="course.sylabus" name="sylabus">
+  
+          <label for="espb">Broj ESPB</label>
+          <input type="text" class="form-control" id="espb" required [(ngModel)]="course.espb" name="espb">
+  
+  
+        <button class="btn btn-md btn-primary btn-block" style="margin-top: 20px;">Ažuriraj</button>
+      </form>
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+        {{ errorMsg }}
+      </div>
+    </div>
+  
+  </body>

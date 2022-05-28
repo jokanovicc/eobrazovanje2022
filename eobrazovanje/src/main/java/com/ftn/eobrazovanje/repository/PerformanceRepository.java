@@ -11,9 +11,7 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
 
     Performance findFirstByCourse(Course course);
 
-    @Query(value = "select * from performance join performance_teacher_relationship where " +
-            "performance.id = performance_teacher_relationship.performance_id and " +
-            "performance_teacher_relationship.teacher_id = ?1",
+    @Query(value = "select * from performance p join performance_teacher_relationship ptr on p.id = ptr.performance_id join course_teacher ct on ptr.teacher_id = ct.id and ct.teacher_user_id = 1",
             nativeQuery = true)
     List<Performance> findAllByTeacher(Long teacherId);
 

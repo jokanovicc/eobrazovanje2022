@@ -2,9 +2,11 @@
   class="bg-light border-right"
   id="sidebar-wrapper"
   [ngClass]="status ? 'hide' : 'show'"
+  *ngIf="token"
 >
-  <div class="sidebar-heading">Dostupni linkovi</div>
-  <div class="list-group list-group-flush">
+<div class="sidebar-heading"><h5 style="text-align:center; margin-top: 20px;">Dostupni linkovi</h5></div>
+<hr/>
+<div class="list-group list-group-flush">
     <a
       routerLink="/dashboard"
       class="list-group-item list-group-item-action bg-light"
@@ -14,11 +16,21 @@
       routerLink="/exams"
       class="list-group-item list-group-item-action bg-light"
       >Vaši ispiti</a
+      
     >
+    <a
+    routerLink="/performances"
+    class="list-group-item list-group-item-action bg-light"
+    >Predmeti</a
+    
+  >
     <a
       routerLink="/notifications"
       class="list-group-item list-group-item-action bg-light"
       >Obaveštenja</a
     >
+
+    <button  *ngIf="token" (click)="logoutButton()">Izlogujte se</button>
+
   </div>
 </div>
