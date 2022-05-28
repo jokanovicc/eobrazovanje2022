@@ -8,7 +8,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -25,7 +25,6 @@ import { SetFirstPasswordComponent } from './components/set-first-password/set-f
 import { SvFormComponent } from './components/sv-form/sv-form.component';
 import { PreliminaryExamsComponent } from './components/preliminary-exams/preliminary-exams.component';
 import { DocumentsComponent } from './components/documents/documents.component';
-
 
 @NgModule({
   declarations: [

@@ -22,4 +22,5 @@ public interface ExamService {
     List<PerformanceExamDTO> getExamPeriodsByTeacher(Authentication authentication);
     PerformanceExamResponse publishPreliminaryResults(Authentication authentication,Long examId, PerformanceExamDTO performanceExamDTO);
     PerformanceExamResponse finalResults(Long examId, PerformanceExamDTO performanceExamDTO);
+    void deregisterExam(Long examId);
 }

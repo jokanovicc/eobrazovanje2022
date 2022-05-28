@@ -49,4 +49,10 @@ export class ExamService {
       options
     );
   }
+
+  deregisterExam(examId: number) {
+    return this.http.delete(
+      environment.backend_endpoint + `exams/exam-registrations/${examId}`
+    );
+  }
 }

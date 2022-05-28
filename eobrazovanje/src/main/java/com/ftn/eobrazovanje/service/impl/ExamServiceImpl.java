@@ -247,6 +247,24 @@ public class ExamServiceImpl implements ExamService {
         return PerformanceExamMapper.toDto(performanceExam);
     }
 
+    @Override
+    public void deregisterExam(Long examId) {
+        ExamRegistration registration = examRegistrationRepository.findByExamId(examId);
+        examRegistrationRepository.deleteById(registration.getId());
+        examRepository.deleteById(examId);
+        FinancialCard card = financialCardRepository.findByStudentId(registration.getStudent().getId()).get();
+        Payment payment = new Payment(
+                registration.getStudent(),
+                (double) 300,
+                "Odjava ispita",
+                "/",
+                LocalDate.now()
+        );
+        paymentRepository.save(payment);
+        card.setBalance(card.getBalance() + 300);
+        financialCardRepository.save(card);
+    }
+
     @Transactional
     void chargeStudentForExam(FinancialCard card, Student student) {
         Payment payment = new Payment(

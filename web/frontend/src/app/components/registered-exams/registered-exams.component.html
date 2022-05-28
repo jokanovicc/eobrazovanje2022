@@ -8,6 +8,7 @@
       <th scope="col">Ispitni rok</th>
       <th scope="col">Datum polaganja</th>
       <th scope="col">Učionica</th>
+      <th scope="col">#</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,40 @@
       <td>{{ exam.examPeriod }}</td>
       <td>{{ exam.date }}</td>
       <td>{{ exam.classroom }}</td>
+      <td>
+        <a
+          class="btn btn-primary"
+          (click)="openDeregisterExamModal(deregisterExamConfirmation, exam.id)"
+          >Odjavi ispit</a
+        >
+      </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #deregisterExamConfirmation let-modal>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Jeste li sigurni da želite da odjavite ovaj ispit?</p>
+    <p></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+      Odustani
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="deregisterExam(); modal.close()"
+    >
+      Odjavi
+    </button>
+  </div>
+</ng-template>
