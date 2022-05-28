@@ -24,4 +24,6 @@ public interface UserService {
    User create(User user);
 
    List<User> findRegisteredToExamUser(Long examId);
+
+   User findByJmbg(String jmbg);
 }

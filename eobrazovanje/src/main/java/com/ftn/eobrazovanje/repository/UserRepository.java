@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findFirstByUsername(String username);
 
+    User findByJmbg(String jmbg);
+
     @Query(value = "SELECT * FROM user u join exam_registration a on u.id = a.student_user_id join exam e on a.exam_id = e.id WHERE e.id=?1 ", nativeQuery = true)
     List<User> findAllRegisteredToExamStudents(Long examId);
 
