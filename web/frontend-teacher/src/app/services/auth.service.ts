@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { User } from '../models/user.interface';
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -23,8 +24,16 @@ export class AuthService {
       )
       .pipe(
         tap((token: any) => {
-          this.token$.next(token);
-          this.saveToken(token);
+          if(this.getRoleWithProps(token) == "ROLE_TEACHER"){
+            this.token$.next(token);
+            this.saveToken(token);
+        }else{
+          Swal.fire(
+            "Greška!",
+            "Nemate adekvatnu ulogu za pristup ovom servisu",
+            "error"
+          )
+        }
         })
       );
   }
@@ -68,6 +77,15 @@ export class AuthService {
 
   getRole() {
     const token = this.getToken();
+    const decoded_token = token ? this.decodeToken(token) : null;
+    if (decoded_token) {
+      return decoded_token.role.authority;
+    } else {
+      return null;
+    }
+  }
+
+  getRoleWithProps(token:string) {
     const decoded_token = token ? this.decodeToken(token) : null;
     if (decoded_token) {
       return decoded_token.role.authority;

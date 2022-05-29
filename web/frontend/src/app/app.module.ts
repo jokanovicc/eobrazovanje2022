@@ -8,7 +8,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { UpdateProfileComponent } from './shared/layouts/update-profile/update-profile.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -27,7 +27,6 @@ import { PreliminaryExamsComponent } from './components/preliminary-exams/prelim
 import { DocumentsComponent } from './components/documents/documents.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PaymentTableComponent } from './components/payment-table/payment-table.component';
-
 
 @NgModule({
   declarations: [

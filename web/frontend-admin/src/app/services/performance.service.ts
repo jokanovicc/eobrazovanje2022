@@ -7,6 +7,7 @@ import { PerformanceDTO } from '../models/performance-dto.interface';
 import { PerformanceTeacher } from '../models/performance-teacher.interface';
 import { Teacher } from '../models/teacher.interface';
 import { BehaviorSubject, tap } from 'rxjs';
+import { Attending } from '../models/attending.interface';
 
 @Injectable({ providedIn: 'root' })
 export class PerformanceService {
@@ -20,6 +21,13 @@ export class PerformanceService {
       environment.backend_endpoint + `performances`
     );
   }
+
+  getStudentByPerformance(id:any) {
+    return this.http.get<Attending[]>(
+      environment.backend_endpoint + `attendings/performances/${id}`
+    );
+  }
+
 
 
   get(){
@@ -49,5 +57,10 @@ export class PerformanceService {
       return this.http.post(environment.backend_endpoint+`performances/${perfId}/teachers`, data);
   
   
+  }
+
+  deleteStudentFromPerformance(perfId:any, studId:any){
+    this.http.delete(environment.backend_endpoint + `attendings/students/${studId}/performance/${perfId}`)
+        .subscribe(() =>'Delete successful');
   }
 }

@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findRegisteredToExamUser(Long examId) {
         return userRepository.findAllRegisteredToExamStudents(examId);
     }
+
+    @Override
+    public User findByJmbg(String jmbg) {
+        return userRepository.findByJmbg(jmbg);
+    }
 }

@@ -132,6 +132,13 @@ public class ExamController {
         return examService.getExamPeriodsByTeacher(authentication);
     }
 
-
+    @PreAuthorize("hasAnyRole('STUDENT')")
+    @DeleteMapping("/exam-registrations/{examId}")
+    public ResponseEntity deregisterExam(
+            @PathVariable Long examId
+    ) {
+        examService.deregisterExam(examId);
+        return ResponseEntity.noContent().build();
+    }
 
 }

@@ -3,8 +3,8 @@
   id="sidebar-wrapper"
   [ngClass]="status ? 'hide' : 'show'"
 >
-  <div class="sidebar-heading">Dostupni linkovi</div>
-  <div class="list-group list-group-flush">
+<div class="sidebar-heading"><h5 style="text-align:center; margin-top: 20px;">Dostupni linkovi</h5></div>
+<hr/>  <div class="list-group list-group-flush">
     <a
       routerLink="/dashboard"
       class="list-group-item list-group-item-action bg-light"
@@ -41,6 +41,7 @@
       >Prijavljeni ispiti</a
     >
     <a
+
       routerLink="/documents"
       class="list-group-item list-group-item-action bg-light"
       >Dokumenta</a
@@ -50,5 +51,8 @@
       class="list-group-item list-group-item-action bg-light"
       >Finansije</a
     >
+
+    <button *ngIf="token" (click)="logoutButton()">Izlogujte se</button>
+
   </div>
 </div>

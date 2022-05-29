@@ -11,6 +11,7 @@ import com.ftn.eobrazovanje.service.StudentService;
 import com.ftn.eobrazovanje.service.TeacherService;
 import com.ftn.eobrazovanje.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -93,12 +94,15 @@ public class UserController {
 
 
     @PostMapping
-    public void createTeacher(@Validated @RequestBody TeacherDTO teacherDTO){
+    public ResponseEntity createTeacher(@Validated @RequestBody TeacherDTO teacherDTO){
+        if(userService.findByJmbg(teacherDTO.getJmbg()) != null || userService.findByUsername(teacherDTO.getUsername()) != null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         Teacher teacher = TeacherMapper.toEntity(teacherDTO);
         teacher.getUser().setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
         teacherService.createTeacher(teacher);
 
-
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     //param je /teachers?pageNo=1

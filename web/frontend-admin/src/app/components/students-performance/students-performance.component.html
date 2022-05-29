@@ -1,0 +1,24 @@
+<h5>Studenti na kursu</h5>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Broj indeksa</th>
+      <th scope="col">Ime i Prezime</th>
+      <th scope="col">JMBG</th>
+      <th scope="col">Ukloni</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of attending">
+      <th scope="row">{{ c.student.indexNumber }}</th>
+      <td>{{ c.student.user.lastname}}  {{ c.student.user.name}}</td>
+      <td>{{ c.student.user.jmbg}}</td>
+
+      <td><button type="button" (click)="remove(c.student.id)" class="btn btn-primary">Ukloni </button></td>
+
+    </tr>
+    </tbody>
+  </table>

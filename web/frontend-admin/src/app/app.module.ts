@@ -32,6 +32,7 @@ import { StudentInfoComponent } from './components/student-info/student-info.com
 import { PaymentComponent } from './components/payment/payment.component';
 import { StudentPaymentsTableComponent } from './components/student-payments-table/student-payments-table.component';
 import { PaymentFormComponent } from './components/payment-form/payment-form.component';
+import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { PaymentFormComponent } from './components/payment-form/payment-form.com
     PaymentComponent,
     StudentPaymentsTableComponent,
     PaymentFormComponent
+    StudentsPerformanceComponent
   ],
   imports: [
     BrowserModule,

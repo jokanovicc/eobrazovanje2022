@@ -18,6 +18,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { AddNotificationModalComponent } from './components/add-notification-modal/add-notification-modal.component';
 import { StudentExamComponent } from './components/student-exam/student-exam.component';
+import { AttendingsComponent } from './components/attendings/attendings.component';
+import { UpdateCourseComponent } from './update-course/update-course.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { StudentExamComponent } from './components/student-exam/student-exam.com
     NotificationsComponent,
     AddNotificationModalComponent,
     StudentExamComponent,
+    AttendingsComponent,
+    UpdateCourseComponent,
   ],
   imports: [
     BrowserModule,

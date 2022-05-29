@@ -9,6 +9,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
+import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
 import { StudentsComponent } from './components/students/students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
@@ -89,6 +90,7 @@ const routes: Routes = [
   {
     path: 'addPayment/:id',
     component: PaymentFormComponent,
+
   },
 ];
 
