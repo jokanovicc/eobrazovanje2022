@@ -18,7 +18,7 @@ INSERT INTO user(name,lastname,jmbg,address,username,password,role,gender, email
     ('Ado','Adminic','11039123213431', 'Nemanjina, Beograd', 'ado','$2a$12$lGAL1aaPLq8CC5YcDbhLj.61yYKK.6UMouXP6fy/vLWLWAb6G/1si', 'ADMIN', 'MALE', 'adminic@gmail.com');
 
 INSERT INTO teacher(user_id) VALUES  (1);
-INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', false);
+INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (2,'RA-123/2020','',true,'1ADRHF322', true);
 INSERT INTO teacher(user_id) VALUES  (3);
 INSERT INTO student(user_id,index_number,password_token,first_login,reference_number, completedsvform) VALUES  (4,'RA-22/2020','',true,'1ASDFF322s', false);
 
@@ -101,4 +101,13 @@ insert into exam_registration(exam_id, exam_period_id, student_user_id) values (
 
 insert into financial_card(student_user_id, balance) values (2, 400);
 
-insert into notification(message, performance_id, teacher_user_id) values ('aaa', 1, 1)
+insert into payment(amount,payment_date,text,student_user_id) values (-300,'2022-01-15','Prijava ispita',2);
+insert into payment(amount,payment_date,text,student_user_id) values (3000,'2022-05-15','Ovjera semestra',2);
+insert into payment(amount,payment_date,text,student_user_id) values (-300,'2022-01-15','Prijava ispita',2);
+insert into payment(amount,payment_date,text,student_user_id) values (1000,'2022-01-15','Za ispitni rok',2);
+insert into payment(amount,payment_date,text,student_user_id) values (-300,'2022-01-15','Prijava ispita',2);
+insert into payment(amount,payment_date,text,student_user_id) values (-300,'2022-01-15','Prijava ispita',2);
+
+insert into notification(message, performance_id, teacher_user_id) values ('aaa', 1, 1);
+
+

@@ -1,0 +1,7 @@
+.positiveAmount {
+  background-color: rgb(60, 179, 113, 0.5);
+}
+
+.negativeAmount {
+  background-color: rgb(255, 0, 0, 0.5);
+}

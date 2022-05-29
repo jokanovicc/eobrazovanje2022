@@ -1,0 +1,37 @@
+<div class="text-center" style="padding: 30px; width: 70%; margin: 0 auto">
+  <h2>Unos uplate studenta</h2>
+</div>
+<div class="text-center" style="width: 70%; margin: 0 auto">
+  <form
+    style="margin: 20px"
+    [formGroup]="paymentForm"
+    (ngSubmit)="postPaymentForm()"
+  >
+    <div style="width: 300px; margin: auto; padding: 10px">
+      <input
+        style="margin: 10px"
+        type="text"
+        formControlName="text"
+        class="form-control"
+        placeholder="Svrha"
+        required
+      />
+      <input
+        style="margin: 10px"
+        type="text"
+        formControlName="amount"
+        class="form-control"
+        placeholder="Iznos(minimalno 300)"
+        required
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-dark">Pošalji</button>
+  </form>
+  <!-- <div *ngIf="message" class="alert alert-success" role="alert">
+      {{ message }}
+    </div> -->
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+    {{ errorMsg }}
+  </div>
+</div>

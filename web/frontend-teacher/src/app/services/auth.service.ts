@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   updateUserProfile(id: number, userDTO: any) {
-    return this.http.put(environment.backend_endpoint +`users`, userDTO);
+    return this.http.put(environment.backend_endpoint + `users`, userDTO);
   }
 
   getToken() {

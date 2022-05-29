@@ -41,9 +41,16 @@
       >Prijavljeni ispiti</a
     >
     <a
-    routerLink="/documents"
-    class="list-group-item list-group-item-action bg-light"
-    >Dokumenta</a>
+
+      routerLink="/documents"
+      class="list-group-item list-group-item-action bg-light"
+      >Dokumenta</a
+    >
+    <a
+      routerLink="/payment"
+      class="list-group-item list-group-item-action bg-light"
+      >Finansije</a
+    >
 
     <button *ngIf="token" (click)="logoutButton()">Izlogujte se</button>
 

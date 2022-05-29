@@ -1,0 +1,47 @@
+<body style="background-color: #f5f5f5">
+  <div class="container" style="margin-top: 20px; width: 65%">
+    <h3>Transakcije</h3>
+    <hr />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Svrha</th>
+          <th scope="col">Iznos</th>
+          <th scope="col">Datum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let payment of payments"
+          [ngClass]="payment.amount > 0 ? 'positiveAmount' : 'negativeAmount'"
+        >
+          <th scope="row">{{ payment.text }}</th>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.paymentDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <span class="margin-md"
+        >Stranica {{ page + 1 }} od {{ totalPagesCount }}</span
+      >
+      <button
+        class="margin-sm pagination-btn"
+        (click)="previousPage()"
+        [disabled]="page <= 0"
+      >
+        prethodna
+      </button>
+      <button class="margin-sm pagination-btn">
+        {{ page + 1 }}
+      </button>
+      <button
+        class="margin-sm pagination-btn"
+        [disabled]="page + 1 >= totalPagesCount"
+        (click)="nextPage()"
+      >
+        sledeća
+      </button>
+    </div>
+  </div>
+</body>

@@ -7,86 +7,74 @@ import { CourseService } from 'src/app/services/course.service';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
-  styleUrls: ['./subjects.component.css']
+  styleUrls: ['./subjects.component.css'],
 })
 export class SubjectsComponent implements OnInit {
+  public courses: Course[];
+  public page: number = 0;
+  public totalPagesCount: number;
+  searchText = '';
 
-  public courses: Course[]
-  public page:number = 0;
-  public totalPagesCount:number;
-  searchText = "";
-
-
-
-
-  constructor(private courseService: CourseService, private cd: ChangeDetectorRef, private router:Router) {
-
-   }
+  constructor(
+    private courseService: CourseService,
+    private cd: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchTeachers();
   }
 
-  fetchTeachers(){
+  fetchTeachers() {
     this.courseService
       .getCourses(this.page)
       .subscribe((response: CourseResponse) => {
-
-        this.courses = response.courses
+        this.courses = response.courses;
         this.totalPagesCount = response.pagesCount;
         this.cd.detectChanges();
       });
-
   }
 
-  nextPage(){
+  nextPage() {
     this.page = this.page + 1;
     this.fetchTeachers();
   }
 
-  getCourse(id:any){
-    this.router.navigate(['/course/' + id])
+  getCourse(id: any) {
+    this.router.navigate(['/course/' + id]);
   }
 
-
-
-  previousPage(){
+  previousPage() {
     this.page = this.page - 1;
     this.fetchTeachers();
   }
 
-  getSubject(id:any){
+  getSubject(id: any) {
     this.router.navigate(['/course/' + id]);
-
   }
 
   Search() {
-    if (this.searchText !== "") {
+    if (this.searchText !== '') {
       let searchValue = this.searchText.toLocaleLowerCase();
 
       this.courses = this.courses.filter((contact: any) => {
-        return contact.name.toLocaleLowerCase().match(searchValue)
-          ;
-        // you can keep on adding object properties here   
-
+        return contact.name.toLocaleLowerCase().match(searchValue);
+        // you can keep on adding object properties here
       });
 
       console.log(this.courses);
-    }
-    else {
+    } else {
       this.courseService
-      .getCourses(this.page)
-      .subscribe((response: CourseResponse) => {
-
-        this.courses = response.courses
-        this.totalPagesCount = response.pagesCount;
-        this.cd.detectChanges();
-      });
-
+        .getCourses(this.page)
+        .subscribe((response: CourseResponse) => {
+          this.courses = response.courses;
+          this.totalPagesCount = response.pagesCount;
+          this.cd.detectChanges();
+        });
     }
   }
 
-  createCourse(){
-    this.router.navigate(["/add-course"])
+  createCourse() {
+    this.router.navigate(['/add-course']);
   }
 }

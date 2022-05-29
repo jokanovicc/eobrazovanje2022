@@ -25,6 +25,8 @@ import { SetFirstPasswordComponent } from './components/set-first-password/set-f
 import { SvFormComponent } from './components/sv-form/sv-form.component';
 import { PreliminaryExamsComponent } from './components/preliminary-exams/preliminary-exams.component';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentTableComponent } from './components/payment-table/payment-table.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { DocumentsComponent } from './components/documents/documents.component';
     SvFormComponent,
     PreliminaryExamsComponent,
     DocumentsComponent,
+    PaymentComponent,
+    PaymentTableComponent,
   ],
   imports: [
     BrowserModule,

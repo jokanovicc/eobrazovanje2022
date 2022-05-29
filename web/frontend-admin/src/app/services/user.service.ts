@@ -5,47 +5,44 @@ import { Teacher } from '../models/models.interface';
 import { TeacherResponse } from '../models/teacherResponse.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-
-  getTeachers(pageNumber?: number){
+  getTeachers(pageNumber?: number) {
     const options = {
       params: {
-        page: pageNumber ? pageNumber : 0
-      }
-    }
+        page: pageNumber ? pageNumber : 0,
+      },
+    };
 
     return this.http.get<TeacherResponse>(
       environment.backend_endpoint + `users/teachers`,
       options
-    )
-    
+    );
   }
 
-  getStudents(pageNumber?: number){
+  getStudents(pageNumber?: number) {
     const options = {
       params: {
-        page: pageNumber ? pageNumber : 0
-      }
-    }
+        page: pageNumber ? pageNumber : 0,
+      },
+    };
 
     return this.http.get<TeacherResponse>(
       environment.backend_endpoint + `users/students`,
       options
-    )
-    
+    );
   }
 
-  createTeacher(teacher: any){
-    return this.http.post(environment.backend_endpoint+`users`, teacher);
-
-  
+  getStudent(studentId: any) {
+    return this.http.get<any>(
+      environment.backend_endpoint + `students/${studentId}`
+    );
   }
 
-
-
+  createTeacher(teacher: any) {
+    return this.http.post(environment.backend_endpoint + `users`, teacher);
+  }
 }
