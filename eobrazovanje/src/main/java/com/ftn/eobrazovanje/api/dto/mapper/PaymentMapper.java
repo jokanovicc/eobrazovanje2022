@@ -1,7 +1,9 @@
 package com.ftn.eobrazovanje.api.dto.mapper;
 
+import com.ftn.eobrazovanje.api.dto.CourseDTO;
 import com.ftn.eobrazovanje.api.dto.ReqPaymentDTO;
 import com.ftn.eobrazovanje.api.dto.RespPaymentDTO;
+import com.ftn.eobrazovanje.model.Course;
 import com.ftn.eobrazovanje.model.Payment;
 
 import java.time.LocalDate;
@@ -20,7 +22,6 @@ public class PaymentMapper {
                 LocalDate.now()
                 );
     }
-    //TODO zavrsiti
     public static RespPaymentDTO respToDto(Payment payment) {
         return new RespPaymentDTO(
                 payment.getId(),
@@ -38,4 +39,5 @@ public class PaymentMapper {
                 .map(payment -> respToDto(payment))
                 .collect(Collectors.toList());
     }
+
 }

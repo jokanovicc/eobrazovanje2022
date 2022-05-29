@@ -27,6 +27,11 @@ import {DecimalPipe} from '@angular/common';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { StudentsComponent } from './components/students/students.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+import { StudentProfileComponent } from './components/student-profile/student-profile.component';
+import { StudentInfoComponent } from './components/student-info/student-info.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { StudentPaymentsTableComponent } from './components/student-payments-table/student-payments-table.component';
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
 
 
 @NgModule({
@@ -46,7 +51,12 @@ import { StudentCardboardComponent } from './components/student-cardboard/studen
     AddToPerformanceComponent,
     UploadFileComponent,
     StudentsComponent,
-    StudentCardboardComponent
+    StudentCardboardComponent,
+    StudentProfileComponent,
+    StudentInfoComponent,
+    PaymentComponent,
+    StudentPaymentsTableComponent,
+    PaymentFormComponent
   ],
   imports: [
     BrowserModule,

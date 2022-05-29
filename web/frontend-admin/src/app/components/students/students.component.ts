@@ -6,33 +6,29 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css']
+  styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-
-  public students: Student[]
+  public students: Student[];
   public page: number = 0;
   public totalPagesCount: number;
 
-  constructor(private userService: UserService, private cd: ChangeDetectorRef, private router: Router) { }
-
+  constructor(
+    private userService: UserService,
+    private cd: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchTeachers();
   }
 
-
   fetchTeachers() {
-    this.userService
-      .getStudents(this.page)
-      .subscribe((response:any) => {
-        this.students = response.students
-        this.totalPagesCount = response.pagesCount;
-        this.cd.detectChanges();
-      });
-
-
-
+    this.userService.getStudents(this.page).subscribe((response: any) => {
+      this.students = response.students;
+      this.totalPagesCount = response.pagesCount;
+      this.cd.detectChanges();
+    });
   }
 
   nextPage() {
@@ -45,9 +41,7 @@ export class StudentsComponent implements OnInit {
     this.fetchTeachers();
   }
 
-  getCard(id:any){
-    this.router.navigate(['/cardboard/' + id])
+  getCard(id: any) {
+    this.router.navigate(['/studentProfile/' + id]);
   }
-
-
 }

@@ -4,6 +4,7 @@ import com.ftn.eobrazovanje.api.dto.FirstPasswordDTO;
 import com.ftn.eobrazovanje.api.dto.SVFormDTO;
 import com.ftn.eobrazovanje.api.dto.StudentDTO;
 import com.ftn.eobrazovanje.api.dto.UserDTO;
+import com.ftn.eobrazovanje.api.dto.mapper.StudentMapper;
 import com.ftn.eobrazovanje.api.dto.mapper.UserMapper;
 import com.ftn.eobrazovanje.exception.UserNonExistentException;
 import com.ftn.eobrazovanje.helper.CSVHelper;
@@ -33,6 +34,17 @@ public class StudentController {
     public StudentController(StudentService studentService, UserService userService) {
         this.studentService = studentService;
         this.userService = userService;
+    }
+
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity getStudent(@PathVariable Long studentId){
+        StudentDTO student = studentService.findById(studentId);
+        if(student == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(student, HttpStatus.OK);
+
     }
 
     @GetMapping("performance/{performanceId}")

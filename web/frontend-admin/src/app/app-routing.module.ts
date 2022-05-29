@@ -4,8 +4,11 @@ import { AddToPerformanceComponent } from './components/add-to-performance/add-t
 import { CoursePerformanceComponent } from './components/course-performance/course-performance.component';
 import { CourseUpdateComponent } from './components/course-update/course-update.component';
 import { InsertStudentsComponent } from './components/insert-students/insert-students.component';
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
+import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentsComponent } from './components/students/students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
@@ -48,33 +51,45 @@ const routes: Routes = [
     component: InsertStudentsComponent,
   },
   {
-    path:'courses',
-    component:SubjectsComponent
+    path: 'courses',
+    component: SubjectsComponent,
   },
   {
-    path:'course/:id',
-    component: CourseUpdateComponent
+    path: 'course/:id',
+    component: CourseUpdateComponent,
   },
   {
-    path:'performances',
-    component: CoursePerformanceComponent
+    path: 'performances',
+    component: CoursePerformanceComponent,
   },
   {
-    path:'performances/:id',
-    component: PerformanceTeacherComponent
+    path: 'performances/:id',
+    component: PerformanceTeacherComponent,
   },
   {
-    path:'add-to-performance/:id',
-    component: AddToPerformanceComponent
+    path: 'add-to-performance/:id',
+    component: AddToPerformanceComponent,
   },
   {
-    path:'cardboard/:id',
-    component: StudentCardboardComponent
+    path: 'cardboard/:id',
+    component: StudentCardboardComponent,
   },
   {
-    path:'students',
-    component:StudentsComponent
-  }
+    path: 'students',
+    component: StudentsComponent,
+  },
+  {
+    path: 'studentProfile/:id',
+    component: StudentProfileComponent,
+  },
+  {
+    path: 'payment/:id',
+    component: PaymentComponent,
+  },
+  {
+    path: 'addPayment/:id',
+    component: PaymentFormComponent,
+  },
 ];
 
 @NgModule({

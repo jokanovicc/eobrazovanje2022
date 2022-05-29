@@ -17,7 +17,7 @@ export class AuthService {
   login(username: string, password: string) {
     return this.http
       .post(
-        environment.backend_endpoint + `/users/login`,
+        environment.backend_endpoint + `users/login`,
         { username, password },
         { responseType: 'text' }
       )
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   fetchCurrentUser() {
-    return this.http.get<User>(environment.backend_endpoint + `/users`).pipe(
+    return this.http.get<User>(environment.backend_endpoint + `users`).pipe(
       tap((user: any) => {
         this.currentUser = user;
         this.user$.next(user);
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   updateUserProfile(id: number, userDTO: any) {
-    return this.http.put(environment.backend_endpoint +`users`, userDTO);
+    return this.http.put(environment.backend_endpoint + `users`, userDTO);
   }
 
   getToken() {
