@@ -23,7 +23,7 @@ import { CourseUpdateComponent } from './components/course-update/course-update.
 import { CoursePerformanceComponent } from './components/course-performance/course-performance.component';
 import { PerformanceTeacherComponent } from './components/performance-teacher/performance-teacher.component';
 import { AddToPerformanceComponent } from './components/add-to-performance/add-to-performance.component';
-import {DecimalPipe} from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { StudentsComponent } from './components/students/students.component';
 import { StudentCardboardComponent } from './components/student-cardboard/student-cardboard.component';
@@ -33,7 +33,6 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { StudentPaymentsTableComponent } from './components/student-payments-table/student-payments-table.component';
 import { PaymentFormComponent } from './components/payment-form/payment-form.component';
 import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
-
 
 @NgModule({
   declarations: [
@@ -57,8 +56,8 @@ import { StudentsPerformanceComponent } from './components/students-performance/
     StudentInfoComponent,
     PaymentComponent,
     StudentPaymentsTableComponent,
-    PaymentFormComponent
-    StudentsPerformanceComponent
+    PaymentFormComponent,
+    StudentsPerformanceComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,11 +68,14 @@ import { StudentsPerformanceComponent } from './components/students-performance/
     ReactiveFormsModule,
     NgbModule,
   ],
-  providers: [    {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true,
-  }, DecimalPipe],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    DecimalPipe,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
