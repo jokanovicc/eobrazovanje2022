@@ -76,27 +76,7 @@ public class StudentServiceImpl implements StudentService {
             List<User> users = CSVHelper.csvToTutorials(file.getInputStream());
 
             for(User user : users) {
-                user.setRole(UserRole.STUDENT);
-                user.setUsername(user.getEmail());
-                User savedUser = userService.create(user);
-
-                Student student = new Student();
-                student.setUser(savedUser);
-                student.setReferenceNumber(generateRandomReferencialNumber());
-
-                String passwordToken = UUID.randomUUID().toString();
-
-                student.setPasswordToken(passwordToken);
-                student.setFirstLogin(true);
-                student.setCompletedSVForm(false);
-
-
-                studentRepository.save(student);
-
-                emailService.sendEmail(user.getEmail(), "Set password",
-                        "Please follow the link and set your password." + " Link: " +
-                        "http://localhost:4200/setPassword?token=" + passwordToken);
-
+             createStudent(user);
             }
 
         } catch (IOException e) {
@@ -136,6 +116,32 @@ public class StudentServiceImpl implements StudentService {
         studentResponseDTO.setPagesCount(pagedResult.getTotalPages());
         return studentResponseDTO;
     }
+
+    @Override
+    public Student createStudent(User user) {
+        user.setRole(UserRole.STUDENT);
+        user.setUsername(user.getEmail());
+        User savedUser = userService.create(user);
+
+        Student student = new Student();
+        student.setUser(savedUser);
+        student.setReferenceNumber(generateRandomReferencialNumber());
+
+        String passwordToken = UUID.randomUUID().toString();
+
+        student.setPasswordToken(passwordToken);
+        student.setFirstLogin(true);
+        student.setCompletedSVForm(false);
+
+
+        studentRepository.save(student);
+
+        emailService.sendEmail(user.getEmail(), "Set password",
+                "Please follow the link and set your password." + " Link: " +
+                        "http://localhost:4200/setPassword?token=" + passwordToken);
+        return student;
+    }
+
 
     @Override
     public StudentDTO findById(Long id) {

@@ -20,7 +20,7 @@ export class PaymentTableComponent implements OnInit {
   }
 
   getPayments() {
-    this.paymentService.getPayments().subscribe({
+    this.paymentService.getPayments(this.page).subscribe({
       next: (x: any) => {
         this.payments = x.payments;
         this.totalPagesCount = x.pageCount;

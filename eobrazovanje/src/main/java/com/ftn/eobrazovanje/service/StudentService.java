@@ -38,6 +38,8 @@ public interface StudentService {
 
     StudentResponseDTO getAll(Integer pageNo);
 
+    Student createStudent(User user);
+
 
 
 

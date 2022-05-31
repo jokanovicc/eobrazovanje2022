@@ -1,9 +1,12 @@
 package com.ftn.eobrazovanje.service;
 
+import com.ftn.eobrazovanje.api.dto.AttendingBulkResponseDTO;
 import com.ftn.eobrazovanje.api.dto.AttendingDTO;
+import com.ftn.eobrazovanje.api.dto.AttendingPaginableDTO;
 import com.ftn.eobrazovanje.api.dto.StudentsAttendingPerformanceDTO;
 import com.ftn.eobrazovanje.model.Attending;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,7 +21,8 @@ public interface AttendingService {
 
     AttendingDTO findLatestOfCourseForStudent(Authentication authentication, Long performanceId);
 
-    List<AttendingDTO> getStudentsOfCourse(Long performanceId);
+    AttendingPaginableDTO getStudentsOfCourse(Long performanceId, Integer page);
 
+    AttendingBulkResponseDTO addStudentsFromFile(MultipartFile file, Long performanceId);
 
 }
