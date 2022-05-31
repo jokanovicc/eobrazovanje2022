@@ -3,6 +3,8 @@ package com.ftn.eobrazovanje.repository;
 import com.ftn.eobrazovanje.model.Attending;
 import com.ftn.eobrazovanje.model.Performance;
 import com.ftn.eobrazovanje.model.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,7 @@ public interface AttendingRepository extends JpaRepository<Attending, Long> {
 
     @Query(value = "select * from attending where performance_id = ?1",
             nativeQuery = true)
-    List<Attending> findByPerformance(Long performanceId);
+    Page<Attending> findByPerformance(Long performanceId, Pageable pageable);
 
     @Query(value = "select * from attending where student_user_id = ?1 and performance_id = ?2",
             nativeQuery = true)

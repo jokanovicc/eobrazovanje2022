@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AttendingsComponent } from './components/attendings/attendings.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { PerformanceStudentsComponent } from './components/performance-students/performance-students.component';
 import { AllExamsComponent } from './layouts/all-exams/all-exams.component';
 import { StudentsExamsComponent } from './layouts/students-exams/students-exams.component';
 import { UpdateProfileComponent } from './layouts/update-profile/update-profile.component';
@@ -41,8 +42,12 @@ const routes: Routes = [
     component: AttendingsComponent,
   },
   {
-    path:'course/:id',
-    component: UpdateCourseComponent
+    path: 'course/:id',
+    component: UpdateCourseComponent,
+  },
+  {
+    path: 'performances/:id/attendings',
+    component: PerformanceStudentsComponent,
   },
 ];
 

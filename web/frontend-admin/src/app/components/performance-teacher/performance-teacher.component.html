@@ -1,41 +1,87 @@
 <body style="background-color: #f5f5f5">
+  <div class="container" style="margin-top: 20px; width: 65%">
+    <h3>{{ performance.courseName }}</h3>
+    <hr />
+    <b>Sylabus</b>:
+    <p>{{ performance.courseSylabus }}</p>
+    <b>Školska godina</b>
+    <p>{{ performance.schoolYear }}</p>
 
-    <div class="container" style="margin-top: 20px; width: 65%">
-      <h3>{{performance.courseName}}</h3>
-      <hr/>
-      <b>Sylabus</b>: <p>{{performance.courseSylabus}}</p>
-      <b>Školska godina</b> <p>{{performance.schoolYear}}</p>
-
-      <h4>Izvođači nastave</h4>
-      <table class="table table-striped">
-        <thead>
+    <h4>Izvođači nastave</h4>
+    <table class="table table-striped">
+      <thead>
         <tr>
           <th scope="col">Ime</th>
           <th scope="col">Korisničko ime</th>
           <th scope="col">Uloga</th>
           <th scope="col">Ukloni sa izvođenja</th>
-
-  
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let c of performance.courseTeacher">
           <th scope="row">{{ c.name }}</th>
-          <td>{{ c.username}}</td>
-          <td>{{ c.teacherRole}}</td>
-          <td><button type="button" (click)="remove(c.id)" class="btn btn-primary">Ukloni </button></td>
-
+          <td>{{ c.username }}</td>
+          <td>{{ c.teacherRole }}</td>
+          <td>
+            <button
+              type="button"
+              (click)="remove(c.id)"
+              class="btn btn-primary"
+            >
+              Ukloni
+            </button>
+          </td>
         </tr>
-        </tbody>
-      </table>
-      <td><button type="button" (click)="addNew(performance.id)" class="btn btn-primary">Dodaj izvođača </button></td>
+      </tbody>
+    </table>
+    <td>
+      <button
+        type="button"
+        (click)="addNew(performance.id)"
+        class="btn btn-primary"
+      >
+        Dodaj izvođača
+      </button>
+    </td>
 
-      <hr/>
-      <div style="margin-top: 20px;">
-        <app-students-performance></app-students-performance>
-      </div>
-        
+    <hr />
+    <div style="margin-top: 20px">
+      <app-students-performance></app-students-performance>
     </div>
-    
-    </body>
-    
+  </div>
+  <div class="container text-center">
+    <h3>Dodaj studente na kurs</h3>
+    <form>
+      <input
+        style="padding: 10px"
+        type="file"
+        class="file-upload"
+        (change)="selectFile($event)"
+      />
+      <div class="container text-center" style="padding: 20px">
+        <div>
+          <button class="btn btn-md btn-primary btn-style" (click)="upload()">
+            Posalji
+          </button>
+        </div>
+        <div *ngIf="messageAdded" class="alert alert-danger" role="alert">
+          {{ messageAdded }}
+        </div>
+        <div
+          *ngIf="messageCreatedAndAdded"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ messageCreatedAndAdded }}
+        </div>
+        <div
+          *ngIf="messageAlreadyAdded"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ messageAlreadyAdded }}
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

@@ -20,6 +20,7 @@ import { AddNotificationModalComponent } from './components/add-notification-mod
 import { StudentExamComponent } from './components/student-exam/student-exam.component';
 import { AttendingsComponent } from './components/attendings/attendings.component';
 import { UpdateCourseComponent } from './update-course/update-course.component';
+import { PerformanceStudentsComponent } from './components/performance-students/performance-students.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UpdateCourseComponent } from './update-course/update-course.component';
     StudentExamComponent,
     AttendingsComponent,
     UpdateCourseComponent,
+    PerformanceStudentsComponent,
   ],
   imports: [
     BrowserModule,

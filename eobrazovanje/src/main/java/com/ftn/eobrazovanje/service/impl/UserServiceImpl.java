@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findOneByEmail(String email) {
+        return userRepository.findFirstByEmail(email).orElse(null);
+    }
+
+    @Override
     public User update(User user, UserUpdateDTO userUpdateDTO) {
         user.setAddress(userUpdateDTO.getAddress());
         user.setUsername(userUpdateDTO.getUsername());

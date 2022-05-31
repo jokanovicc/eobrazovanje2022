@@ -26,4 +26,23 @@ export class InsertStudentsService {
 
     return this.http.request(req);
   }
+
+  uploadStudentsPefrormanceFile(file: File, pefromanceId: any) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest(
+      'POST',
+      environment.backend_endpoint +
+        `attendings/perfromances/${pefromanceId}/bulkStudents`,
+      formData,
+      {
+        reportProgress: true,
+        responseType: 'json',
+      }
+    );
+
+    return this.http.request(req);
+  }
 }

@@ -6,19 +6,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-attendings',
   templateUrl: './attendings.component.html',
-  styleUrls: ['./attendings.component.css']
+  styleUrls: ['./attendings.component.css'],
 })
 export class AttendingsComponent implements OnInit {
-
   public courses: Performance[];
 
-  constructor(private performanceService: PerformanceService, private router:Router
-    ) { }
+  constructor(
+    private performanceService: PerformanceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchCourses();
   }
-
 
   fetchCourses() {
     this.performanceService
@@ -28,9 +28,11 @@ export class AttendingsComponent implements OnInit {
       });
   }
 
-  getSubject(id:any){
+  getSubject(id: any) {
     this.router.navigate(['/course/' + id]);
-
   }
 
+  getAttendings(id: any) {
+    this.router.navigate(['/performances/' + id + '/attendings']);
+  }
 }
