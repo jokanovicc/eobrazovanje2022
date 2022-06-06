@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./set-first-password.component.css'],
 })
 export class SetFirstPasswordComponent implements OnInit {
-  public setPasswordForm: FormGroup;
+
+  setPasswordForm: FormGroup;
   token: string;
-  public message = '';
+  message = '';
   errorMsg = '';
 
   constructor(
@@ -20,7 +21,7 @@ export class SetFirstPasswordComponent implements OnInit {
     private router: Router,
     private setFirstPasswordService: SetFirstPasswordService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setPasswordForm = this.formBuilder.group({
@@ -43,7 +44,6 @@ export class SetFirstPasswordComponent implements OnInit {
   }
 
   handleError(err: any) {
-    console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

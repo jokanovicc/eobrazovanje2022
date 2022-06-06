@@ -13,32 +13,30 @@ import { ExamService } from 'src/app/service/exam.service';
   styleUrls: ['./register-exam.component.css'],
 })
 export class RegisterExamComponent implements OnInit {
-  public exams: PerformanceExam[];
-  public selectedExam: PerformanceExam;
+  exams: PerformanceExam[];
+  selectedExam: PerformanceExam;
 
-  public examPeriods: ExamPeriod[];
-  public selectedPeriod: ExamPeriod;
+  examPeriods: ExamPeriod[];
+  selectedPeriod: ExamPeriod;
 
-  public showSuccessMessage: boolean;
-  public showErrorMessage: boolean;
+  showSuccessMessage: boolean;
+  showErrorMessage: boolean;
 
   constructor(
     private examService: ExamService,
     private attendingService: AttendingService,
     private examPeriodService: ExamPeriodService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.examService
       .getExamsForRegistration()
       .subscribe((exams: PerformanceExam[]) => {
         this.exams = exams;
-        console.log(exams);
       });
     this.examPeriodService.getActive().subscribe((periods: ExamPeriod[]) => {
       this.examPeriods = periods;
-      console.log(periods);
     });
   }
 
@@ -46,7 +44,6 @@ export class RegisterExamComponent implements OnInit {
     this.attendingService
       .getLatestForPerformance(this.selectedExam.performance.id)
       .subscribe((response: Attending) => {
-        console.log(response);
         this.examService
           .registerExam(this.selectedExam.id, response.performance.id)
           .subscribe(
@@ -83,13 +80,11 @@ export class RegisterExamComponent implements OnInit {
   }
 
   pickPeriod(period: ExamPeriod) {
-    console.log(period);
     this.selectedPeriod = period;
     this.examService
       .getExamsInPeriod(period.id)
       .subscribe((exams: PerformanceExam[]) => {
         this.exams = exams;
-        console.log(exams);
       });
   }
 
@@ -97,9 +92,6 @@ export class RegisterExamComponent implements OnInit {
     var threeDaysFromNow = new Date(
       new Date().getTime() + 3 * 24 * 60 * 60 * 1000
     );
-    console.log(threeDaysFromNow);
-    console.log(exam.date);
-    console.log(exam.date < threeDaysFromNow);
 
     return new Date(exam.date) < threeDaysFromNow;
   }

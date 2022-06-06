@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamStatus } from 'src/app/models/exam-status.enum';
 import { Exam } from 'src/app/models/exam.interface';
 import { ExamService } from 'src/app/service/exam.service';
 
@@ -9,8 +8,10 @@ import { ExamService } from 'src/app/service/exam.service';
   styleUrls: ['./passed-exams.component.css'],
 })
 export class PassedExamsComponent implements OnInit {
-  public exams: Exam[];
-  constructor(private examService: ExamService) {}
+
+  exams: Exam[];
+
+  constructor(private examService: ExamService) { }
 
   ngOnInit(): void {
     this.examService.getExams('PASSED').subscribe((exams: Exam[]) => {

@@ -8,8 +8,8 @@ import { PaymentService } from 'src/app/service/payment.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
+
   financialCard: FinancialCard;
-  id: any;
   constructor(private paymentService: PaymentService) {}
 
   ngOnInit(): void {

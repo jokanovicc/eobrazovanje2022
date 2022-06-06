@@ -12,17 +12,18 @@ import { SvFormService } from 'src/app/service/sv-form.service';
   styleUrls: ['./sv-form.component.css'],
 })
 export class SvFormComponent implements OnInit {
-  public svForm: FormGroup;
+
+  svForm: FormGroup;
   token: string;
-  public message = '';
+  message = '';
   errorMsg = '';
-  genders: any = ['muški', 'ženski'];
+  genders: string[] = ['muški', 'ženski'];
 
   constructor(
     private formBuilder: FormBuilder,
     private svFormService: SvFormService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.svForm = this.formBuilder.group({
@@ -55,7 +56,6 @@ export class SvFormComponent implements OnInit {
   }
 
   handleError(err: any) {
-    console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

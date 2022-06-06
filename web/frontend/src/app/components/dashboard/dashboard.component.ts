@@ -16,9 +16,6 @@ export class DashboardComponent implements OnInit {
     this.authService.fetchCurrentUser().subscribe((user: any) => {
       this.user = user;
     });
-    // this.authService.user$.subscribe((user: UserInfo) => {
-    //   this.user = user;
-    // });
   }
 
   updateEmployee() {

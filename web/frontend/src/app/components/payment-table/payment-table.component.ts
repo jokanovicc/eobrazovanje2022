@@ -8,10 +8,10 @@ import { PaymentService } from 'src/app/service/payment.service';
   styleUrls: ['./payment-table.component.css'],
 })
 export class PaymentTableComponent implements OnInit {
-  public payments: Payment[];
-  public page: number = 0;
-  public totalPagesCount: number;
-  public id: any;
+  
+   payments: Payment[];
+   page: number = 0;
+   totalPagesCount: number;
 
   constructor(private paymentService: PaymentService) {}
 
