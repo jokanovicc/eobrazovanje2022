@@ -12,22 +12,21 @@ import { StudentProfileComponent } from './components/student-profile/student-pr
 import { StudentsPerformanceComponent } from './components/students-performance/students-performance.component';
 import { StudentsComponent } from './components/students/students.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
-import { UploadFileComponent } from './components/upload-file/upload-file.component';
-import { CreateExamComponent } from './create-exam/create-exam.component';
-import { AddSubjectComponent } from './layouts/add-subject/add-subject.component';
-import { AddTeacherComponent } from './layouts/add-teacher/add-teacher.component';
-import { TeacherManagementComponent } from './layouts/teacher-management/teacher-management.component';
+import { CreateExamComponent } from './components/create-exam/create-exam.component';
+import { AddSubjectComponent } from './components/add-subject/add-subject.component';
+import { AddTeacherComponent } from './components/add-teacher/add-teacher.component';
+import { TeacherManagementComponent } from './components/teacher-management/teacher-management.component';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./layouts/login/login.module').then((m) => m.LoginModule),
+      import('./components/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./layouts/dashboard/dashboard.module').then(
+      import('./components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
   },

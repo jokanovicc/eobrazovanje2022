@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class AddToPerformanceComponent implements OnInit {
 
-  public addPerformanceForm: FormGroup;
-  public message = "";
+  addPerformanceForm: FormGroup;
+  message = "";
   errorMsg = "";
   id:any;
   roles: any = ["PROFESOR", "ASISTENT", "PREDAVAC"]

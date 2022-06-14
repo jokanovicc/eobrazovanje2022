@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddTeacherComponent implements OnInit {
 
-  public addTeacherForm: FormGroup;
-  public message = "";
+  addTeacherForm: FormGroup;
+  message = "";
   errorMsg = "";
   genders: any = ['muški', 'ženski'];
 

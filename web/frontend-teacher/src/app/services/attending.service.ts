@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Exam } from '../models/exam.interface';
-import { ExamStatus } from '../models/exam-status.enum';
-import { PerformanceExam } from '../models/performance-exam.interface';
 import { Attending } from '../models/attending.interface';
 import { CreateAttendingReq } from '../models/create-attending-req.interface';
 import { AttendingResponse } from '../models/attending-pageable.interface';
@@ -26,7 +23,7 @@ export class AttendingService {
     );
   }
 
-  getStudentByPerformance(id: any, pageNumber?: number) {
+  getStudentByPerformance(id: number, pageNumber?: number) {
     const options = {
       params: {
         page: pageNumber ? pageNumber : 0,
@@ -45,7 +42,7 @@ export class AttendingService {
     );
   }
 
-  deleteStudentFromPerformance(perfId: any, studId: any) {
+  deleteStudentFromPerformance(perfId: number, studId: number) {
     this.http
       .delete(
         environment.backend_endpoint +

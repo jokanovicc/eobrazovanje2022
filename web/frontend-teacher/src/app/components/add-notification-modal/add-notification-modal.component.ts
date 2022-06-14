@@ -12,15 +12,15 @@ import { PerformanceService } from 'src/app/services/performance.service';
 export class AddNotificationModalComponent implements OnInit {
   @Output() closeModal: EventEmitter<any> = new EventEmitter();
 
-  public courses: Performance[];
+  courses: Performance[];
 
-  public message: string;
-  public selectedCourse: Performance;
+  message: string;
+  selectedCourse: Performance;
 
   constructor(
     private notificationService: NotificationsService,
     private performanceService: PerformanceService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchCourses();
@@ -41,14 +41,7 @@ export class AddNotificationModalComponent implements OnInit {
   sendNotification() {
     this.notificationService
       .sendNotification(this.message, this.selectedCourse.id)
-      .subscribe(
-        (onSuccess) => {
-          console.log('success');
-        },
-        (onError) => {
-          console.log('error');
-        }
-      );
+      .subscribe(() => {});
     this.close();
   }
 

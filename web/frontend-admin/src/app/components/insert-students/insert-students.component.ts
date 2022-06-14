@@ -9,9 +9,8 @@ import { InsertStudentsService } from 'src/app/services/insert-students.service'
   styleUrls: ['./insert-students.component.css'],
 })
 export class InsertStudentsComponent implements OnInit {
-  selectedFiles?: FileList;
-  currentFile?: File;
-  public message = '';
+  currentFile: File;
+  message = '';
   errorMsg = '';
 
   constructor(private insertStudentsService: InsertStudentsService) {}
@@ -19,17 +18,15 @@ export class InsertStudentsComponent implements OnInit {
   ngOnInit() {}
 
   selectFile(event: any) {
-    this.selectedFiles = event.target.files;
+    this.currentFile = event.target.files.item[0];
   }
 
   upload(): void {
     if (this.validation()) {
-      const file: File = this.selectedFiles.item(0);
-      this.currentFile = file;
       this.insertStudentsService.uploadFile(this.currentFile).subscribe({
         next: (x: any) => {
           this.handleSuccess(x);
-          this.selectedFiles = undefined;
+          this.currentFile = undefined;
         },
         error: (err: any) => {
           this.handleError(err);
@@ -41,7 +38,7 @@ export class InsertStudentsComponent implements OnInit {
 
   validation() {
     this.errorMsg = '';
-    if (!this.selectedFiles) {
+    if (!this.currentFile) {
       this.errorMsg = 'Niste odabrali fajl';
       return false;
     }

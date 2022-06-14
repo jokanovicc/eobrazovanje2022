@@ -10,19 +10,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./students-performance.component.css'],
 })
 export class StudentsPerformanceComponent implements OnInit {
-  public id: any;
-  public attending: Attending[];
-  public page: number = 0;
-  public totalPagesCount: number;
+  id: number;
+  attending: Attending[];
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(
     private performanceService: PerformanceService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchById();
   }
 
@@ -32,7 +31,6 @@ export class StudentsPerformanceComponent implements OnInit {
       .subscribe((Response) => {
         this.attending = Response.attendings;
         this.totalPagesCount = Response.pageCount;
-        console.log(Response);
       });
   }
 

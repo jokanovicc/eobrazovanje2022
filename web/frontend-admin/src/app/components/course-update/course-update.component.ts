@@ -11,23 +11,21 @@ import Swal from 'sweetalert2';
 })
 export class CourseUpdateComponent implements OnInit {
 
-  public course:Course;
-  public id: any;
-  public message = '';
+  course:Course;
+  id: number;
+  message = '';
   errorMsg = '';
 
   constructor(private courseService: CourseService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.getSubject();
   }
 
   getSubject(){
-    this.courseService.getCourse(this.id).subscribe((Response) => {
-      console.log(Response);
+    this.courseService.getCourse(this.id).subscribe((Response: Course) => {
       this.course = Response;
-
     })
   }
 
@@ -46,9 +44,7 @@ export class CourseUpdateComponent implements OnInit {
 
   }
 
-
   handleError(err: any) {
-    console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

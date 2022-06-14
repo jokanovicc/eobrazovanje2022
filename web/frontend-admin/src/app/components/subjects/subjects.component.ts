@@ -10,16 +10,16 @@ import { CourseService } from 'src/app/services/course.service';
   styleUrls: ['./subjects.component.css'],
 })
 export class SubjectsComponent implements OnInit {
-  public courses: Course[];
-  public page: number = 0;
-  public totalPagesCount: number;
+  courses: Course[];
+  page: number = 0;
+  totalPagesCount: number;
   searchText = '';
 
   constructor(
     private courseService: CourseService,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchTeachers();
@@ -57,12 +57,10 @@ export class SubjectsComponent implements OnInit {
     if (this.searchText !== '') {
       let searchValue = this.searchText.toLocaleLowerCase();
 
-      this.courses = this.courses.filter((contact: any) => {
-        return contact.name.toLocaleLowerCase().match(searchValue);
-        // you can keep on adding object properties here
+      this.courses = this.courses.filter((course: any) => {
+        return course.name.toLocaleLowerCase().match(searchValue);
       });
 
-      console.log(this.courses);
     } else {
       this.courseService
         .getCourses(this.page)

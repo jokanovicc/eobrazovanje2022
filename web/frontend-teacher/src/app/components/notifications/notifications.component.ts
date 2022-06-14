@@ -12,18 +12,18 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   styleUrls: ['./notifications.component.css'],
 })
 export class NotificationsComponent implements OnInit {
-  public notifications: Notification[];
-  public currentUser: User;
+  notifications: Notification[];
+  currentUser: User;
 
-  public page: number = 0;
-  public totalPagesCount: number;
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(
     private notificationService: NotificationsService,
     private authService: AuthService,
     private modalService: NgbModal,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchNotifications();

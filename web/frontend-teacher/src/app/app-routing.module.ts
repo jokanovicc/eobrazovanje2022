@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllExamsComponent } from './components/all-exams/all-exams.component';
 import { AttendingsComponent } from './components/attendings/attendings.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { PerformanceStudentsComponent } from './components/performance-students/performance-students.component';
-import { AllExamsComponent } from './layouts/all-exams/all-exams.component';
-import { StudentsExamsComponent } from './layouts/students-exams/students-exams.component';
-import { UpdateProfileComponent } from './layouts/update-profile/update-profile.component';
-import { UpdateCourseComponent } from './update-course/update-course.component';
+import { StudentsExamsComponent } from './components/students-exams/students-exams.component';
+import { UpdateCourseComponent } from './components/update-course/update-course.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./layouts/login/login.module').then((m) => m.LoginModule),
+      import('./components/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./layouts/dashboard/dashboard.module').then(
+      import('./components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
   },

@@ -6,11 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./student-profile.component.css'],
 })
 export class StudentProfileComponent implements OnInit {
-  public id: any;
+  id: number;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   getDocuments() {

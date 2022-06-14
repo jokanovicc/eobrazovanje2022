@@ -11,18 +11,19 @@ import { PerformanceExam } from 'src/app/models/performance-exam.interface';
   styleUrls: ['./students-exams.component.css'],
 })
 export class StudentsExamsComponent implements OnInit {
-  public id: any;
-  public students: ExamWithStudentInfoResponse[];
-  public toggleButton: boolean = true;
-  public isButtonVisible: boolean = false;
+  
+  id: number;
+  students: ExamWithStudentInfoResponse[];
+  toggleButton: boolean = true;
+  isButtonVisible: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private examService: ExamService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.getStudents();
   }
 

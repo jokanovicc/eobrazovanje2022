@@ -9,16 +9,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  user: User | undefined;
+
+  user: User;
+  
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.authService.fetchCurrentUser().subscribe((user: any) => {
       this.user = user;
     });
-    // this.authService.user$.subscribe((user: UserInfo) => {
-    //   this.user = user;
-    // });
+
   }
 
   updateEmployee() {

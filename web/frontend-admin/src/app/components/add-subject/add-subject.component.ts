@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class AddSubjectComponent implements OnInit {
 
-  public addCourseForm: FormGroup;
-  public message = '';
+  addCourseForm: FormGroup;
+  message = '';
   errorMsg = '';
 
   constructor(private courseService: CourseService, private router:Router,

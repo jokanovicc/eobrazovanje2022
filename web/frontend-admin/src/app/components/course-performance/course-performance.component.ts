@@ -26,7 +26,6 @@ export class CoursePerformanceComponent implements OnInit {
   fetchPerformances() {
     this.performanceService.get().subscribe((response) => {
       this.performances = response;
-      console.log(response);
     })
 
 
@@ -38,26 +37,21 @@ export class CoursePerformanceComponent implements OnInit {
   }
 
   Search() {
-    if (this.searchText !== "") {
+    if (this.searchText) {
       let searchValue = this.searchText.toLocaleLowerCase();
 
       this.performances = this.performances.filter((contact: any) => {
-        return contact.courseName.toLocaleLowerCase().match(searchValue)
-        return contact.studyProgram.toLocaleLowerCase().match(searchValue)
-          ;
-        // you can keep on adding object properties here   
+        return contact.courseName.toLocaleLowerCase().match(searchValue);
 
       });
 
-      console.log(this.performances);
     }
     else {
       this.performanceService.get().subscribe(data => {
 
         this.performances = data;
 
-      }, error => console.error(error));
-      // if(this.searchText== ""){ you don't need this if
+      });
 
     }
   }

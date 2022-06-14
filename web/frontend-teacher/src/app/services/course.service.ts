@@ -12,11 +12,11 @@ export class CourseService {
   }
 
 
-  updateCourse(id: any, userDTO: any) {
+  updateCourse(id: number, userDTO: any) {
     return this.http.put(environment.backend_endpoint + `courses/${id}`, userDTO);
   }
 
-  getCourse(id: any) {
+  getCourse(id: number) {
     return this.http.get<Course>(environment.backend_endpoint + `courses/${id}`)
   }
 }

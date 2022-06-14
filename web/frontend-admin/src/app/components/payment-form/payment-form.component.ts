@@ -9,8 +9,8 @@ import { PaymentService } from 'src/app/services/payment.service';
   styleUrls: ['./payment-form.component.css'],
 })
 export class PaymentFormComponent implements OnInit {
-  public paymentForm: FormGroup;
-  public id: any;
+  paymentForm: FormGroup;
+  id: number;
   errorMsg = '';
 
   constructor(
@@ -18,10 +18,10 @@ export class PaymentFormComponent implements OnInit {
     private paymentService: PaymentService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.paymentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
       amount: ['', [Validators.required]],
@@ -40,7 +40,6 @@ export class PaymentFormComponent implements OnInit {
   }
 
   handleError(err: any) {
-    console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

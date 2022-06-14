@@ -27,7 +27,6 @@ export class UpdateProfileComponent implements OnInit {
   getUser() {
     this.authService.fetchCurrentUser().subscribe((Response) => {
       this.user = Response;
-      console.log(this.user);
     });
   }
 

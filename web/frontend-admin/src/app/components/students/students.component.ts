@@ -9,21 +9,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-  public students: Student[];
-  public page: number = 0;
-  public totalPagesCount: number;
+  students: Student[];
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(
     private userService: UserService,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
-  fetchTeachers() {
+  fetchStudents() {
     this.userService.getStudents(this.page).subscribe((response: any) => {
       this.students = response.students;
       this.totalPagesCount = response.pagesCount;
@@ -33,12 +33,12 @@ export class StudentsComponent implements OnInit {
 
   nextPage() {
     this.page = this.page + 1;
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
   previousPage() {
     this.page = this.page - 1;
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
   getCard(id: any) {

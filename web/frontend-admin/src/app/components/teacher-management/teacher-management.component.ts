@@ -12,9 +12,9 @@ import { Teacher } from '../../models/models.interface';
 })
 export class TeacherManagementComponent implements OnInit {
 
-  public teachers: Teacher[]
-  public page: number = 0;
-  public totalPagesCount: number;
+  teachers: Teacher[]
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(private userService: UserService, private cd: ChangeDetectorRef, private router: Router) { }
 

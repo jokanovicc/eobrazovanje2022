@@ -11,24 +11,23 @@ import { AttendingService } from 'src/app/services/attending.service';
   styleUrls: ['./performance-students.component.css'],
 })
 export class PerformanceStudentsComponent implements OnInit {
-  public id: any;
-  public attending: Attending[];
-  public indexNumber: string;
-  public data: CreateAttendingReq = { indexNumbers: [] };
-  public page: number = 0;
-  public totalPagesCount: number;
+  id: number;
+  attending: Attending[];
+  indexNumber: string;
+  data: CreateAttendingReq = { indexNumbers: [] };
+  page: number = 0;
+  totalPagesCount: number;
   errorMsg = '';
 
   constructor(
     private attendingService: AttendingService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchById();
-    console.log(this.attending);
   }
 
   fetchById() {
@@ -68,7 +67,6 @@ export class PerformanceStudentsComponent implements OnInit {
   }
 
   handleError(err: any) {
-    console.log(err);
     if (err.status === HttpStatusCode.BadRequest) {
       this.errorMsg = 'Student je već dodat';
     } else {

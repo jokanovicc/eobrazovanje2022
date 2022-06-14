@@ -9,18 +9,18 @@ import { PaymentService } from 'src/app/services/payment.service';
   styleUrls: ['./student-payments-table.component.css'],
 })
 export class StudentPaymentsTableComponent implements OnInit {
-  public payments: Payment[];
-  public page: number = 0;
-  public totalPagesCount: number;
-  public id: any;
+  payments: Payment[];
+  page: number = 0;
+  totalPagesCount: number;
+  id: number;
 
   constructor(
     private paymentService: PaymentService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.getPayments();
   }
 
