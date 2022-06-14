@@ -23,16 +23,17 @@ export class PerformanceTeacherComponent implements OnInit {
   id: number;
   performance: PerformanceTeacher;
   currentFile: File;
-  messageAdded = '';
-  messageCreatedAndAdded = '';
-  messageAlreadyAdded = '';
-  message = '';
-  errorMsg = '';
   response: AttendingResponseBukl = {
     added: [],
     createdAndAdded: [],
     alreadyAdded: [],
   };
+
+  messageAdded = '';
+  messageCreatedAndAdded = '';
+  messageAlreadyAdded = '';
+  message = '';
+  errorMsg = '';
 
   constructor(
     private performanceService: PerformanceService,
@@ -101,7 +102,7 @@ export class PerformanceTeacherComponent implements OnInit {
     } else if (response instanceof HttpResponse && response.status == 201) {
       this.message = 'Studenti su uspešno dodati u bazu';
       this.response = response.body;
-      this.messageBuilder();
+      this.generateMessage();
     }
   }
 
@@ -122,7 +123,7 @@ export class PerformanceTeacherComponent implements OnInit {
       '. Sačekajte';
   }
 
-  messageBuilder() {
+  generateMessage() {
     this.messageAdded = `Dodati: ${this.response.added.toString()}`;
     this.messageCreatedAndAdded = `Kreirani i dodati: ${this.response.createdAndAdded.toString()}`;
     this.messageAlreadyAdded = `Već pohađaju: ${this.response.alreadyAdded.toString()}`;
