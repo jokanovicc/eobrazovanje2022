@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SetFirstPasswordService } from 'src/app/service/set-first-password.service';
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 @Component({
@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./set-first-password.component.css'],
 })
 export class SetFirstPasswordComponent implements OnInit {
-  public setPasswordForm: FormGroup;
+  setPasswordForm: FormGroup;
   token: string;
-  public message = '';
+  message = '';
   errorMsg = '';
 
   constructor(
@@ -35,15 +35,14 @@ export class SetFirstPasswordComponent implements OnInit {
     this.setFirstPasswordService
       .setPassword(this.setPasswordForm.get('password')?.value, this.token)
       .subscribe({
-        next: (x: any) => {
+        next: () => {
           this.router.navigate(['']);
         },
-        error: (err: any) => this.handleError(err),
+        error: (err: HttpErrorResponse) => this.handleError(err),
       });
   }
 
-  handleError(err: any) {
-    console.log(err);
+  handleError(err: HttpErrorResponse) {
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

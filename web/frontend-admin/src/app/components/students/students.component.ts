@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/models/student.interface';
+import { StudentsResponse } from 'src/app/models/students-response.interface';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-  public students: Student[];
-  public page: number = 0;
-  public totalPagesCount: number;
+  students: Student[];
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(
     private userService: UserService,
@@ -20,25 +21,27 @@ export class StudentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
-  fetchTeachers() {
-    this.userService.getStudents(this.page).subscribe((response: any) => {
-      this.students = response.students;
-      this.totalPagesCount = response.pagesCount;
-      this.cd.detectChanges();
-    });
+  fetchStudents() {
+    this.userService
+      .getStudents(this.page)
+      .subscribe((response: StudentsResponse) => {
+        this.students = response.students;
+        this.totalPagesCount = response.pagesCount;
+        this.cd.detectChanges();
+      });
   }
 
   nextPage() {
     this.page = this.page + 1;
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
   previousPage() {
     this.page = this.page - 1;
-    this.fetchTeachers();
+    this.fetchStudents();
   }
 
   getCard(id: any) {

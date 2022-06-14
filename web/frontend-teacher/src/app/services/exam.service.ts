@@ -16,7 +16,7 @@ export class ExamService {
     );
   }
 
-  getRegisteredToExamStudents(id: any) {
+  getRegisteredToExamStudents(id: number) {
     return this.http.get<any[]>(
       environment.backend_endpoint+`exams/${id}/students`
     );
@@ -29,7 +29,7 @@ export class ExamService {
     );
   }
 
-  publishResults(resultsType: string, examId: any, results: PerformanceExam) {
+  publishResults(resultsType: string, examId: number, results: PerformanceExam) {
     console.log(results);
     return this.http.put(
       environment.backend_endpoint +

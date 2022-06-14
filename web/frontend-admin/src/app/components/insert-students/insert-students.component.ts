@@ -1,4 +1,8 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsertStudentsService } from 'src/app/services/insert-students.service';
@@ -9,9 +13,8 @@ import { InsertStudentsService } from 'src/app/services/insert-students.service'
   styleUrls: ['./insert-students.component.css'],
 })
 export class InsertStudentsComponent implements OnInit {
-  selectedFiles?: FileList;
-  currentFile?: File;
-  public message = '';
+  currentFile: File;
+  message = '';
   errorMsg = '';
 
   constructor(private insertStudentsService: InsertStudentsService) {}
@@ -19,19 +22,17 @@ export class InsertStudentsComponent implements OnInit {
   ngOnInit() {}
 
   selectFile(event: any) {
-    this.selectedFiles = event.target.files;
+    this.currentFile = event.target.files.item[0];
   }
 
   upload(): void {
     if (this.validation()) {
-      const file: File = this.selectedFiles.item(0);
-      this.currentFile = file;
       this.insertStudentsService.uploadFile(this.currentFile).subscribe({
-        next: (x: any) => {
-          this.handleSuccess(x);
-          this.selectedFiles = undefined;
+        next: (response: any) => {
+          this.handleSuccess(response);
+          this.currentFile = undefined;
         },
-        error: (err: any) => {
+        error: (err: HttpErrorResponse) => {
           this.handleError(err);
           this.currentFile = undefined;
         },
@@ -41,22 +42,22 @@ export class InsertStudentsComponent implements OnInit {
 
   validation() {
     this.errorMsg = '';
-    if (!this.selectedFiles) {
+    if (!this.currentFile) {
       this.errorMsg = 'Niste odabrali fajl';
       return false;
     }
     return true;
   }
 
-  handleSuccess(x: any) {
-    if (x.type === HttpEventType.UploadProgress) {
-      this.fileUploadProgress(x);
-    } else if (x instanceof HttpResponse && x.status == 201) {
+  handleSuccess(response: any) {
+    if (response.type === HttpEventType.UploadProgress) {
+      this.fileUploadProgress(response);
+    } else if (response instanceof HttpResponse && response.status == 201) {
       this.message = 'Studenti su uspešno dodati u bazu';
     }
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
@@ -65,10 +66,10 @@ export class InsertStudentsComponent implements OnInit {
     }
   }
 
-  fileUploadProgress(x: any) {
+  fileUploadProgress(response: any) {
     this.message =
       'Slanje fajla: ' +
-      Math.round((100 * x.loaded) / x.total) +
+      Math.round((100 * response.loaded) / response.total) +
       '%' +
       '. Sačekajte';
   }

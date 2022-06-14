@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Teacher } from '../models/models.interface';
+import { Student } from '../models/student.interface';
+import { StudentsResponse } from '../models/students-response.interface';
 import { TeacherResponse } from '../models/teacherResponse.interface';
 
 @Injectable({
@@ -30,14 +32,14 @@ export class UserService {
       },
     };
 
-    return this.http.get<TeacherResponse>(
+    return this.http.get<StudentsResponse>(
       environment.backend_endpoint + `users/students`,
       options
     );
   }
 
-  getStudent(studentId: any) {
-    return this.http.get<any>(
+  getStudent(studentId: number) {
+    return this.http.get<Student>(
       environment.backend_endpoint + `students/${studentId}`
     );
   }

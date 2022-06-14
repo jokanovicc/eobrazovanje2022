@@ -8,57 +8,42 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-course-performance',
   templateUrl: './course-performance.component.html',
-  styleUrls: ['./course-performance.component.css']
+  styleUrls: ['./course-performance.component.css'],
 })
 export class CoursePerformanceComponent implements OnInit {
+  performances: any;
+  searchText = '';
 
-  public performances: any;
-  searchText = "";
-  constructor(private performanceService: PerformanceService,
-    private router: Router, private http: HttpClient) { }
+  constructor(
+    private performanceService: PerformanceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchPerformances();
   }
 
-
-
   fetchPerformances() {
     this.performanceService.get().subscribe((response) => {
       this.performances = response;
-      console.log(response);
-    })
-
-
+    });
   }
 
-  sendTeacher(id: any) {
-    this.router.navigate(['/performances/' + id])
-
+  sendTeacher(id: number) {
+    this.router.navigate(['/performances/' + id]);
   }
 
   Search() {
-    if (this.searchText !== "") {
+    if (this.searchText) {
       let searchValue = this.searchText.toLocaleLowerCase();
 
       this.performances = this.performances.filter((contact: any) => {
-        return contact.courseName.toLocaleLowerCase().match(searchValue)
-        return contact.studyProgram.toLocaleLowerCase().match(searchValue)
-          ;
-        // you can keep on adding object properties here   
-
+        return contact.courseName.toLocaleLowerCase().match(searchValue);
       });
-
-      console.log(this.performances);
-    }
-    else {
-      this.performanceService.get().subscribe(data => {
-
+    } else {
+      this.performanceService.get().subscribe((data) => {
         this.performances = data;
-
-      }, error => console.error(error));
-      // if(this.searchText== ""){ you don't need this if
-
+      });
     }
   }
 }

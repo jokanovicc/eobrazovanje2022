@@ -4,23 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './layouts/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { UpdateProfileComponent } from './layouts/update-profile/update-profile.component';
-import { AllExamsComponent } from './layouts/all-exams/all-exams.component';
-import { StudentsExamsComponent } from './layouts/students-exams/students-exams.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { AddNotificationModalComponent } from './components/add-notification-modal/add-notification-modal.component';
 import { StudentExamComponent } from './components/student-exam/student-exam.component';
 import { AttendingsComponent } from './components/attendings/attendings.component';
-import { UpdateCourseComponent } from './update-course/update-course.component';
 import { PerformanceStudentsComponent } from './components/performance-students/performance-students.component';
+import { AllExamsComponent } from './components/all-exams/all-exams.component';
+import { StudentsExamsComponent } from './components/students-exams/students-exams.component';
+import { UpdateCourseComponent } from './components/update-course/update-course.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [

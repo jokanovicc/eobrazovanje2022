@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,19 +7,20 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-add-teacher',
   templateUrl: './add-teacher.component.html',
-  styleUrls: ['./add-teacher.component.css']
+  styleUrls: ['./add-teacher.component.css'],
 })
 export class AddTeacherComponent implements OnInit {
-
-  public addTeacherForm: FormGroup;
-  public message = "";
-  errorMsg = "";
+  addTeacherForm: FormGroup;
+  message = '';
+  errorMsg = '';
   genders: any = ['muški', 'ženski'];
 
-
-  constructor(private userService: UserService, private cd: ChangeDetectorRef,  private router: Router,
-    private formBuilder:FormBuilder
-    ) { }
+  constructor(
+    private userService: UserService,
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.addTeacherForm = this.formBuilder.group({
@@ -30,9 +32,7 @@ export class AddTeacherComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       email: ['', [Validators.required]],
-
-    
-    })
+    });
   }
 
   get gender() {
@@ -45,18 +45,16 @@ export class AddTeacherComponent implements OnInit {
     });
   }
 
-  addTeacher(){
+  addTeacher() {
     this.userService.createTeacher(this.addTeacherForm.value).subscribe({
-      next: (x: any) => {
+      next: () => {
         this.router.navigate(['/dashboard']);
       },
-      error: (err: any) => this.handleError(err),
+      error: (err: HttpErrorResponse) => this.handleError(err),
     });
-
   }
-  
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
@@ -64,5 +62,4 @@ export class AddTeacherComponent implements OnInit {
       this.errorMsg = 'Sva polja moraju biti pravilno popunjena!';
     }
   }
-
 }

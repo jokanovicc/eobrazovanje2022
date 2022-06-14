@@ -10,7 +10,9 @@ import ExamStatusHelper from 'src/app/shared/exam-status-helper';
   styleUrls: ['./preliminary-exams.component.css'],
 })
 export class PreliminaryExamsComponent implements OnInit {
-  public exams: Exam[];
+
+  exams: Exam[];
+  
   constructor(private examService: ExamService) {}
 
   ngOnInit(): void {

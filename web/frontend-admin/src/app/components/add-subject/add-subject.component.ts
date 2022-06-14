@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,19 +8,18 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-subject',
   templateUrl: './add-subject.component.html',
-  styleUrls: ['./add-subject.component.css']
+  styleUrls: ['./add-subject.component.css'],
 })
 export class AddSubjectComponent implements OnInit {
-
-  public addCourseForm: FormGroup;
-  public message = '';
+  addCourseForm: FormGroup;
+  message = '';
   errorMsg = '';
 
-  constructor(private courseService: CourseService, private router:Router,
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
     private formBuilder: FormBuilder
-    
-    
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.addCourseForm = this.formBuilder.group({
@@ -29,16 +29,16 @@ export class AddSubjectComponent implements OnInit {
     });
   }
 
-  setCourse(){
+  setCourse() {
     this.courseService.createCourse(this.addCourseForm.value).subscribe({
-      next: (x: any) => {
+      next: () => {
         this.router.navigate(['/dashboard']);
       },
-      error: (err: any) => this.handleError(err),
+      error: (err: HttpErrorResponse) => this.handleError(err),
     });
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
@@ -46,7 +46,4 @@ export class AddSubjectComponent implements OnInit {
       this.errorMsg = 'Sva polja moraju biti pravilno popunjena!';
     }
   }
-
-
-
 }

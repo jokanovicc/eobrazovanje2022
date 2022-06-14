@@ -9,12 +9,14 @@ import { ExamService } from 'src/app/service/exam.service';
   styleUrls: ['./registered-exams.component.css'],
 })
 export class RegisteredExamsComponent implements OnInit {
-  public exams: Exam[];
-  public selectedExamId: number;
+
+  exams: Exam[];
+  selectedExamId: number;
+  
   constructor(
     private examService: ExamService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getRegisteredExams();

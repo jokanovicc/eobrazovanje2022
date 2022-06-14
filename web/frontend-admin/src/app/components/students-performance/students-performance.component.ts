@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AttendingResponse } from 'src/app/models/attending-pageable.interface';
 import { Attending } from 'src/app/models/attending.interface';
 import { PerformanceService } from 'src/app/services/performance.service';
 import Swal from 'sweetalert2';
@@ -10,33 +11,31 @@ import Swal from 'sweetalert2';
   styleUrls: ['./students-performance.component.css'],
 })
 export class StudentsPerformanceComponent implements OnInit {
-  public id: any;
-  public attending: Attending[];
-  public page: number = 0;
-  public totalPagesCount: number;
+  id: number;
+  attending: Attending[];
+  page: number = 0;
+  totalPagesCount: number;
 
   constructor(
     private performanceService: PerformanceService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchById();
   }
 
   fetchById() {
     this.performanceService
       .getStudentByPerformance(this.id)
-      .subscribe((Response) => {
-        this.attending = Response.attendings;
-        this.totalPagesCount = Response.pageCount;
-        console.log(Response);
+      .subscribe((response: AttendingResponse) => {
+        this.attending = response.attendings;
+        this.totalPagesCount = response.pageCount;
       });
   }
 
-  remove(id: any) {
+  remove(id: number) {
     this.performanceService.deleteStudentFromPerformance(this.id, id);
     Swal.fire('Uspešno!', 'Student je uklonjen sa predmeta.', 'success').then(
       () => location.reload()

@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Attending } from 'src/app/models/attending.interface';
 import { CreateAttendingReq } from 'src/app/models/create-attending-req.interface';
 import { AttendingService } from 'src/app/services/attending.service';
@@ -11,24 +11,22 @@ import { AttendingService } from 'src/app/services/attending.service';
   styleUrls: ['./performance-students.component.css'],
 })
 export class PerformanceStudentsComponent implements OnInit {
-  public id: any;
-  public attending: Attending[];
-  public indexNumber: string;
-  public data: CreateAttendingReq = { indexNumbers: [] };
-  public page: number = 0;
-  public totalPagesCount: number;
+  id: number;
+  attending: Attending[];
+  indexNumber: string;
+  data: CreateAttendingReq = { indexNumbers: [] };
+  page: number = 0;
+  totalPagesCount: number;
   errorMsg = '';
 
   constructor(
     private attendingService: AttendingService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchById();
-    console.log(this.attending);
   }
 
   fetchById() {
@@ -40,7 +38,7 @@ export class PerformanceStudentsComponent implements OnInit {
       });
   }
 
-  remove(id: any) {
+  remove(id: number) {
     this.attendingService.deleteStudentFromPerformance(this.id, id);
     window.location.reload();
   }
@@ -49,10 +47,10 @@ export class PerformanceStudentsComponent implements OnInit {
     this.data.indexNumbers = [];
     this.data.indexNumbers.push(this.indexNumber);
     this.attendingService.createAttending(this.data, this.id).subscribe({
-      next: (x: any) => {
+      next: () => {
         window.location.reload();
       },
-      error: (err: any) => {
+      error: (err: HttpErrorResponse) => {
         this.handleError(err);
       },
     });
@@ -67,8 +65,7 @@ export class PerformanceStudentsComponent implements OnInit {
     this.fetchById();
   }
 
-  handleError(err: any) {
-    console.log(err);
+  handleError(err: HttpErrorResponse) {
     if (err.status === HttpStatusCode.BadRequest) {
       this.errorMsg = 'Student je već dodat';
     } else {

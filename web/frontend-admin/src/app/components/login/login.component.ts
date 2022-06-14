@@ -16,10 +16,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
-  public loginForm: FormGroup;
-  public wrongCredentials: boolean;
+  loginForm: FormGroup;
+  wrongCredentials: boolean;
   destroy$ = new Subject();
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .fetchCurrentUser()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-          this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
       });
   };
 

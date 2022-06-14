@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Exam } from '../models/exam.interface';
 import { ExamStatus } from '../models/exam-status.enum';
 import { PerformanceExam } from '../models/performance-exam.interface';
-import { CreateExamRequest } from '../create-exam/create-exam-request.model';
+import { CreateExamRequest } from '../components/create-exam/create-exam-request.model';
 
 @Injectable({ providedIn: 'root' })
 export class ExamService {

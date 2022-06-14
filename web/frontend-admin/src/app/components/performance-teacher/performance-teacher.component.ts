@@ -1,4 +1,8 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttendingResponseBukl } from 'src/app/models/attending-bulk-response.interface';
@@ -16,20 +20,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./performance-teacher.component.css'],
 })
 export class PerformanceTeacherComponent implements OnInit {
-  public id: any;
-  public performance: PerformanceTeacher;
-  selectedFiles?: FileList;
-  currentFile?: File;
-  public messageAdded = '';
-  public messageCreatedAndAdded = '';
-  public messageAlreadyAdded = '';
-  message = '';
-  errorMsg = '';
-  public response: AttendingResponseBukl = {
+  id: number;
+  performance: PerformanceTeacher;
+  currentFile: File;
+  response: AttendingResponseBukl = {
     added: [],
     createdAndAdded: [],
     alreadyAdded: [],
   };
+
+  messageAdded = '';
+  messageCreatedAndAdded = '';
+  messageAlreadyAdded = '';
+  message = '';
+  errorMsg = '';
 
   constructor(
     private performanceService: PerformanceService,
@@ -39,7 +43,7 @@ export class PerformanceTeacherComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.fetchById();
   }
 
@@ -63,21 +67,19 @@ export class PerformanceTeacherComponent implements OnInit {
   }
 
   selectFile(event: any) {
-    this.selectedFiles = event.target.files;
+    this.currentFile = event.target.files.item[0];
   }
 
   upload(): void {
     if (this.validation()) {
-      const file: File = this.selectedFiles.item(0);
-      this.currentFile = file;
       this.insertStudentsService
         .uploadStudentsPefrormanceFile(this.currentFile, this.id)
         .subscribe({
-          next: (x: any) => {
-            this.handleSuccess(x);
-            this.selectedFiles = undefined;
+          next: (response: any) => {
+            this.handleSuccess(response);
+            this.currentFile = undefined;
           },
-          error: (err: any) => {
+          error: (err: HttpErrorResponse) => {
             this.handleError(err);
             this.currentFile = undefined;
           },
@@ -87,25 +89,24 @@ export class PerformanceTeacherComponent implements OnInit {
 
   validation() {
     this.errorMsg = '';
-    if (!this.selectedFiles) {
+    if (!this.currentFile) {
       this.errorMsg = 'Niste odabrali fajl';
       return false;
     }
     return true;
   }
 
-  handleSuccess(x: any) {
-    if (x.type === HttpEventType.UploadProgress) {
-      this.fileUploadProgress(x);
-    } else if (x instanceof HttpResponse && x.status == 201) {
+  handleSuccess(response: any) {
+    if (response.type === HttpEventType.UploadProgress) {
+      this.fileUploadProgress(response);
+    } else if (response instanceof HttpResponse && response.status == 201) {
       this.message = 'Studenti su uspešno dodati u bazu';
-      this.response = x.body;
-      this.messageBuilder();
-      console.log(this.message);
+      this.response = response.body;
+      this.generateMessage();
     }
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
@@ -122,11 +123,9 @@ export class PerformanceTeacherComponent implements OnInit {
       '. Sačekajte';
   }
 
-  messageBuilder() {
-    this.messageAdded = 'Dodati: ' + this.response.added.toString();
-    this.messageCreatedAndAdded =
-      'Kreirani i dodati: ' + this.response.createdAndAdded.toString();
-    this.messageAlreadyAdded =
-      'Već pohađaju: ' + this.response.alreadyAdded.toString();
+  generateMessage() {
+    this.messageAdded = `Dodati: ${this.response.added.toString()}`;
+    this.messageCreatedAndAdded = `Kreirani i dodati: ${this.response.createdAndAdded.toString()}`;
+    this.messageAlreadyAdded = `Već pohađaju: ${this.response.alreadyAdded.toString()}`;
   }
 }

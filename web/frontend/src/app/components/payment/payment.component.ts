@@ -9,7 +9,6 @@ import { PaymentService } from 'src/app/service/payment.service';
 })
 export class PaymentComponent implements OnInit {
   financialCard: FinancialCard;
-  id: any;
   constructor(private paymentService: PaymentService) {}
 
   ngOnInit(): void {
@@ -18,8 +17,8 @@ export class PaymentComponent implements OnInit {
 
   getFinancialCard() {
     this.paymentService.getFinancialCard().subscribe({
-      next: (x: any) => {
-        this.financialCard = x;
+      next: (response: FinancialCard) => {
+        this.financialCard = response;
       },
     });
   }

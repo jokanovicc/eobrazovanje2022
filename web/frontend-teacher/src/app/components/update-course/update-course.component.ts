@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/models/course.interface';
 import { CourseService } from 'src/app/services/course.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-course',
@@ -10,41 +11,40 @@ import { CourseService } from 'src/app/services/course.service';
 })
 export class UpdateCourseComponent implements OnInit {
 
-  public course:Course;
-  public id: any;
-  public message = '';
+  course: Course;
+  id: number;
+  message = '';
   errorMsg = '';
 
-  constructor(private courseService: CourseService, private route:ActivatedRoute) { }
+  constructor(private courseService: CourseService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.getSubject();
   }
 
-  getSubject(){
+  getSubject() {
     this.courseService.getCourse(this.id).subscribe((Response) => {
-      console.log(Response);
       this.course = Response;
 
     })
   }
 
 
-  onSubmit(){
+  onSubmit() {
     this.courseService.updateCourse(this.id, this.course)
-    .subscribe({
-      next: (x: any) => {
-        alert("Apdejted")      },
-      error: (err: any) => this.handleError(err),
-    });
+      .subscribe({
+        next: (x) => {
+          Swal.fire("Uspesno", "Izmenjen kurs", 'success')
+        },
+        error: (err: any) => this.handleError(err),
+      });
 
 
   }
 
 
   handleError(err: any) {
-    console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamPeriod } from '../models/exam-period.interface';
-import { Performance } from '../models/performance.interface';
-import { CourseService } from '../services/course.service';
-import { ExamPeriodService } from '../services/exam-period.service';
-import { ExamService } from '../services/exam.service';
-import { PerformanceService } from '../services/performance.service';
 import { CreateExamRequest } from './create-exam-request.model';
 import Swal from 'sweetalert2';
+import { ExamPeriod } from 'src/app/models/exam-period.interface';
+import { PerformanceService } from 'src/app/services/performance.service';
+import { ExamPeriodService } from 'src/app/services/exam-period.service';
+import { ExamService } from 'src/app/services/exam.service';
+import { Performance } from 'src/app/models/performance.interface';
 
 @Component({
   selector: 'app-create-exam',
@@ -14,22 +13,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-exam.component.css'],
 })
 export class CreateExamComponent implements OnInit {
-  public courses: Performance[];
-  public periods: ExamPeriod[];
+  courses: Performance[];
+  periods: ExamPeriod[];
 
-  public selectedCourse: Performance;
-  public selectedPeriod: ExamPeriod;
-  public classroom: string;
-  public date: Date;
+  selectedCourse: Performance;
+  selectedPeriod: ExamPeriod;
+  classroom: string;
+  date: Date;
 
-  public showSuccessMsg: boolean = false;
-  public showErrorMsg: boolean = false;
+  showSuccessMsg: boolean = false;
+  showErrorMsg: boolean = false;
 
   constructor(
     private performanceService: PerformanceService,
     private examPeriodService: ExamPeriodService,
     private examService: ExamService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchCourses();
