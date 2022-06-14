@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ExamStatus } from 'src/app/models/exam-status.enum';
 import { ExamWithStudentInfoResponse } from 'src/app/models/exam-with-student-info-response.interface';
@@ -11,10 +12,10 @@ import ExamStatusHelper from 'src/app/shared/exam-status-helper';
   styleUrls: ['./student-exam.component.css'],
 })
 export class StudentExamComponent implements OnInit {
-  public toggleButton: boolean = true;
-  public isButtonVisible: boolean = false;
+  toggleButton: boolean = true;
+  isButtonVisible: boolean = false;
   errorMsg = '';
-  public data: gradeStudent = {
+  data: gradeStudent = {
     preExamDutyPoints: 0,
     finalExamPoints: 0,
   };
@@ -40,7 +41,7 @@ export class StudentExamComponent implements OnInit {
     this.examService
       .gradeStudent(this.student.examId, this.student.studentId, this.data)
       .subscribe({
-        error: (err: any) => this.handleError(err),
+        error: (err: HttpErrorResponse) => this.handleError(err),
       });
     this.toggleButton = true;
     this.isButtonVisible = false;
@@ -52,7 +53,7 @@ export class StudentExamComponent implements OnInit {
     );
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;

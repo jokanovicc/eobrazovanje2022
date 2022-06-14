@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/models/student.interface';
+import { StudentsResponse } from 'src/app/models/students-response.interface';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,18 +18,20 @@ export class StudentsComponent implements OnInit {
     private userService: UserService,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchStudents();
   }
 
   fetchStudents() {
-    this.userService.getStudents(this.page).subscribe((response: any) => {
-      this.students = response.students;
-      this.totalPagesCount = response.pagesCount;
-      this.cd.detectChanges();
-    });
+    this.userService
+      .getStudents(this.page)
+      .subscribe((response: StudentsResponse) => {
+        this.students = response.students;
+        this.totalPagesCount = response.pagesCount;
+        this.cd.detectChanges();
+      });
   }
 
   nextPage() {

@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Attending } from 'src/app/models/attending.interface';
 import { CreateAttendingReq } from 'src/app/models/create-attending-req.interface';
 import { AttendingService } from 'src/app/services/attending.service';
@@ -21,9 +21,8 @@ export class PerformanceStudentsComponent implements OnInit {
 
   constructor(
     private attendingService: AttendingService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -39,7 +38,7 @@ export class PerformanceStudentsComponent implements OnInit {
       });
   }
 
-  remove(id: any) {
+  remove(id: number) {
     this.attendingService.deleteStudentFromPerformance(this.id, id);
     window.location.reload();
   }
@@ -48,10 +47,10 @@ export class PerformanceStudentsComponent implements OnInit {
     this.data.indexNumbers = [];
     this.data.indexNumbers.push(this.indexNumber);
     this.attendingService.createAttending(this.data, this.id).subscribe({
-      next: (x: any) => {
+      next: () => {
         window.location.reload();
       },
-      error: (err: any) => {
+      error: (err: HttpErrorResponse) => {
         this.handleError(err);
       },
     });
@@ -66,7 +65,7 @@ export class PerformanceStudentsComponent implements OnInit {
     this.fetchById();
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     if (err.status === HttpStatusCode.BadRequest) {
       this.errorMsg = 'Student je već dodat';
     } else {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Payment } from 'src/app/models/payment.interface';
+import { PaymentResposne } from 'src/app/models/paymentResposne.interface';
 import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class StudentPaymentsTableComponent implements OnInit {
   constructor(
     private paymentService: PaymentService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -26,9 +27,9 @@ export class StudentPaymentsTableComponent implements OnInit {
 
   getPayments() {
     this.paymentService.getStudentPayments(this.id, this.page).subscribe({
-      next: (x: any) => {
-        this.payments = x.payments;
-        this.totalPagesCount = x.pageCount;
+      next: (response: PaymentResposne) => {
+        this.payments = response.payments;
+        this.totalPagesCount = response.pageCount;
       },
     });
   }

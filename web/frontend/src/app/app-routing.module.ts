@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [svFormGuard],
     loadChildren: () =>
-      import('./layouts/dashboard/dashboard.module').then(
+      import('./components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
   },
@@ -76,7 +76,7 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () =>
-      import('./layouts/login/login.module').then((m) => m.LoginModule),
+      import('./components/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

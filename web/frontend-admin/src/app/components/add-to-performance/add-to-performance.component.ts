@@ -8,63 +8,69 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-to-performance',
   templateUrl: './add-to-performance.component.html',
-  styleUrls: ['./add-to-performance.component.css']
+  styleUrls: ['./add-to-performance.component.css'],
 })
 export class AddToPerformanceComponent implements OnInit {
-
   addPerformanceForm: FormGroup;
-  message = "";
-  errorMsg = "";
-  id:any;
-  roles: any = ["PROFESOR", "ASISTENT", "PREDAVAC"]
+  message = '';
+  errorMsg = '';
+  id: any;
+  roles: any = ['PROFESOR', 'ASISTENT', 'PREDAVAC'];
   teachers: Teacher[];
 
-  constructor(private route:ActivatedRoute, private router: Router, private performanceService:PerformanceService,private formBuilder: FormBuilder,
-    ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private performanceService: PerformanceService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.fetchTeachers();
     this.addPerformanceForm = this.formBuilder.group({
       role: ['', [Validators.required]],
-      teacher: ['', [Validators.required]]
+      teacher: ['', [Validators.required]],
     });
   }
 
-  changeTeacher(e:any){
-    console.log(e.target.value);
+  changeTeacher(e: any) {
     this.teacher?.setValue(e.target.value, {
       onlySelf: true,
     });
-
-
   }
 
-  fetchTeachers(){
-    this.performanceService.getTeacherForPerformance(this.id).subscribe((Response) => {
-      this.teachers = Response;
-      console.log(this.teachers);
-    })
+  fetchTeachers() {
+    this.performanceService
+      .getTeacherForPerformance(this.id)
+      .subscribe((Response) => {
+        this.teachers = Response;
+        console.log(this.teachers);
+      });
   }
 
-  addToPerf(){
-    this.performanceService.addTeacherToPerformance(this.id,this.addPerformanceForm.value).subscribe({
-      next: (x: any) => {
-        Swal.fire('Uspešno!','Nastavnik je dodat na predmeta.','success').then(() => this.router.navigate([`/performances/${this.id}`]))
-
-      },
-      error: (err: any) => this.handleError(err)
-    });
+  addToPerf() {
+    this.performanceService
+      .addTeacherToPerformance(this.id, this.addPerformanceForm.value)
+      .subscribe({
+        next: () => {
+          Swal.fire(
+            'Uspešno!',
+            'Nastavnik je dodat na predmeta.',
+            'success'
+          ).then(() => this.router.navigate([`/performances/${this.id}`]));
+        },
+        error: (err: any) => this.handleError(err),
+      });
   }
 
   get role() {
     return this.addPerformanceForm.get('role');
   }
 
-  get teacher(){
-    return this.addPerformanceForm.get("teacher")
+  get teacher() {
+    return this.addPerformanceForm.get('teacher');
   }
-
 
   changeRole(e: any) {
     this.role?.setValue(e.target.value, {
@@ -80,5 +86,4 @@ export class AddToPerformanceComponent implements OnInit {
       this.errorMsg = 'Sva polja moraju biti pravilno popunjena!';
     }
   }
-
 }

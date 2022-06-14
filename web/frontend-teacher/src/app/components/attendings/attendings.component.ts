@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./attendings.component.css'],
 })
 export class AttendingsComponent implements OnInit {
-  public courses: Performance[];
+  courses: Performance[];
 
   constructor(
     private performanceService: PerformanceService,

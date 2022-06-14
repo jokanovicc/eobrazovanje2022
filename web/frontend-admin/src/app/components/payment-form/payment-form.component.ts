@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +19,7 @@ export class PaymentFormComponent implements OnInit {
     private paymentService: PaymentService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -32,14 +33,14 @@ export class PaymentFormComponent implements OnInit {
     this.paymentService
       .postPaymentForm(this.id, this.paymentForm.value)
       .subscribe({
-        next: (x: any) => {
+        next: () => {
           this.router.navigate(['/payment/' + this.id]);
         },
-        error: (err: any) => this.handleError(err),
+        error: (err: HttpErrorResponse) => this.handleError(err),
       });
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
     } else {

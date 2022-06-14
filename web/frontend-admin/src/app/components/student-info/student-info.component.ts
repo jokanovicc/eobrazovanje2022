@@ -11,11 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 export class StudentInfoComponent implements OnInit {
   id: number;
   student: Student;
-  
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -24,8 +24,8 @@ export class StudentInfoComponent implements OnInit {
 
   getStudent() {
     this.userService.getStudent(this.id).subscribe({
-      next: (x: any) => {
-        this.student = x;
+      next: (response: Student) => {
+        this.student = response;
       },
     });
   }

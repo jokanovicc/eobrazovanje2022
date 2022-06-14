@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { FinancialCard } from '../models/financial-card.interface';
 import { PaymentResposne } from '../models/paymentResposne.interface';
 
 @Injectable({
@@ -10,7 +11,9 @@ export class PaymentService {
   constructor(private http: HttpClient) {}
 
   getFinancialCard() {
-    return this.http.get<any>(environment.backend_endpoint + `financialCards`);
+    return this.http.get<FinancialCard>(
+      environment.backend_endpoint + `financialCards`
+    );
   }
 
   getPayments(pageNumber?: number) {

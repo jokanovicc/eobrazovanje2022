@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AttendingResponse } from 'src/app/models/attending-pageable.interface';
 import { Attending } from 'src/app/models/attending.interface';
 import { PerformanceService } from 'src/app/services/performance.service';
 import Swal from 'sweetalert2';
@@ -17,8 +18,8 @@ export class StudentsPerformanceComponent implements OnInit {
 
   constructor(
     private performanceService: PerformanceService,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -28,13 +29,13 @@ export class StudentsPerformanceComponent implements OnInit {
   fetchById() {
     this.performanceService
       .getStudentByPerformance(this.id)
-      .subscribe((Response) => {
-        this.attending = Response.attendings;
-        this.totalPagesCount = Response.pageCount;
+      .subscribe((response: AttendingResponse) => {
+        this.attending = response.attendings;
+        this.totalPagesCount = response.pageCount;
       });
   }
 
-  remove(id: any) {
+  remove(id: number) {
     this.performanceService.deleteStudentFromPerformance(this.id, id);
     Swal.fire('Uspešno!', 'Student je uklonjen sa predmeta.', 'success').then(
       () => location.reload()

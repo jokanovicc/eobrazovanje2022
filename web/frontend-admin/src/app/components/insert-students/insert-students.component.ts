@@ -1,4 +1,8 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsertStudentsService } from 'src/app/services/insert-students.service';
@@ -24,11 +28,11 @@ export class InsertStudentsComponent implements OnInit {
   upload(): void {
     if (this.validation()) {
       this.insertStudentsService.uploadFile(this.currentFile).subscribe({
-        next: (x: any) => {
-          this.handleSuccess(x);
+        next: (response: any) => {
+          this.handleSuccess(response);
           this.currentFile = undefined;
         },
-        error: (err: any) => {
+        error: (err: HttpErrorResponse) => {
           this.handleError(err);
           this.currentFile = undefined;
         },
@@ -45,15 +49,15 @@ export class InsertStudentsComponent implements OnInit {
     return true;
   }
 
-  handleSuccess(x: any) {
-    if (x.type === HttpEventType.UploadProgress) {
-      this.fileUploadProgress(x);
-    } else if (x instanceof HttpResponse && x.status == 201) {
+  handleSuccess(response: any) {
+    if (response.type === HttpEventType.UploadProgress) {
+      this.fileUploadProgress(response);
+    } else if (response instanceof HttpResponse && response.status == 201) {
       this.message = 'Studenti su uspešno dodati u bazu';
     }
   }
 
-  handleError(err: any) {
+  handleError(err: HttpErrorResponse) {
     console.log(err);
     if (err.error && err.error.responseMessage) {
       this.errorMsg = err.error.responseMessage;
@@ -62,10 +66,10 @@ export class InsertStudentsComponent implements OnInit {
     }
   }
 
-  fileUploadProgress(x: any) {
+  fileUploadProgress(response: any) {
     this.message =
       'Slanje fajla: ' +
-      Math.round((100 * x.loaded) / x.total) +
+      Math.round((100 * response.loaded) / response.total) +
       '%' +
       '. Sačekajte';
   }

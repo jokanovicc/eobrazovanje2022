@@ -8,7 +8,6 @@ import { PaymentService } from 'src/app/service/payment.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-
   financialCard: FinancialCard;
   constructor(private paymentService: PaymentService) {}
 
@@ -18,8 +17,8 @@ export class PaymentComponent implements OnInit {
 
   getFinancialCard() {
     this.paymentService.getFinancialCard().subscribe({
-      next: (x: any) => {
-        this.financialCard = x;
+      next: (response: FinancialCard) => {
+        this.financialCard = response;
       },
     });
   }

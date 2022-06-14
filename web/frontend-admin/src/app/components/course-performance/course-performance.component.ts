@@ -8,32 +8,29 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-course-performance',
   templateUrl: './course-performance.component.html',
-  styleUrls: ['./course-performance.component.css']
+  styleUrls: ['./course-performance.component.css'],
 })
 export class CoursePerformanceComponent implements OnInit {
+  performances: any;
+  searchText = '';
 
-  public performances: any;
-  searchText = "";
-  constructor(private performanceService: PerformanceService,
-    private router: Router, private http: HttpClient) { }
+  constructor(
+    private performanceService: PerformanceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchPerformances();
   }
 
-
-
   fetchPerformances() {
     this.performanceService.get().subscribe((response) => {
       this.performances = response;
-    })
-
-
+    });
   }
 
-  sendTeacher(id: any) {
-    this.router.navigate(['/performances/' + id])
-
+  sendTeacher(id: number) {
+    this.router.navigate(['/performances/' + id]);
   }
 
   Search() {
@@ -42,17 +39,11 @@ export class CoursePerformanceComponent implements OnInit {
 
       this.performances = this.performances.filter((contact: any) => {
         return contact.courseName.toLocaleLowerCase().match(searchValue);
-
       });
-
-    }
-    else {
-      this.performanceService.get().subscribe(data => {
-
+    } else {
+      this.performanceService.get().subscribe((data) => {
         this.performances = data;
-
       });
-
     }
   }
 }

@@ -19,7 +19,7 @@ export class SubjectsComponent implements OnInit {
     private courseService: CourseService,
     private cd: ChangeDetectorRef,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchTeachers();
@@ -40,7 +40,7 @@ export class SubjectsComponent implements OnInit {
     this.fetchTeachers();
   }
 
-  getCourse(id: any) {
+  getCourse(id: number) {
     this.router.navigate(['/course/' + id]);
   }
 
@@ -49,7 +49,7 @@ export class SubjectsComponent implements OnInit {
     this.fetchTeachers();
   }
 
-  getSubject(id: any) {
+  getSubject(id: number) {
     this.router.navigate(['/course/' + id]);
   }
 
@@ -60,7 +60,6 @@ export class SubjectsComponent implements OnInit {
       this.courses = this.courses.filter((course: any) => {
         return course.name.toLocaleLowerCase().match(searchValue);
       });
-
     } else {
       this.courseService
         .getCourses(this.page)
